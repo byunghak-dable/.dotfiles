@@ -1,0 +1,95 @@
+# TokyoNight Alacritty Colors
+colors:
+  # Default colors
+  primary:
+    background: '0x24283b'
+    foreground: '0xc0caf5'
+
+  # Normal colors
+  normal:
+    black:   '0x1d202f'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
+
+  # Bright colors
+  bright:
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+
+font:
+  normal:
+    family: CasKaydiaCove Nerd Font
+    style: SemiLight
+  bold:
+    family: CasKaydiaCove Nerd Font
+    style: Regular
+  italic:
+    family: CasKaydiaCove Nerd Font
+    style: SemiLight Italic
+  bold_italic:
+    family: CasKaydiaCove Nerd Font
+    style: Italic
+  size: 15
+  offset:
+    x: 1
+    y: 1
+
+cursor:
+  unfocused_hollow: true
+
+window:
+  title: Alacritty
+  padding:
+    x: 0
+    y: 0
+  decorations: none
+  opacity: 1
+
+scrolling:
+  history: 10000
+  multiplier: 10
+
+selection:
+  semantic_escape_chars: ',│`|:"'' ()[]{}<>'
+  save_to_clipboard: false
+
+live_config_reload: true
+
+key_bindings:
+  - { key: H, mods: Command, chars: "\x1bh" }
+  - { key: L, mods: Command, chars: "\x1bl" }
+  - { key: W, mods: Command, chars: "\x1bw" }
+  - { key: C, mods: Command, chars: "\x1bc" }
+  - { key: R, mods: Command, chars: "\x1br" }
+  - { key: M, mods: Command, chars: "\x1bm" }
+  - { key: Y, mods: Command, chars: "\x1by" }
+  - { key: D, mods: Command, chars: "\x1bd" }
+  - { key: J, mods: Command, chars: "\x1bj" }
+  - { key: K, mods: Command, chars: "\x1bk" }
+  - { key: P, mods: Command, chars: "\x1bp" }
+  - { key: D, mods: Control|Shift, action: Paste }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: NumpadAdd, mods: Control, action: IncreaseFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }
+  - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: Return, mods: Alt, action: ToggleFullscreen }
+  - { key: Space, mods: Control, chars: "\x00" }
