@@ -2,9 +2,8 @@ return {
 	{ "williamboman/mason.nvim", cmd = "Mason", lazy = true, config = true },
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
 		lazy = true,
-		config = function() require("lsp-zero.settings").preset({}) end,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -16,6 +15,7 @@ return {
 		},
 		config = function()
 			local lsp = require("lsp-zero")
+			local mason_lsp = require("mason-lspconfig")
 
 			for _, file in
 				pairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/plugins/lsp/options", [[v:val =~ '\.lua$']]))
@@ -24,14 +24,20 @@ return {
 				lsp.configure(server, require("plugins.lsp.options." .. server))
 			end
 
+			mason_lsp.setup({
+				handlers = {
+					lsp.default_setup,
+					tsserver = function() end,
+					rust_analyzer = function() end,
+					jdtls = function() end,
+				},
+			})
+			lsp.set_sign_icons({ error = "", warn = "", hint = "", info = "" })
 			lsp.on_attach(function(_, bufnr)
 				lsp.default_keymaps({ buffer = bufnr })
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
 			end)
-			lsp.set_sign_icons({ error = "", warn = "", hint = "", info = "" })
-			lsp.skip_server_setup({ "tsserver", "rust_analyzer", "jdtls" })
-			lsp.setup()
 		end,
 	},
 	{
