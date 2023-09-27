@@ -1,10 +1,5 @@
 return {
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
-		opts = { show_current_context = true },
-	},
-	{
 		"kevinhwang91/nvim-hlslens",
 		event = "InsertEnter",
 		config = true,
