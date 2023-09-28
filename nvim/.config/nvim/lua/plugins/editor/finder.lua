@@ -53,7 +53,6 @@ return {
 				file_browser = {
 					path = "%:p:h",
 					cwd_to_path = true,
-					hijack_netrw = true,
 					hide_parent_dir = true,
 					hidden = true,
 					grouped = true,

@@ -1,5 +1,5 @@
 return {
-	{ "williamboman/mason.nvim", cmd = "Mason", lazy = true, config = true },
+	{ "williamboman/mason.nvim", cmd = "Mason", lazy = true, opts = {} },
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -102,7 +102,7 @@ return {
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "jay-babu/mason-null-ls.nvim", opts = { handlers = {} } },

@@ -1,13 +1,16 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
-		opts = { show_current_context = true },
+		event = { "BufReadPost", "BufNewFile" },
+		main = "ibl",
+		opts = {
+			scope = { show_start = false },
+		},
 	},
 	{
 		"echasnovski/mini.pairs",
-		version = "*",
-		config = true,
+		event = "VeryLazy",
+		opts = {},
 	},
 	{
 		"echasnovski/mini.surround",
@@ -32,7 +35,7 @@ return {
 			{ "<C-w>m", "<cmd>WindowsMaximize<cr>" },
 			{ "<C-w>=", "<cmd>WindowsEqualize<cr>" },
 		},
-		config = true,
+		opts = {},
 	},
 	{
 		"echasnovski/mini.bufremove",

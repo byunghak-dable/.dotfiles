@@ -2,14 +2,17 @@ return {
 	{
 		"kevinhwang91/nvim-hlslens",
 		event = "InsertEnter",
-		config = true,
+		opts = {},
 	},
 	{
 		"RRethy/vim-illuminate",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
+			delay = 200,
 			large_file_cutoff = 2000,
-			large_file_overrides = { providers = { "lsp" } },
+			large_file_overrides = {
+				providers = { "lsp" },
+			},
 		},
 		config = function(_, opts)
 			require("illuminate").configure(opts)
@@ -26,10 +29,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			{ "nvim-treesitter/nvim-treesitter-context", config = true },
+			{ "nvim-treesitter/nvim-treesitter-context", opts = {} },
 		},
 		opts = {
 			ensure_installed = "all",

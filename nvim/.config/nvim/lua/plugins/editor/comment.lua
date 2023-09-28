@@ -18,6 +18,6 @@ return {
 			{ "[t", function() require("todo-comments").jump_prev() end },
 			{ "<leader>ft", "<cmd>TodoTelescope<cr>" },
 		},
-		config = true,
+		opts = {},
 	},
 }

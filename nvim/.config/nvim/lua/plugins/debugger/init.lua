@@ -1,6 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
-	dependencies = { "rcarriga/nvim-dap-ui", config = true },
+	dependencies = { "rcarriga/nvim-dap-ui", opts = {} },
 	keys = {
 		-- break
 		{ "<leader>dp", function() require("dap").toggle_breakpoint() end },
