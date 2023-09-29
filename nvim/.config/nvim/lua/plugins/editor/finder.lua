@@ -62,6 +62,7 @@ return {
 						i = {
 							["<C-r>"] = fb_actions.goto_cwd,
 							["<C-w>"] = function() vim.cmd("normal vbd") end,
+							["<A-d>"] = fb_actions.remove,
 						},
 					},
 				},
