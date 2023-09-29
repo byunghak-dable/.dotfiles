@@ -120,7 +120,6 @@ return {
 					builtins.code_actions.eslint,
 					builtins.diagnostics.eslint,
 					builtins.formatting.prettier,
-					builtins.formatting.gofmt,
 				},
 				on_attach = function(client, bufnr)
 					if not client.supports_method("textDocument/formatting") then return end

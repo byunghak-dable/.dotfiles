@@ -1,11 +1,19 @@
 return {
 	{
-		"ggandor/leap.nvim",
+		"echasnovski/mini.bufremove",
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+			{ "<A-w>", function() require("mini.bufremove").delete(0, false) end },
 		},
-		config = function() require("leap").add_default_mappings(true) end,
+	},
+	{
+		"anuvyklack/windows.nvim",
+		event = "VeryLazy",
+		dependencies = "anuvyklack/middleclass",
+		keys = {
+			{ "<C-w>m", "<cmd>WindowsMaximize<cr>" },
+			{ "<C-w>=", "<cmd>WindowsEqualize<cr>" },
+		},
+		opts = {},
 	},
 	{
 		"numToStr/Navigator.nvim",
