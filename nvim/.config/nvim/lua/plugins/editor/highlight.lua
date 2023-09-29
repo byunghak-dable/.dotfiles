@@ -36,7 +36,6 @@ return {
 		},
 		opts = {
 			ensure_installed = "all",
-			autotag = { enable = true },
 			highlight = { enable = true },
 			textobjects = {
 				select = {
