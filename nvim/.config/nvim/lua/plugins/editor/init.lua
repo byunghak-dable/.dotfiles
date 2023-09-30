@@ -35,11 +35,6 @@ return {
 		opts = {},
 	},
 	{
-		"kevinhwang91/nvim-hlslens",
-		event = "InsertEnter",
-		opts = {},
-	},
-	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		main = "ibl",
