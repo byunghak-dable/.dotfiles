@@ -1,6 +1,18 @@
 return {
 	{ "williamboman/mason.nvim", cmd = "Mason", lazy = true, opts = {} },
 	{
+		"hinell/lsp-timeout.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			vim.g["lsp-timeout-config"] = {
+				stopTimeout = 60 * 1000,
+				startTimeout = 1 * 1000,
+				silent = false,
+			}
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
