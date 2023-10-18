@@ -13,7 +13,13 @@ return {
 				providers = { "lsp" },
 			},
 		},
-		config = function(_, opts) require("illuminate").configure(opts) end,
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+
+			for _, suffix in pairs({ "Text", "Read", "Write" }) do
+				vim.api.nvim_set_hl(0, "IlluminatedWord" .. suffix, { bg = "#444c56" })
+			end
+		end,
 	},
 	{
 		"ggandor/leap.nvim",
