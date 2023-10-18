@@ -30,31 +30,34 @@ return {
 		config = function() require("leap").add_default_mappings(true) end,
 	},
 	{
-		"echasnovski/mini.pairs",
-		event = "VeryLazy",
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {},
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		main = "ibl",
-		opts = {
-			scope = { show_start = false },
-		},
-	},
-	{
 		"echasnovski/mini.surround",
-		event = "InsertEnter",
+		keys = function()
+			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
+			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+
+			return {
+				{ opts.mappings.add, mode = { "n", "v" } },
+				{ opts.mappings.delete },
+				{ opts.mappings.replace },
+			}
+		end,
 		opts = {
 			mappings = {
 				add = "gza",
-				replace = "gzr",
 				delete = "gzd",
-				find = "gzf",
-				find_left = "gzF",
-				highlight = "gzh",
-				update_n_lines = "gzn",
+				replace = "gzr",
 			},
 		},
+	},
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		opts = {},
 	},
 }
