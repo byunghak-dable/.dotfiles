@@ -4,10 +4,10 @@ return {
 		name = "barbecue",
 		event = "VeryLazy",
 		dependencies = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" },
-		opts = { show_modified = true },
 		keys = {
 			{ "[[", function() require("barbecue.ui").navigate(-2) end },
 		},
+		opts = { show_modified = true },
 	},
 	{
 		"nvim-lualine/lualine.nvim",
