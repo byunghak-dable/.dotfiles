@@ -1,5 +1,7 @@
 return {
-	"folke/tokyonight.nvim",
-	event = "UIEnter",
-	config = function() vim.cmd("colorscheme tokyonight") end,
+	{
+		"Tsuzat/NeoSolarized.nvim",
+		event = "UIEnter",
+		config = function() vim.cmd("colorscheme NeoSolarized") end,
+	},
 }
