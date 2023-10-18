@@ -30,12 +30,6 @@ return {
 		config = function() require("leap").add_default_mappings(true) end,
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		event = { "BufReadPost", "BufNewFile" },
-		opts = {},
-	},
-	{
 		"echasnovski/mini.surround",
 		keys = function()
 			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
