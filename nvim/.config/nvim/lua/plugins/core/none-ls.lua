@@ -1,12 +1,13 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "jay-babu/mason-null-ls.nvim", opts = { handlers = {} } },
 	},
 	opts = function()
-		local builtins = require("null-ls").builtins
+		local nls = require("null-ls")
+		local builtins = nls.builtins
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
 		vim.api.nvim_create_user_command(
