@@ -1,7 +1,7 @@
 return {
 	{
-		"Tsuzat/NeoSolarized.nvim",
+		"rebelot/kanagawa.nvim",
 		event = "UIEnter",
-		config = function() vim.cmd("colorscheme NeoSolarized") end,
+		config = function() vim.cmd("colorscheme kanagawa") end,
 	},
 }
