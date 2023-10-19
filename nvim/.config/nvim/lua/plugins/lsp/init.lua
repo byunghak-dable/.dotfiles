@@ -1,5 +1,4 @@
 return {
-	{ "williamboman/mason.nvim", cmd = "Mason", lazy = true, opts = {} },
 	{
 		"hinell/lsp-timeout.nvim",
 		dependencies = { "neovim/nvim-lspconfig" },
@@ -16,8 +15,9 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			{ "williamboman/mason.nvim", cmd = "Mason", opts = {} },
 			"williamboman/mason-lspconfig.nvim",
+			"hrsh7th/cmp-nvim-lsp",
 			"b0o/schemastore.nvim",
 		},
 		config = function()
