@@ -1,5 +1,9 @@
 return {
 	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
 		event = "VeryLazy",

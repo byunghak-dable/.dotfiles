@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
-		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-telescope/telescope-file-browser.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
@@ -49,7 +48,6 @@ return {
 				},
 			},
 			extensions = {
-				["ui-select"] = { themes.get_cursor() },
 				file_browser = {
 					path = "%:p:h",
 					cwd_to_path = true,
@@ -74,7 +72,6 @@ return {
 		local builtin = require("telescope.builtin")
 
 		telescope.setup(opts)
-		telescope.load_extension("ui-select")
 		telescope.load_extension("file_browser")
 		pcall(telescope.load_extension, "fzf")
 
