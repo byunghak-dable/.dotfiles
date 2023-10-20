@@ -1,30 +1,28 @@
+# Colors (One Dark)
 colors:
-  # Default colors
   primary:
-    background: '#242933'
-    foreground: '#BBC3D4'
+    background: '#232326'
+    foreground: '#a7aab0'
 
-  # Normal colors
   normal:
-    black: '#191D24'
-    red: '#BF616A'
-    green: '#A3BE8C'
-    yellow: '#EBCB8B'
-    blue: '#81A1C1'
-    magenta: '#B48EAD'
-    cyan: '#8FBCBB'
-    white: '#BBC3D4'
+    black:   '#101012'
+    red:     '#de5d68'
+    green:   '#8fb573'
+    yellow:  '#dbb671'
+    blue:    '#61afef'
+    magenta: '#bb70d2'
+    cyan:    '#51a8b3'
+    white:   '#abb2bf'
 
-  # Bright colors
   bright:
-    black: '#727C7C'
-    red: '#D06F79'
-    green: '#B1D196'
-    yellow: '#F0D399'
-    blue: '#8CAFD2'
-    magenta: '#C895BF'
-    cyan: '#93CCDC'
-    white: '#D8DEE9'
+    black:   '#5c6370'
+    red:     '#e06c75'
+    green:   '#98c379'
+    yellow:  '#d19a66'
+    blue:    '#61afef'
+    magenta: '#c678dd'
+    cyan:    '#56b6c2'
+    white:   '#ffffff'
 
 font:
   normal:
