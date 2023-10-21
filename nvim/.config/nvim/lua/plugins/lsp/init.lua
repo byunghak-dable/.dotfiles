@@ -45,6 +45,10 @@ return {
 					vim.keymap.set("n", "gl", vim.diagnostic.open_float, buf_opts)
 					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, buf_opts)
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, buf_opts)
+
+					if vim.lsp.inlay_hint then
+						vim.keymap.set("n", "<leader>sh", function() vim.lsp.inlay_hint(0, nil) end)
+					end
 				end,
 			})
 			lsp_conf.util.default_config.capabilities = cmp_lsp.default_capabilities()

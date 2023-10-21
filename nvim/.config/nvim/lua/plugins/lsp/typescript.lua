@@ -1,6 +1,9 @@
 return {
 	"pmizio/typescript-tools.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"neovim/nvim-lspconfig",
+	},
 	ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 	keys = {
 		{ "<leader>mi", "<cmd>TSToolsAddMissingImports<cr>" },
@@ -15,6 +18,13 @@ return {
 			settings = {
 				separate_diagnostic_server = false,
 				tsserver_file_preferences = {
+					includeInlayParameterNameHints = "all",
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeCompletionsForModuleExports = true,
 					importModuleSpecifierPreference = "relative",
 				},
 			},
