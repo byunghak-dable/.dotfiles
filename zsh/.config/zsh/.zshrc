@@ -3,6 +3,8 @@ ZDOTDIR=$HOME/.config/zsh
 (( $+commands[brew] )) && eval $(/opt/homebrew/bin/brew shellenv)
 (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 (( $+commands[go] )) && export PATH=$(go env GOPATH)/bin:$PATH # go binaries
+(( $+commands[cargo] )) && export PATH=$HOME/.cargo/bin:$PATH # cargo(rust)
+(( $+commands[bob] )) && export PATH=$HOME/.local/share/bob/nvim-bin:$PATH # cargo(rust)
 (( $+commands[pyenv] )) && eval "$(pyenv init -)" && eval "$(pyenv init --path)" 
 [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source $HOME/.sdkman/bin/sdkman-init.sh # sdkman
 
