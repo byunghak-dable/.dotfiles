@@ -22,6 +22,7 @@ return {
 			},
 			tools = {
 				hover_actions = { auto_focus = true },
+				inlay_hints = { auto = false },
 			},
 		}
 	end,
