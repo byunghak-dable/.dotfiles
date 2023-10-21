@@ -50,16 +50,16 @@ return {
 			root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
 			capabilities = capabilities,
 			on_attach = function(_, bufnr)
-				local bufopts = { buffer = bufnr, noremap = true }
+				local buf_opts = { buffer = bufnr, noremap = true }
 
-				vim.keymap.set("n", "<leader>tc", jdtls.test_class, bufopts)
-				vim.keymap.set("n", "<leader>tm", jdtls.test_nearest_method, bufopts)
-				vim.keymap.set("n", "<leader>oi", jdtls.organize_imports, bufopts)
-				vim.keymap.set("n", "<leader>ev", jdtls.extract_variable, bufopts)
-				vim.keymap.set("n", "<leader>ec", jdtls.extract_constant, bufopts)
-				vim.keymap.set("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", bufopts)
-				vim.keymap.set("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", bufopts)
-				vim.keymap.set("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", bufopts)
+				vim.keymap.set("n", "<leader>tc", jdtls.test_class, buf_opts)
+				vim.keymap.set("n", "<leader>tm", jdtls.test_nearest_method, buf_opts)
+				vim.keymap.set("n", "<leader>oi", jdtls.organize_imports, buf_opts)
+				vim.keymap.set("n", "<leader>ev", jdtls.extract_variable, buf_opts)
+				vim.keymap.set("n", "<leader>ec", jdtls.extract_constant, buf_opts)
+				vim.keymap.set("v", "<leader>ev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", buf_opts)
+				vim.keymap.set("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", buf_opts)
+				vim.keymap.set("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", buf_opts)
 
 				-- debug
 				jdtls.setup_dap({ hotcodereplace = "auto" })

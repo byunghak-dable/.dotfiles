@@ -15,8 +15,10 @@ return {
 		opts = {
 			current_line_blame_opts = { delay = 100 },
 			on_attach = function(bufnr)
+				local buf_opts = { buffer = bufnr }
 				local gs = package.loaded.gitsigns
-				vim.keymap.set("n", "<leader>gb", gs.toggle_current_line_blame, { buffer = bufnr })
+
+				vim.keymap.set("n", "<leader>gb", gs.toggle_current_line_blame, buf_opts)
 			end,
 		},
 	},

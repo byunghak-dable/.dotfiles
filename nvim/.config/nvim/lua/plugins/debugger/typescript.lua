@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
+	dependencies = "williamboman/mason.nvim",
 	opts = function()
 		local dap = require("dap")
 		local ok, debug = pcall(require("mason-registry").get_package, "js-debug-adapter")
