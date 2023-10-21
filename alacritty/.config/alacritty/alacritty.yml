@@ -26,21 +26,21 @@ colors:
 
 font:
   normal:
-    family: CasKaydiaCove Nerd Font
-    style: SemiLight
-  bold:
-    family: CasKaydiaCove Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Regular
+  bold:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold
   italic:
-    family: CasKaydiaCove Nerd Font
-    style: SemiLight Italic
-  bold_italic:
-    family: CasKaydiaCove Nerd Font
+    family: JetBrainsMonoNL Nerd Font
     style: Italic
-  size: 15
+  bold_italic:
+    family: JetBrainsMonoNL Nerd Font
+    style: Bold Italic
+  size: 16
   offset:
     x: 1
-    y: 1
+    y: 0
 
 cursor:
   unfocused_hollow: true
