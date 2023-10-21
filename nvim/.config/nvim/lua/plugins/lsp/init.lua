@@ -1,27 +1,15 @@
 return {
 	{
-		"hinell/lsp-timeout.nvim",
-		dependencies = { "neovim/nvim-lspconfig" },
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			vim.g["lsp-timeout-config"] = {
-				stopTimeout = 60 * 1000,
-				startTimeout = 1 * 1000,
-				silent = false,
-			}
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			-- "williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"b0o/schemastore.nvim",
 		},
 		config = function()
 			local lsp_conf = require("lspconfig")
-			local mason_lsp = require("mason-lspconfig")
+			-- local mason_lsp = require("mason-lspconfig")
 			local cmp_lsp = require("cmp_nvim_lsp")
 			local float_conf = { border = "rounded" }
 
@@ -53,17 +41,29 @@ return {
 			})
 			lsp_conf.util.default_config.capabilities = cmp_lsp.default_capabilities()
 
-			mason_lsp.setup({
-				handlers = {
-					function(server)
-						local pcall, opts = pcall(require, "plugins.lsp.options." .. server)
-						lsp_conf[server].setup(pcall and opts or {})
-					end,
-					tsserver = function() end,
-					rust_analyzer = function() end,
-					jdtls = function() end,
-				},
-			})
+			-- mason_lsp.setup({
+			-- 	handlers = {
+			-- 		function(server)
+			-- 			local pcall, opts = pcall(require, "plugins.lsp.options." .. server)
+			-- 			lsp_conf[server].setup(pcall and opts or {})
+			-- 		end,
+			-- 		tsserver = function() end,
+			-- 		rust_analyzer = function() end,
+			-- 		jdtls = function() end,
+			-- 	},
+			-- })
+		end,
+	},
+	{
+		"hinell/lsp-timeout.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			vim.g["lsp-timeout-config"] = {
+				stopTimeout = 60 * 1000,
+				startTimeout = 1 * 1000,
+				silent = false,
+			}
 		end,
 	},
 }
