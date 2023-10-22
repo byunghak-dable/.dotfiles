@@ -10,7 +10,7 @@ return {
 	},
 	opts = {
 		formatters_by_ft = {
-			javascript = { { { "prettierd", "prettier" } } },
+			javascript = { { "prettierd", "prettier" } },
 			typescript = { { "prettierd", "prettier" } },
 			javascriptreact = { { "prettierd", "prettier" } },
 			typescriptreact = { { "prettierd", "prettier" } },
