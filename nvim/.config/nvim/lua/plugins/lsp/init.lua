@@ -16,12 +16,20 @@ return {
 						"dockerls",
 						"docker_compose_language_service",
 					},
+					handlers = {
+						function(server)
+							local pcall, opts = pcall(require, "plugins.lsp.options." .. server)
+							require("lspconfig")[server].setup(pcall and opts or {})
+						end,
+						tsserver = function() end,
+						rust_analyzer = function() end,
+						jdtls = function() end,
+					},
 				},
 			},
 		},
 		config = function()
-			local lsp_conf = require("lspconfig")
-			local mason_lsp = require("mason-lspconfig")
+			local lspconfig = require("lspconfig")
 			local cmp_lsp = require("cmp_nvim_lsp")
 			local float_conf = { border = "rounded" }
 
@@ -51,19 +59,7 @@ return {
 					end
 				end,
 			})
-			lsp_conf.util.default_config.capabilities = cmp_lsp.default_capabilities()
-
-			mason_lsp.setup({
-				handlers = {
-					function(server)
-						local pcall, opts = pcall(require, "plugins.lsp.options." .. server)
-						lsp_conf[server].setup(pcall and opts or {})
-					end,
-					tsserver = function() end,
-					rust_analyzer = function() end,
-					jdtls = function() end,
-				},
-			})
+			lspconfig.util.default_config.capabilities = cmp_lsp.default_capabilities()
 		end,
 	},
 	{

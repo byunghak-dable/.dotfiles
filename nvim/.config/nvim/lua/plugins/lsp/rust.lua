@@ -1,7 +1,10 @@
 return {
 	"simrat39/rust-tools.nvim",
 	ft = "rust",
-	dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"mfussenegger/nvim-dap",
+	},
 	opts = function()
 		local rt = require("rust-tools")
 		local ok, codelldb = pcall(require("mason-registry").get_package, "codelldb")
