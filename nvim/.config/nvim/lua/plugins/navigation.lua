@@ -1,11 +1,15 @@
 return {
 	{
-		"ggandor/leap.nvim",
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+			{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end },
+			{ "r", mode = "o", function() require("flash").remote() end },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end },
 		},
-		config = function() require("leap").add_default_mappings(true) end,
 	},
 	{
 		"numToStr/Navigator.nvim",
