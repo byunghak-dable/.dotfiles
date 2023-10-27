@@ -2,7 +2,6 @@ return {
 	"williamboman/mason.nvim",
 	cmd = "Mason",
 	build = ":MasonUpdate",
-	lazy = true,
 	config = function(_, opts)
 		local mason = require("mason")
 		local registry = require("mason-registry")
