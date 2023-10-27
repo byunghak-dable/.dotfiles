@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		"b0o/schemastore.nvim",
 		{
 			"williamboman/mason-lspconfig.nvim",
 			dependencies = "williamboman/mason.nvim",
@@ -40,7 +39,7 @@ return {
 			end,
 		},
 	},
-	config = function(_, opts)
+	config = function()
 		local lspconfig = require("lspconfig")
 		local cmp_lsp = require("cmp_nvim_lsp")
 
