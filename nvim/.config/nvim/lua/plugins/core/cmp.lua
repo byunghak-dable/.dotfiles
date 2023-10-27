@@ -7,7 +7,6 @@ return {
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
-		"kristijanhusak/vim-dadbod-completion",
 		{
 			"L3MON4D3/LuaSnip",
 			dependencies = "rafamadriz/friendly-snippets",
@@ -38,17 +37,12 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" },
-				{ name = "vim-dadbod-completion" },
 			},
 			mapping = {
 				["<C-space>"] = cmp.mapping.complete(),
 				["<C-f>"] = cmp.mapping.confirm({ select = true }),
 				["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-			},
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
 			},
 			experimental = { ghost_text = true },
 		}
