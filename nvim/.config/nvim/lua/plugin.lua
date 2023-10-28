@@ -37,7 +37,6 @@ require("lazy").setup({
 
 local term_size = { width = 0.9, height = 0.9 }
 
-vim.keymap.set("n", "<leader>dd", function() require("lazy.util").float_term({ "gobang" }, { size = term_size }) end)
 vim.keymap.set("n", "<leader>gg", function() require("lazy.util").float_term({ "lazygit" }, { size = term_size }) end)
 vim.keymap.set(
 	"n",
