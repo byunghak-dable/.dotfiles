@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "java-test", "java-debug-adapter" })
+			vim.list_extend(opts.ensure_installed, { "jdtls", "java-test", "java-debug-adapter" })
 		end,
 	},
 	{
@@ -11,8 +11,6 @@ return {
 		lazy = true,
 		opts = function(_, opts)
 			opts.handlers = vim.tbl_extend("force", opts.handlers, { jdtls = function() end })
-			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "jdtls" })
 		end,
 	},
 	{

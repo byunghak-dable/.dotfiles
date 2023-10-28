@@ -1,21 +1,20 @@
 return {
 	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = "williamboman/mason.nvim",
-		lazy = true,
+		"williamboman/mason.nvim",
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "yamlls" })
+			vim.list_extend(opts.ensure_installed, { "yaml-language-server" })
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = "b0o/schemastore.nvim",
 		opts = function(_, opts)
-			return vim.tbl_extend("force", opts.settings, {
+			return vim.tbl_deep_extend("force", opts, {
 				settings = {
-					yaml = {
-						schemas = require("schemastore").yaml.schemas(),
+					json = {
+						validate = { enable = true },
+						schemas = require("schemastore").json.schemas(),
 					},
 				},
 			})

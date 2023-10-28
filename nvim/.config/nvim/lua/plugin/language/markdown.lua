@@ -7,14 +7,6 @@ return {
 		end,
 	},
 	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			settings = {
-				marksman = {},
-			},
-		},
-	},
-	{
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {

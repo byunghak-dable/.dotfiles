@@ -1,12 +1,16 @@
 return {
 	{
+		"williamboman/mason.nvim",
+		opts = function(_, opts)
+			opts.ensure_installed = opts.ensure_installed or {}
+			vim.list_extend(opts.ensure_installed, { "typescript-language-server" })
+		end,
+	},
+	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = "williamboman/mason.nvim",
 		lazy = true,
 		opts = function(_, opts)
 			opts.handlers = vim.tbl_extend("force", opts.handlers, { tsserver = function() end })
-			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "tsserver" })
 		end,
 	},
 	{
@@ -89,13 +93,6 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			opts = function(_, opts)
-				opts.ensure_installed = opts.ensure_installed or {}
-				vim.list_extend(opts.ensure_installed, { "stylua" })
-			end,
-		},
 		opts = {
 			formatters_by_ft = {
 				javascript = { { "prettierd", "prettier" } },

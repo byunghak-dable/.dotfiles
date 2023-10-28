@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "codelldb" })
+			vim.list_extend(opts.ensure_installed, { "rust-analyzer", "codelldb" })
 		end,
 	},
 	{
@@ -11,8 +11,6 @@ return {
 		lazy = true,
 		opts = function(_, opts)
 			opts.handlers = vim.tbl_extend("force", opts.handlers, { rust_analyzer = function() end })
-			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "rust_analyzer" })
 		end,
 	},
 	{
