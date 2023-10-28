@@ -1,29 +1,23 @@
 return {
 	"mfussenegger/nvim-jdtls",
+	dependencies = {
+		"hrsh7th/cmp-nvim-lsp",
+		{
+			"williamboman/mason.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				vim.list_extend(opts.ensure_installed, { "java-test", "java-debug-adapter" })
+			end,
+		},
+	},
 	ft = "java",
 	opts = function()
 		local jdtls = require("jdtls")
+		local cmp_lsp = require("cmp_nvim_lsp")
 		local registry = require("mason-registry")
 		local jdtls_path = registry.get_package("jdtls"):get_install_path()
-
-		-- test & debug bundles
-		local bundles = {}
-		local test_path = require("mason-registry").get_package("java-test"):get_install_path()
-		local test_bundle = vim.split(vim.fn.glob(test_path .. "/extension/server/*.jar"), "\n")
-		local debug_path = require("mason-registry").get_package("java-debug-adapter"):get_install_path()
-		local debug_bundle =
-			vim.split(vim.fn.glob(debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
-		if test_bundle[1] ~= "" then vim.list_extend(bundles, test_bundle) end
-		if debug_bundle[1] ~= "" then vim.list_extend(bundles, debug_bundle) end
-
-		-- capabilities
-		local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			vim.lsp.protocol.make_client_capabilities(),
-			ok and cmp_lsp.default_capabilities() or {}
-		)
-		jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+		local test_path = registry.get_package("java-test"):get_install_path()
+		local debug_path = registry.get_package("java-debug-adapter"):get_install_path()
 
 		return {
 			cmd = {
@@ -48,7 +42,7 @@ return {
 				os.getenv("HOME") .. "/workspace/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"), -- project name
 			},
 			root_dir = jdtls.setup.find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
-			capabilities = capabilities,
+			capabilities = cmp_lsp.default_capabilities(),
 			on_attach = function(_, bufnr)
 				local buf_opts = { buffer = bufnr, noremap = true }
 
@@ -61,17 +55,9 @@ return {
 				vim.keymap.set("v", "<leader>ec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", buf_opts)
 				vim.keymap.set("v", "<leader>em", "<esc><cmd>lua require('jdtls').extract_method(true)<cr>", buf_opts)
 
-				-- debug
 				jdtls.setup_dap({ hotcodereplace = "auto" })
 				jdtls.setup.add_commands()
 				jdtls.dap.setup_dap_main_class_configs()
-
-				-- codelens
-				pcall(vim.lsp.codelens.refresh)
-				vim.api.nvim_create_autocmd("BufWritePost", {
-					buffer = bufnr,
-					callback = function() pcall(vim.lsp.codelens.refresh) end,
-				})
 			end,
 			settings = {
 				java = {
@@ -114,7 +100,15 @@ return {
 				},
 			},
 			flags = { allow_incremental_sync = true },
-			init_options = { bundles = bundles },
+			init_options = {
+				bundles = {
+					vim.split(vim.fn.glob(test_path .. "/extension/server/*.jar"), "\n"),
+					vim.split(
+						vim.fn.glob(debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+						"\n"
+					),
+				},
+			},
 		}
 	end,
 	config = function(_, opts)
