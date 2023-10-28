@@ -12,9 +12,10 @@ return {
 		opts = function(_, opts)
 			return vim.tbl_deep_extend("force", opts, {
 				settings = {
-					json = {
-						validate = { enable = true },
-						schemas = require("schemastore").json.schemas(),
+					yaml = {
+						keyOrdering = false,
+						validate = true,
+						schemaStore = require("schemastore").yaml.schemas(),
 					},
 				},
 			})
