@@ -1,20 +1,18 @@
 return {
 	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = "williamboman/mason.nvim",
+		lazy = true,
+		opts = function(_, opts)
+			opts.handlers = vim.tbl_extend("force", opts.handlers, { tsserver = function() end })
+			opts.ensure_installed = opts.ensure_installed or {}
+			vim.list_extend(opts.ensure_installed, { "tsserver" })
+		end,
+	},
+	{
 		"pmizio/typescript-tools.nvim",
 		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"neovim/nvim-lspconfig",
-			{
-				"williamboman/mason-lspconfig.nvim",
-				dependencies = "williamboman/mason.nvim",
-				opts = function(_, opts)
-					opts.ensure_installed = opts.ensure_installed or {}
-					opts.handlers = vim.tbl_extend("force", opts.handlers, { tsserver = function() end })
-					vim.list_extend(opts.ensure_installed, { "tsserver" })
-				end,
-			},
-		},
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		keys = {
 			{ "<leader>mi", "<cmd>TSToolsAddMissingImports<cr>" },
 			{ "<leader>oi", "<cmd>TSToolsOrganizeImports<cr>" },
@@ -47,7 +45,7 @@ return {
 			"williamboman/mason.nvim",
 			opts = function(_, opts)
 				opts.ensure_installed = opts.ensure_installed or {}
-				table.insert(opts.ensure_installed, "js-debug-adapter")
+				vim.list_extend(opts.ensure_installed, { "js-debug-adapter" })
 			end,
 		},
 		opts = function()
@@ -88,5 +86,35 @@ return {
 				end
 			end
 		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				vim.list_extend(opts.ensure_installed, { "stylua" })
+			end,
+		},
+		opts = {
+			formatters_by_ft = {
+				javascript = { { "prettierd", "prettier" } },
+				typescript = { { "prettierd", "prettier" } },
+				javascriptreact = { { "prettierd", "prettier" } },
+				typescriptreact = { { "prettierd", "prettier" } },
+			},
+		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		opts = {
+			linters_by_ft = {
+				javascript = { "eslint" },
+				typescript = { "eslint" },
+				javascriptreact = { "eslint" },
+				typescriptreact = { "eslint" },
+				svelte = { "eslint" },
+			},
+		},
 	},
 }

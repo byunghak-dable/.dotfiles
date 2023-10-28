@@ -7,10 +7,6 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			dependencies = "williamboman/mason.nvim",
 			opts = {
-				ensure_installed = {
-					"dockerls",
-					"docker_compose_language_service",
-				},
 				handlers = {
 					function(server)
 						local plugin = require("lazy.core.config").spec.plugins["nvim-lspconfig"]
