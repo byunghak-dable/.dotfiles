@@ -18,9 +18,6 @@ return {
 
 						require("lspconfig")[server].setup(opts)
 					end,
-					tsserver = function() end,
-					rust_analyzer = function() end,
-					jdtls = function() end,
 				},
 			},
 		},
