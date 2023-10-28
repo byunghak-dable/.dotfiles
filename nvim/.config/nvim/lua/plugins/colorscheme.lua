@@ -1,27 +1,23 @@
+vim.api.nvim_create_autocmd("UIEnter", {
+	callback = function()
+		require("lazy").load({ plugins = { "onedark.nvim" } })
+		vim.cmd.colorscheme("onedark")
+	end,
+})
+
 return {
 	{
 		"AlexvZyl/nordic.nvim",
-		event = "UIEnter",
-		enabled = false,
+		lazy = true,
 		opts = {
 			leap = { dim_backdrop = true },
 		},
-		config = function(_, opts)
-			local nordic = require("nordic")
-			nordic.setup(opts)
-			nordic.load()
-		end,
 	},
 	{
 		"navarasu/onedark.nvim",
-		event = "UIEnter",
+		lazy = true,
 		opts = {
 			style = "warmer",
 		},
-		config = function(_, opts)
-			local onedark = require("onedark")
-			onedark.setup(opts)
-			onedark.load()
-		end,
 	},
 }
