@@ -12,7 +12,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = "b0o/schemastore.nvim",
 		opts = function(_, opts)
-			return vim.tbl_deep_extend("force", opts, {
+			return vim.tbl_extend("force", opts.settings, {
 				settings = {
 					yaml = {
 						schemas = require("schemastore").yaml.schemas(),

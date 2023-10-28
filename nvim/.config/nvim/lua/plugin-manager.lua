@@ -12,9 +12,9 @@ end
 vim.opt.rtp:prepend(path)
 
 require("lazy").setup({
-	{ import = "plugins" },
-	{ import = "plugins.core" },
-	{ import = "plugins.language" },
+	{ import = "plugin" },
+	{ import = "plugin.core" },
+	{ import = "plugin.language" },
 }, {
 	change_detection = { notify = false },
 	ui = { border = "rounded" },
