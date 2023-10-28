@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-jdtls",
+	ft = "java",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		{
@@ -9,10 +10,17 @@ return {
 				vim.list_extend(opts.ensure_installed, { "java-test", "java-debug-adapter" })
 			end,
 		},
+		{
+			"williamboman/mason-lspconfig.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				vim.list_extend(opts.ensure_installed, { "jdtls" })
+			end,
+		},
 	},
-	ft = "java",
 	opts = function()
 		local jdtls = require("jdtls")
+		local jdtls_dap = require("jdtls.dap")
 		local cmp_lsp = require("cmp_nvim_lsp")
 		local registry = require("mason-registry")
 		local jdtls_path = registry.get_package("jdtls"):get_install_path()
@@ -57,7 +65,7 @@ return {
 
 				jdtls.setup_dap({ hotcodereplace = "auto" })
 				jdtls.setup.add_commands()
-				jdtls.dap.setup_dap_main_class_configs()
+				jdtls_dap.setup_dap_main_class_configs()
 			end,
 			settings = {
 				java = {
@@ -101,13 +109,13 @@ return {
 			},
 			flags = { allow_incremental_sync = true },
 			init_options = {
-				bundles = {
+				bundles = vim.list_extend(
 					vim.split(vim.fn.glob(test_path .. "/extension/server/*.jar"), "\n"),
 					vim.split(
 						vim.fn.glob(debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"),
 						"\n"
-					),
-				},
+					)
+				),
 			},
 		}
 	end,

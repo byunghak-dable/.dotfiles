@@ -4,11 +4,25 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"mfussenegger/nvim-dap",
+		{
+			"williamboman/mason.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				table.insert(opts.ensure_installed, "codelldb")
+			end,
+		},
+		{
+			"williamboman/mason-lspconfig.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				vim.list_extend(opts.ensure_installed, { "rust_analyzer" })
+			end,
+		},
 	},
 	opts = function()
 		local rt = require("rust-tools")
-		local ok, codelldb = pcall(require("mason-registry").get_package, "codelldb")
-		local debugger_path = ok and codelldb:get_install_path() .. "/extension/" or nil
+		local rt_dap = require("rust-tools.dap")
+		local debugger_path = require("mason-registry").get_package("codelldb"):get_install_path() .. "/extension/"
 
 		return {
 			server = {
@@ -18,10 +32,10 @@ return {
 				end,
 			},
 			dap = {
-				adapter = debugger_path and require("rust-tools.dap").get_codelldb_adapter(
+				adapter = rt_dap.get_codelldb_adapter(
 					debugger_path .. "adapter/codelldb",
 					vim.fn.has("mac") == 1 and debugger_path .. "lldb/lib/liblldb.dylib"
-				) or nil,
+				),
 			},
 			tools = {
 				hover_actions = { auto_focus = true },

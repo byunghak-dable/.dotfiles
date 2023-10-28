@@ -1,11 +1,19 @@
 return {
 	{
 		"pmizio/typescript-tools.nvim",
+		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
+			{
+				"williamboman/mason-lspconfig.nvim",
+				dependencies = "williamboman/mason.nvim",
+				opts = function(_, opts)
+					opts.ensure_installed = opts.ensure_installed or {}
+					vim.list_extend(opts.ensure_installed, { "tsserver" })
+				end,
+			},
 		},
-		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		keys = {
 			{ "<leader>mi", "<cmd>TSToolsAddMissingImports<cr>" },
 			{ "<leader>oi", "<cmd>TSToolsOrganizeImports<cr>" },
@@ -35,13 +43,11 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			{
-				"williamboman/mason.nvim",
-				opts = function(_, opts)
-					opts.ensure_installed = opts.ensure_installed or {}
-					table.insert(opts.ensure_installed, "js-debug-adapter")
-				end,
-			},
+			"williamboman/mason.nvim",
+			opts = function(_, opts)
+				opts.ensure_installed = opts.ensure_installed or {}
+				table.insert(opts.ensure_installed, "js-debug-adapter")
+			end,
 		},
 		opts = function()
 			local dap = require("dap")

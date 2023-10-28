@@ -8,10 +8,6 @@ return {
 			dependencies = "williamboman/mason.nvim",
 			opts = {
 				ensure_installed = {
-					"lua_ls",
-					"tsserver",
-					"jsonls",
-					"yamlls",
 					"dockerls",
 					"docker_compose_language_service",
 				},
@@ -27,16 +23,6 @@ return {
 					jdtls = function() end,
 				},
 			},
-		},
-		{
-			"hinell/lsp-timeout.nvim",
-			config = function()
-				vim.g["lsp-timeout-config"] = {
-					stopTimeout = 60 * 1000,
-					startTimeout = 1 * 1000,
-					silent = false,
-				}
-			end,
 		},
 	},
 	config = function()
