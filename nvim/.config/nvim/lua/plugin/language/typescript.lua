@@ -3,7 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
 			opts.ensure_installed = opts.ensure_installed or {}
-			vim.list_extend(opts.ensure_installed, { "typescript-language-server" })
+			vim.list_extend(opts.ensure_installed, { "typescript-language-server", "js-debug-adapter" })
 		end,
 	},
 	{
@@ -45,13 +45,6 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap",
-		dependencies = {
-			"williamboman/mason.nvim",
-			opts = function(_, opts)
-				opts.ensure_installed = opts.ensure_installed or {}
-				vim.list_extend(opts.ensure_installed, { "js-debug-adapter" })
-			end,
-		},
 		opts = function()
 			local dap = require("dap")
 			if not dap.adapters["pwa-node"] then
