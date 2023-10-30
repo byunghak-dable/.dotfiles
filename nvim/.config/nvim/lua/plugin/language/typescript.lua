@@ -25,23 +25,21 @@ return {
 			{ "<leader>fa", "<cmd>TSToolsFixAll<cr>" },
 			{ "gs", "<cmd>TSToolsGoToSourceDefinition<cr>" },
 		},
-		opts = function()
-			return {
-				settings = {
-					separate_diagnostic_server = false,
-					tsserver_file_preferences = {
-						includeInlayParameterNameHints = "all",
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeCompletionsForModuleExports = true,
-						importModuleSpecifierPreference = "relative",
-					},
+		opts = {
+			settings = {
+				separate_diagnostic_server = false,
+				tsserver_file_preferences = {
+					includeInlayParameterNameHints = "all",
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeCompletionsForModuleExports = true,
+					importModuleSpecifierPreference = "relative",
 				},
-			}
-		end,
+			},
+		},
 	},
 	{
 		"mfussenegger/nvim-dap",
