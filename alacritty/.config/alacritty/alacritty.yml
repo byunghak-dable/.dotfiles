@@ -1,29 +1,5 @@
-# Colors (One Dark)
-colors:
-  primary:
-    background: '#232326'
-    foreground: '#a7aab0'
-
-  normal:
-    black:   '#101012'
-    red:     '#de5d68'
-    green:   '#8fb573'
-    yellow:  '#dbb671'
-    blue:    '#61afef'
-    magenta: '#bb70d2'
-    cyan:    '#51a8b3'
-    white:   '#abb2bf'
-
-  bright:
-    black:   '#5c6370'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#ffffff'
-
+import:
+  - ~/.config/alacritty/themes/one_dark.yaml
 font:
   normal:
     family: JetBrainsMono Nerd Font
