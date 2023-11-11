@@ -9,6 +9,12 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
+			init_options = {
+				preferences = {
+					importModuleSpecifierPreference = "relative",
+					importModuleSpecifierEnding = "minimal",
+				},
+			},
 			settings = {
 				completions = {
 					completeFunctionCalls = true,
@@ -31,6 +37,7 @@ return {
 					local buf_opts = { buffer = args.buf }
 
 					vim.keymap.set("n", "<leader>fa", function() ts_action("source.fixAll") end, buf_opts)
+					vim.keymap.set("n", "<leader>ru", function() ts_action("source.removeUnused") end, buf_opts)
 					vim.keymap.set("n", "<leader>oi", function() ts_action("source.organizeImports") end, buf_opts)
 					vim.keymap.set("n", "<leader>ri", function() ts_action("source.removeUnusedImports") end, buf_opts)
 					vim.keymap.set("n", "<leader>mi", function() ts_action("source.addMissingImports") end, buf_opts)

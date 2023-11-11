@@ -2,6 +2,7 @@ return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	opts = {
+		notify_on_error = false,
 		formatters_by_ft = {
 			css = { { "prettierd", "prettier" } },
 			html = { { "prettierd", "prettier" } },
