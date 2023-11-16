@@ -24,15 +24,30 @@ return {
 	opts = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		local fb_utils = require("telescope._extensions.file_browser.utils")
 		local fb_actions = telescope.extensions.file_browser.actions
-		local file_operation = require("lsp-file-operations.will-rename")
+		local fb_utils = require("telescope._extensions.file_browser.utils")
+		local lf_operation = require("lsp-file-operations.will-rename")
+
+		local function sync_import(old_path, new_path)
+			local paths = vim.split(vim.fn.glob(new_path .. "*"), "\n")
+
+			for _, new_name in pairs(paths) do
+				local old_name = old_path .. new_name:sub(string.len(new_path) + 1)
+
+				if vim.fn.isdirectory(new_name) ~= 0 then
+					sync_import(old_name .. "/", new_name .. "/")
+				else
+					lf_operation.callback({ old_name = old_name, new_name = new_name })
+				end
+			end
+		end
 
 		for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
 			local rename_func = fb_utils[name]
+
 			fb_utils[name] = function(old_path, new_path)
 				rename_func(old_path, new_path)
-				file_operation.callback({ old_name = old_path, new_name = new_path })
+				sync_import(old_path, new_path)
 			end
 		end
 
