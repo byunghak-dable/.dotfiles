@@ -6,6 +6,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"nvim-telescope/telescope-file-browser.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{ "antosha417/nvim-lsp-file-operations", opts = {} },
 	},
 	keys = {
 		{ "<leader>fe", "<cmd>Telescope file_browser<cr>" },
@@ -23,13 +24,24 @@ return {
 	opts = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
+		local fb_utils = require("telescope._extensions.file_browser.utils")
 		local fb_actions = telescope.extensions.file_browser.actions
+		local file_operation = require("lsp-file-operations.will-rename")
+
+		for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
+			local rename_func = fb_utils[name]
+			fb_utils[name] = function(old_path, new_path)
+				rename_func(old_path, new_path)
+				file_operation.callback({ old_name = old_path, new_name = new_path })
+			end
+		end
 
 		return {
 			defaults = {
 				path_display = { "smart" },
 				sorting_strategy = "ascending",
 				layout_strategy = "flex",
+				preview = { treesitter = false },
 				layout_config = {
 					prompt_position = "top",
 					width = 0.9,
@@ -44,9 +56,6 @@ return {
 						["<C-k>"] = "move_selection_previous",
 						["<A-d>"] = actions.delete_buffer,
 					},
-				},
-				preview = {
-					filesize_limit = 2000,
 				},
 			},
 			extensions = {

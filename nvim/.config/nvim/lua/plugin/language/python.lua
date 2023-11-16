@@ -9,10 +9,12 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
-			settings = {
-				python = {
-					analysis = {
-						typeCheckingMode = "off",
+			pyright = {
+				settings = {
+					python = {
+						analysis = {
+							typeCheckingMode = "off",
+						},
 					},
 				},
 			},

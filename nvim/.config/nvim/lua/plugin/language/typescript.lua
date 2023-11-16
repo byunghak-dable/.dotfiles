@@ -9,32 +9,26 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
-			init_options = {
-				preferences = {
-					importModuleSpecifierPreference = "relative",
-					importModuleSpecifierEnding = "minimal",
-				},
-			},
-			settings = {
-				completions = {
-					completeFunctionCalls = true,
-				},
-			},
-		},
-		init = function()
-			local ts_action = function(source)
-				vim.lsp.buf.code_action({
-					apply = true,
-					context = {
-						only = { source },
+			tsserver = {
+				init_options = {
+					preferences = {
+						importModuleSpecifierPreference = "relative",
+						importModuleSpecifierEnding = "minimal",
 					},
-				})
-			end
-
-			vim.api.nvim_create_autocmd("LspAttach", {
-				pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
-				callback = function(args)
-					local buf_opts = { buffer = args.buf }
+				},
+				settings = {
+					completions = {
+						completeFunctionCalls = true,
+					},
+				},
+				on_attach = function(_, bufnr)
+					local buf_opts = { buffer = bufnr }
+					local ts_action = function(source)
+						vim.lsp.buf.code_action({
+							apply = true,
+							context = { only = { source } },
+						})
+					end
 
 					vim.keymap.set("n", "<leader>fa", function() ts_action("source.fixAll") end, buf_opts)
 					vim.keymap.set("n", "<leader>ru", function() ts_action("source.removeUnused") end, buf_opts)
@@ -43,8 +37,8 @@ return {
 					vim.keymap.set("n", "<leader>mi", function() ts_action("source.addMissingImports") end, buf_opts)
 					vim.keymap.set("n", "<leader>si", function() ts_action("source.sortImports") end, buf_opts)
 				end,
-			})
-		end,
+			},
+		},
 	},
 	{
 		"mfussenegger/nvim-dap",

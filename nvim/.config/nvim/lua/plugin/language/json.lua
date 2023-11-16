@@ -11,10 +11,12 @@ return {
 		dependencies = "b0o/schemastore.nvim",
 		opts = function(_, opts)
 			return vim.tbl_deep_extend("force", opts, {
-				settings = {
-					json = {
-						validate = { enable = true },
-						schemas = require("schemastore").json.schemas(),
+				jsonls = {
+					settings = {
+						json = {
+							validate = { enable = true },
+							schemas = require("schemastore").json.schemas(),
+						},
 					},
 				},
 			})
