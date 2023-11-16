@@ -79,6 +79,7 @@ return {
 					cwd_to_path = true,
 					hide_parent_dir = true,
 					hidden = true,
+					no_ignore = true,
 					grouped = true,
 					select_buffer = true,
 					mappings = {
