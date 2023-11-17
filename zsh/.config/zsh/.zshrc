@@ -36,9 +36,6 @@ Darwin) # mac
   alias ls="ls -G"
   alias ll="ls -lGFh"
   alias la="ls -laGFh"
-  # -- to install python <= 3.7 -- 
-  # export LDFLAGS="-L/usr/local/opt/zlib/lib"
-  # export CPPFLAGS="-I/usr/local/opt/zlib/include" 
 	;;
 Linux) # linux
   alias ls='ls --color=auto'
