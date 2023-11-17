@@ -2,21 +2,21 @@ import:
   - ~/.config/alacritty/themes/neosolarized_dark.yml
 font:
   normal:
-    family: JetBrainsMono Nerd Font
-    style: Regular
+    family: CaskaydiaCove Nerd Font
+    style: SemiLight
   bold:
-    family: JetBrainsMonoNL Nerd Font
-    style: Bold
+    family: CaskaydiaCove Nerd Font
+    style: Regular
   italic:
-    family: JetBrainsMonoNL Nerd Font
-    style: Italic
+    family: CaskaydiaCove Nerd Font
+    style: SemiLight Italic
   bold_italic:
-    family: JetBrainsMonoNL Nerd Font
-    style: Bold Italic
+    family: CaskaydiaCove Nerd Font
+    style: Italic
   size: 16
   offset:
     x: 1
-    y: 0
+    y: 1
 
 cursor:
   unfocused_hollow: true
