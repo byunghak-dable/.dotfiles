@@ -8,6 +8,11 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
 		{
+			"Exafunction/codeium.nvim",
+			dependencies = "nvim-lua/plenary.nvim",
+			opts = {},
+		},
+		{
 			"L3MON4D3/LuaSnip",
 			dependencies = "rafamadriz/friendly-snippets",
 			keys = {
@@ -35,6 +40,7 @@ return {
 				{ name = "path" },
 				{ name = "luasnip" },
 				{ name = "nvim_lsp" },
+				{ name = "codeium" },
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" },
 			},
