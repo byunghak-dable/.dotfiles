@@ -36,7 +36,7 @@ return {
     },
   },
   {
-    "telescope-file-browser.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
     dependencies = "telescope.nvim",
     keys = {
       { "<leader>fe", "<cmd>Telescope file_browser<cr>" },
