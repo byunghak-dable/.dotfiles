@@ -7,38 +7,48 @@ return {
 		end,
 	},
 	{
-		"neovim/nvim-lspconfig",
+		"williamboman/mason-lspconfig.nvim",
+		lazy = true,
+		opts = function(_, opts)
+			opts.handlers = vim.tbl_extend("force", opts.handlers, { tsserver = function() end })
+		end,
+	},
+	{
+		"pmizio/typescript-tools.nvim",
+		ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {
-			tsserver = {
-				init_options = {
-					preferences = {
-						importModuleSpecifierPreference = "relative",
-						importModuleSpecifierEnding = "minimal",
-					},
+			settings = {
+				separate_diagnostic_server = false,
+				tsserver_file_preferences = {
+					includeInlayParameterNameHints = "all",
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeCompletionsForModuleExports = true,
+					importModuleSpecifierPreference = "relative",
 				},
-				settings = {
-					completions = {
-						completeFunctionCalls = true,
-					},
-				},
-				on_attach = function(_, bufnr)
-					local buf_opts = { buffer = bufnr }
-					local ts_action = function(source)
-						vim.lsp.buf.code_action({
-							apply = true,
-							context = { only = { source } },
-						})
-					end
-
-					vim.keymap.set("n", "<leader>fa", function() ts_action("source.fixAll") end, buf_opts)
-					vim.keymap.set("n", "<leader>ru", function() ts_action("source.removeUnused") end, buf_opts)
-					vim.keymap.set("n", "<leader>oi", function() ts_action("source.organizeImports") end, buf_opts)
-					vim.keymap.set("n", "<leader>ri", function() ts_action("source.removeUnusedImports") end, buf_opts)
-					vim.keymap.set("n", "<leader>mi", function() ts_action("source.addMissingImports") end, buf_opts)
-					vim.keymap.set("n", "<leader>si", function() ts_action("source.sortImports") end, buf_opts)
-				end,
 			},
 		},
+		config = function(_, opts)
+			require("typescript-tools").setup(opts)
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
+				callback = function(args)
+					local buf_opts = { buffer = args.buf }
+
+					vim.keymap.set("n", "<leader>oi", "<cmd>TSToolsOrganizeImports<cr>", buf_opts)
+					vim.keymap.set("n", "<leader>mi", "<cmd>TSToolsAddMissingImports<cr>", buf_opts)
+					vim.keymap.set("n", "<leader>si", "<cmd>TSToolsSortImports<cr>", buf_opts)
+					vim.keymap.set("n", "<leader>ri", "<cmd>TSToolsRemoveUnusedImports<cr>", buf_opts)
+					vim.keymap.set("n", "<leader>ru", "<cmd>TSToolsRemoveUnused<cr>", buf_opts)
+					vim.keymap.set("n", "<leader>fa", "<cmd>TSToolsFixAll<cr>", buf_opts)
+				end,
+			})
+		end,
 	},
 	{
 		"mfussenegger/nvim-dap",
