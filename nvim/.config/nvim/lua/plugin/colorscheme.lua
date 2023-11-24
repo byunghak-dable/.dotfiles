@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd("UIEnter", {
 	callback = function()
-		require("lazy").load({ plugins = { "NeoSolarized.nvim" } })
-		vim.cmd.colorscheme("NeoSolarized")
+		require("lazy").load({ plugins = { "solarized-osaka.nvim" } })
+		vim.cmd.colorscheme("solarized-osaka")
 	end,
 })
 
@@ -21,7 +21,7 @@ return {
 		},
 	},
 	{
-		"Tsuzat/NeoSolarized.nvim",
-		lazy = false,
+		"craftzdog/solarized-osaka.nvim",
+		lazy = true,
 	},
 }
