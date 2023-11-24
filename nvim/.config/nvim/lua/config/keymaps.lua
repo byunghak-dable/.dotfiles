@@ -1,8 +1,7 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
 
--- buffer
-vim.keymap.set("n", "<leader><leader>", "<C-6>")
 -- vertical center
 vim.keymap.set("n", "<C-d>", "m'<C-d>zz")
 vim.keymap.set("n", "<C-u>", "m'<C-u>zz")

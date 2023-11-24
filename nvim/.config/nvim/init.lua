@@ -1,6 +1,2 @@
-require("options")
-require("keymaps")
-require("plugin-manager")
-
-local path = vim.fn.expand("%")
-if type(path) == "string" and vim.fn.isdirectory(path) ~= 0 then vim.fn.chdir(path) end
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
