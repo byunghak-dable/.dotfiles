@@ -1,3 +1,7 @@
 os:
   editCommand: 'nvim'
   openCommand: 'nvim {{filename}}'
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never -s 
