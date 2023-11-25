@@ -10,7 +10,7 @@ return {
           reveal = true,
         })
       end,
-      desc = "Explorer NeoTree (root dir)",
+      desc = "Explorer NeoTree",
     },
   },
   opts = {
