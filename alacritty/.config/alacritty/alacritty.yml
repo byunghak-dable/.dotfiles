@@ -2,16 +2,16 @@ import:
   - ~/.config/alacritty/themes/neosolarized_dark.yml
 font:
   normal:
-    family: CaskaydiaCove NF
-    style: SemiLight
+    family: CaskaydiaMono NF
+    style: Light
   bold:
-    family: CaskaydiaCove NF
+    family: CaskaydiaMono NF
     style: Regular
   italic:
-    family: CaskaydiaCove NF
-    style: SemiLight Italic
+    family: CaskaydiaMono NF
+    style: Light Italic
   bold_italic:
-    family: CaskaydiaCove NF
+    family: CaskaydiaMono NF
     style: Italic
   size: 16
   offset:
