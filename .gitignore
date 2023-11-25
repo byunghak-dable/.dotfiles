@@ -1,4 +1,8 @@
 alacritty/**/themes/*
+
 nvim/.config/nvim/plugin
+
 zsh/**/.plugins
 zsh/**/.zcompdump
+
+karabiner/**/automatic_backups/*
