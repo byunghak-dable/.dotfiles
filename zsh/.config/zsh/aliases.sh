@@ -3,12 +3,13 @@
 alias src="source ~/.zshrc"
 alias zrc="nvim ~/.config/zsh"
 alias nvimrc="nvim ~/.config/nvim"
-alias alc="nvim ~/.config/alacritty/alacritty.yml"
+alias alc="nvim ~/.config/alacritty"
 alias tlc="nvim ~/.tmux.conf"
 
 # util
 alias nv="nvim"
 alias cl="clear"
+alias tl="tmux clear-history"
 alias g="lazygit"
 
 # confirm before overwriting something

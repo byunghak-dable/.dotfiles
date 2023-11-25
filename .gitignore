@@ -3,7 +3,7 @@ alacritty/**/themes/*
 nvim/.config/nvim/plugin
 
 zsh/**/.plugins
-zsh/**/.zcompdump
+zsh/**/.zcomp*
 
 karabiner/**/automatic_backups/*
 
