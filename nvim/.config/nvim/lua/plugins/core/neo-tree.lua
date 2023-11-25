@@ -7,9 +7,10 @@ return {
         require("neo-tree.command").execute({
           toggle = true,
           reveal_file = vim.fn.expand("%:p"),
-          reveal_force_cwd = true,
+          reveal = true,
         })
       end,
+      desc = "Explorer NeoTree (root dir)",
     },
   },
   opts = {
@@ -23,6 +24,7 @@ return {
       },
     },
     filesystem = {
+      bind_to_cwd = true,
       hijack_netrw_behavior = "disabled",
     },
   },
