@@ -1,6 +1,10 @@
 return {
   {
     "telescope.nvim",
+    keys = {
+      { "<leader><space>", "<leader>fF", desc = "Find Files (cwd)", remap = true },
+      { "<leader>/", "<leader>sG", desc = "Grep (cwd)", remap = true },
+    },
     opts = {
       defaults = {
         path_display = { "smart" },
