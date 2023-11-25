@@ -19,5 +19,3 @@ vim.keymap.set("v", "p", '"_dP') -- paste
 vim.keymap.set("n", "<leader>d", '"_d')
 vim.keymap.set("n", "J", "mzJ`z") -- move line up
 vim.keymap.set("n", "<C-a>", "ggVG") -- select all
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>") -- save file
-vim.keymap.set("n", "<leader>h", "<cmd>noh<cr>") -- no hl
