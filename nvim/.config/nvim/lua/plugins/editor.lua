@@ -14,7 +14,6 @@ return {
   },
   {
     "numToStr/Navigator.nvim",
-    opts = { disable_on_zoom = true },
     keys = {
       { "<A-k>", "<cmd>NavigatorUp<cr>", mode = { "n", "t" }, desc = "Navigate Up" },
       { "<A-j>", "<cmd>NavigatorDown<cr>", mode = { "n", "t" }, desc = "Navigator Down" },
@@ -22,6 +21,7 @@ return {
       { "<A-l>", "<cmd>NavigatorRight<cr>", mode = { "n", "t" }, desc = "Navigator Right" },
       { "<A-p>", "<cmd>NavigatorPrevious<cr>", mode = { "n", "t" }, desc = "Navigator Previous" },
     },
+    opts = { disable_on_zoom = true },
   },
   {
     "anuvyklack/windows.nvim",
@@ -31,5 +31,15 @@ return {
       { "<C-w>=", "<cmd>WindowsEqualize<cr>", "Windows Equalize" },
     },
     opts = {},
+  },
+  {
+    "sindrets/diffview.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    keys = {
+      { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Diffvew" },
+      { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview (cwd)" },
+      { "<leader>go", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
+      { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
+    },
   },
 }
