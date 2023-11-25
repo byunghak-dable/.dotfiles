@@ -7,16 +7,10 @@ return {
     },
     opts = {
       defaults = {
-        path_display = { "smart" },
         sorting_strategy = "ascending",
         layout_strategy = "flex",
+        layout_config = { prompt_position = "top" },
         preview = { treesitter = false },
-        layout_config = {
-          prompt_position = "top",
-          width = 0.9,
-          height = 0.9,
-          vertical = { preview_height = 0.4 },
-        },
         mappings = {
           n = {
             l = "select_default",
