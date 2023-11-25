@@ -1,16 +1,6 @@
 return {
   {
     "telescope.nvim",
-    keys = {
-      -- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      -- { "<leader>ff", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", desc = "Find Files (no hidden)" },
-      -- { "<leader>fl", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
-      -- { "<leader>fL", "<cmd>Telescope live_grep hidden=true no_ignore=true<cr>", desc = "Grep (no hidden)" },
-      -- { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-      -- { "<leader>fd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics (Buffer)" },
-      -- { "<leader>fD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics (File)" },
-      { "<leader>fu", "<cmd>Telescope buffers sort_mru=true ignore_current_buffer=true<cr>", desc = "Buffers" },
-    },
     opts = {
       defaults = {
         path_display = { "smart" },
@@ -24,8 +14,11 @@ return {
           vertical = { preview_height = 0.4 },
         },
         mappings = {
-          n = { l = "select_default" },
+          n = {
+            l = "select_default",
+          },
           i = {
+            -- ["<C-t>"] = function() end,
             ["<C-l>"] = "select_default",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
@@ -76,11 +69,6 @@ return {
             mappings = {
               n = {
                 h = fb_actions.goto_parent_dir,
-              },
-              i = {
-                ["<C-h>"] = fb_actions.goto_parent_dir,
-                ["<C-r>"] = fb_actions.goto_cwd,
-                ["<C-w>"] = function() vim.cmd("normal vbd") end,
               },
             },
           },

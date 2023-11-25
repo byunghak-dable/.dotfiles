@@ -7,6 +7,11 @@ return {
     },
   },
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
     "echasnovski/mini.bufremove",
     keys = {
       { "<A-w>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
