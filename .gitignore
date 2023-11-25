@@ -6,3 +6,5 @@ zsh/**/.plugins
 zsh/**/.zcompdump
 
 karabiner/**/automatic_backups/*
+
+lazygit/**/state.yml
