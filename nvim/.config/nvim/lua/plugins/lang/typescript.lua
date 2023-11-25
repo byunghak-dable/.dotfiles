@@ -9,10 +9,7 @@ return {
             function()
               vim.lsp.buf.code_action({
                 apply = true,
-                context = {
-                  only = { "source.organizeImports.ts" },
-                  diagnostics = {},
-                },
+                context = { only = { "source.organizeImports.ts" }, diagnostics = {} },
               })
             end,
             desc = "Organize Imports",
@@ -28,7 +25,7 @@ return {
                 },
               })
             end,
-            desc = "Remove Unused Imports",
+            desc = "Remove Unused",
           },
           {
             "<leader>ri",
@@ -54,7 +51,7 @@ return {
                 },
               })
             end,
-            desc = "Remove Unused Imports",
+            desc = "Add Missig Imports",
           },
         },
       },
