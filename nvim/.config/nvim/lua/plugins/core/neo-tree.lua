@@ -2,7 +2,7 @@ return {
   "neo-tree.nvim",
   keys = {
     {
-      "<leader>e",
+      "<leader>fe",
       function()
         require("neo-tree.command").execute({
           toggle = true,
