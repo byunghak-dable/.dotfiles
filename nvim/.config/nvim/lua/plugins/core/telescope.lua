@@ -31,4 +31,15 @@ return {
     },
     config = function() require("telescope").load_extension("undo") end,
   },
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    keys = {
+      { "<leader>fw", function() require("telescope").extensions.git_worktree.git_worktrees() end },
+      { "<leader>fW", function() require("telescope").extensions.git_worktree.create_git_worktree() end },
+    },
+    config = function(_, opts)
+      require("git-worktree").setup(opts)
+      require("telescope").load_extension("git_worktree")
+    end,
+  },
 }
