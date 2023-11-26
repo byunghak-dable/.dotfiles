@@ -10,7 +10,6 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 -- editor
-vim.keymap.set("i", "{", "{<C-g>u") -- add undo history
 vim.keymap.set("v", "p", '"_dP') -- paste
 vim.keymap.set("n", "<leader>d", '"_d')
 vim.keymap.set("n", "J", "mzJ`z") -- move line up
