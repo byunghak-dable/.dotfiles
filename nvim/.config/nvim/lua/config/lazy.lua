@@ -18,6 +18,10 @@ require("lazy").setup({
       import = "lazyvim.plugins",
       opts = {
         colorscheme = "solarized-osaka",
+        news = {
+          lazyvim = true,
+          neovim = true,
+        },
       },
     },
 
@@ -44,6 +48,7 @@ require("lazy").setup({
   },
   checker = { enabled = true },
   performance = {
+    cache = { enabled = true },
     rtp = {
       disabled_plugins = {
         "gzip",
