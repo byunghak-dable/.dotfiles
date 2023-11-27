@@ -5,7 +5,7 @@ return {
       tsserver = {
         keys = {
           {
-            "<leader>oi",
+            "<leader>cO",
             function()
               vim.lsp.buf.code_action({
                 apply = true,
@@ -15,7 +15,7 @@ return {
             desc = "Organize Imports",
           },
           {
-            "<leader>ru",
+            "<leader>cR",
             function()
               vim.lsp.buf.code_action({
                 apply = true,
@@ -28,20 +28,7 @@ return {
             desc = "Remove Unused",
           },
           {
-            "<leader>ri",
-            function()
-              vim.lsp.buf.code_action({
-                apply = true,
-                context = {
-                  only = { "source.removeUnusedImports.ts" },
-                  diagnostics = {},
-                },
-              })
-            end,
-            desc = "Remove Unused Imports",
-          },
-          {
-            "<leader>mi",
+            "<leader>cM",
             function()
               vim.lsp.buf.code_action({
                 apply = true,
