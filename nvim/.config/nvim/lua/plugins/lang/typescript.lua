@@ -3,6 +3,12 @@ return {
   opts = {
     servers = {
       tsserver = {
+        init_options = {
+          preferences = {
+            importModuleSpecifierPreference = "relative",
+            importModuleSpecifierEnding = "minimal",
+          },
+        },
         keys = {
           {
             "<leader>cO",
