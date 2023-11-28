@@ -5,6 +5,11 @@ return {
     opts = {},
   },
   {
+    "utilyre/barbecue.nvim",
+    dependencies = "SmiteshP/nvim-navic",
+    opts = { show_modified = true },
+  },
+  {
     "numToStr/Navigator.nvim",
     keys = {
       { "<A-k>", "<cmd>NavigatorUp<cr>", mode = { "n", "t" }, desc = "Navigate Up" },
