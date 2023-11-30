@@ -3,13 +3,7 @@ return {
   keys = {
     {
       "<leader>fe",
-      function()
-        require("neo-tree.command").execute({
-          toggle = true,
-          reveal_file = vim.fn.expand("%:p"),
-          reveal = true,
-        })
-      end,
+      function() require("neo-tree.command").execute({ toggle = true, reveal = true }) end,
       desc = "Explorer NeoTree",
     },
   },
@@ -24,7 +18,6 @@ return {
       },
     },
     filesystem = {
-      bind_to_cwd = true,
       hijack_netrw_behavior = "disabled",
     },
   },

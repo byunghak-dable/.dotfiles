@@ -1,5 +1,20 @@
 return {
   {
+    "flash.nvim",
+    opts = {
+      modes = {
+        char = { enabled = false },
+        search = { enabled = false },
+      },
+    },
+  },
+  {
+    "mini.bufremove",
+    keys = {
+      { "<A-w>", "<leader>bd", remap = true, desc = "Delete Buffer" },
+    },
+  },
+  {
     "smjonas/inc-rename.nvim",
     lazy = true,
     opts = {},

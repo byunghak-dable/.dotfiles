@@ -2,8 +2,8 @@ return {
   {
     "telescope.nvim",
     keys = {
-      { "<leader><space>", "<leader>fF", desc = "Find Files (cwd)", remap = true },
-      { "<leader>/", "<leader>sG", desc = "Grep (cwd)", remap = true },
+      { "<leader><space>", "<leader>fF", remap = true, desc = "Find Files (cwd)" },
+      { "<leader>/", "<leader>sG", remap = true, desc = "Grep (cwd)" },
     },
     opts = {
       defaults = {
@@ -34,8 +34,16 @@ return {
   {
     "ThePrimeagen/git-worktree.nvim",
     keys = {
-      { "<leader>fw", function() require("telescope").extensions.git_worktree.git_worktrees() end },
-      { "<leader>fW", function() require("telescope").extensions.git_worktree.create_git_worktree() end },
+      {
+        "<leader>fw",
+        function() require("telescope").extensions.git_worktree.git_worktrees() end,
+        desc = "Git Wortrees",
+      },
+      {
+        "<leader>fW",
+        function() require("telescope").extensions.git_worktree.create_git_worktree() end,
+        desc = "Create Git Worktree",
+      },
     },
     config = function(_, opts)
       require("git-worktree").setup(opts)
