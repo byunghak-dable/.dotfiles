@@ -24,10 +24,7 @@ require("lazy").setup({
         },
       },
     },
-
     { import = "plugins" },
-    { import = "plugins.core" },
-    { import = "plugins.lang" },
   },
   defaults = {
     lazy = false,
