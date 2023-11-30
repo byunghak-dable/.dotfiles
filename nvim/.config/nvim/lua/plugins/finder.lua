@@ -1,27 +1,5 @@
 return {
   {
-    "neo-tree.nvim",
-    keys = {
-      {
-        "<leader>fe",
-        function() require("neo-tree.command").execute({ toggle = true, reveal = true }) end,
-        desc = "Explorer NeoTree",
-      },
-    },
-    opts = {
-      window = {
-        position = "float",
-        mappings = {
-          ["/"] = "noop",
-          ["l"] = "open",
-          ["h"] = "close_node",
-          ["<C-h>"] = "navigate_up",
-        },
-      },
-      filesystem = { hijack_netrw_behavior = "disabled" },
-    },
-  },
-  {
     "telescope.nvim",
     keys = {
       { "<leader><space>", "<leader>fF", remap = true, desc = "Find Files (cwd)" },
@@ -43,11 +21,61 @@ return {
             ["<C-k>"] = "move_selection_previous",
             -- disabling lazyvim "trouble" keymap
             ["<C-t>"] = false,
+            ["<c-t>"] = false,
             ["<A-t>"] = false,
+            ["<a-t>"] = false,
           },
         },
       },
     },
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    keys = {
+      {
+        "<leader>fe",
+        function()
+          require("telescope").extensions.file_browser.file_browser({
+            path = "%:p:h",
+            cwd_to_path = true,
+            hijack_netrw = true,
+            hide_parent_dir = true,
+            hidden = true,
+            grouped = true,
+            select_buffer = true,
+          })
+        end,
+        desc = "File Browser",
+      },
+    },
+    opts = function()
+      local lazy_util = require("lazyvim.util")
+      local fb_utils = require("telescope._extensions.file_browser.utils")
+      local fb_actions = require("telescope").extensions.file_browser.actions
+
+      for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
+        local rename_func = fb_utils[name]
+
+        fb_utils[name] = function(old_path, new_path)
+          rename_func(old_path, new_path)
+          lazy_util.lsp.on_rename(old_path, new_path)
+        end
+      end
+
+      return {
+        mappings = {
+          i = {
+            ["<C-w>"] = function() vim.cmd("normal vbd") end,
+            ["<C-t>"] = fb_actions.change_cwd,
+          },
+        },
+      }
+    end,
+    config = function(_, opts)
+      require("telescope").load_extension("file_browser")
+      -- must call filebrowser config "setup" after "load_extension"
+      require("telescope._extensions.file_browser.config").setup(opts)
+    end,
   },
   {
     "debugloop/telescope-undo.nvim",

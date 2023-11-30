@@ -7,4 +7,5 @@ return {
   { "tokyonight.nvim", enabled = false },
   { "vim-startuptime", enabled = false },
   { "trouble.nvim", enabled = false },
+  { "neo-tree.nvim", enabled = false },
 }
