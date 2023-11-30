@@ -1,9 +1,9 @@
 #!/bin/sh
 # config
-alias src="source ~/.zshrc"
-alias zrc="nvim ~/.config/zsh"
-alias nvimrc="nvim ~/.config/nvim"
-alias alc="nvim ~/.config/alacritty"
+alias src="source ~/.zshrc/"
+alias zrc="nvim ~/.config/zsh/"
+alias nvimrc="nvim ~/.config/nvim/"
+alias alc="nvim ~/.config/alacritty/"
 alias tlc="nvim ~/.tmux.conf"
 
 # util
