@@ -18,9 +18,7 @@ return {
           ["<C-h>"] = "navigate_up",
         },
       },
-      filesystem = {
-        hijack_netrw_behavior = "disabled",
-      },
+      filesystem = { hijack_netrw_behavior = "disabled" },
     },
   },
   {
@@ -43,6 +41,9 @@ return {
             ["<C-l>"] = "select_default",
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
+            -- disabling lazyvim "trouble" keymap
+            ["<C-t>"] = false,
+            ["<A-t>"] = false,
           },
         },
       },
