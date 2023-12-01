@@ -21,9 +21,7 @@ return {
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
             -- disabling lazyvim "trouble" keymap
-            ["<C-t>"] = false,
             ["<c-t>"] = false,
-            ["<A-t>"] = false,
             ["<a-t>"] = false,
           },
         },
@@ -32,35 +30,23 @@ return {
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = "telescope.nvim",
     keys = {
-      {
-        "<leader>fe",
-        function()
-          require("telescope").extensions.file_browser.file_browser({
-            path = "%:p:h",
-            cwd_to_path = true,
-            hijack_netrw = true,
-            hide_parent_dir = true,
-            hidden = true,
-            grouped = true,
-            select_buffer = true,
-          })
-        end,
-        desc = "File Browser",
+      { "<leader>fe", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
+    },
+    opts = {
+      path = "%:p:h",
+      cwd_to_path = true,
+      hide_parent_dir = true,
+      hidden = true,
+      grouped = true,
+      select_buffer = true,
+      mappings = {
+        i = {
+          ["<C-w>"] = function() vim.cmd("normal vbd") end,
+        },
       },
     },
-    opts = function()
-      local fb_actions = require("telescope").extensions.file_browser.actions
-
-      return {
-        mappings = {
-          i = {
-            ["<C-w>"] = function() vim.cmd("normal vbd") end,
-            ["<C-t>"] = fb_actions.change_cwd,
-          },
-        },
-      }
-    end,
     config = function(_, opts)
       local fb_utils = require("telescope._extensions.file_browser.utils")
       local lazy_util = require("lazyvim.util")

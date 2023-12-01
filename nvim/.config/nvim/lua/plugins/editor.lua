@@ -41,6 +41,8 @@ return {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
     dependencies = "SmiteshP/nvim-navic",
-    opts = { show_modified = true },
+    opts = {
+      show_modified = true,
+    },
   },
 }
