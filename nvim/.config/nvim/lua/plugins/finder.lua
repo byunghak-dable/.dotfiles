@@ -51,6 +51,17 @@ return {
     },
     opts = function()
       local fb_actions = require("telescope").extensions.file_browser.actions
+
+      return {
+        mappings = {
+          i = {
+            ["<C-w>"] = function() vim.cmd("normal vbd") end,
+            ["<C-t>"] = fb_actions.change_cwd,
+          },
+        },
+      }
+    end,
+    config = function(_, opts)
       local fb_utils = require("telescope._extensions.file_browser.utils")
       local lazy_util = require("lazyvim.util")
 
@@ -63,16 +74,8 @@ return {
         end
       end
 
-      return {
-        mappings = {
-          i = {
-            ["<C-w>"] = function() vim.cmd("normal vbd") end,
-            ["<C-t>"] = fb_actions.change_cwd,
-          },
-        },
-      }
+      require("telescope._extensions.file_browser.config").setup(opts)
     end,
-    config = function(_, opts) require("telescope._extensions.file_browser.config").setup(opts) end,
   },
   {
     "debugloop/telescope-undo.nvim",
