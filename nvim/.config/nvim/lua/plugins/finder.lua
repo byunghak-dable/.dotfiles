@@ -49,9 +49,9 @@ return {
       },
     },
     opts = function()
-      local lazy_util = require("lazyvim.util")
-      local fb_utils = require("telescope._extensions.file_browser.utils")
       local fb_actions = require("telescope").extensions.file_browser.actions
+      local fb_utils = require("telescope._extensions.file_browser.utils")
+      local lazy_util = require("lazyvim.util")
 
       for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
         local rename_func = fb_utils[name]
@@ -71,11 +71,7 @@ return {
         },
       }
     end,
-    config = function(_, opts)
-      require("telescope").load_extension("file_browser")
-      -- must call filebrowser config "setup" after "load_extension"
-      require("telescope._extensions.file_browser.config").setup(opts)
-    end,
+    config = function(_, opts) require("telescope._extensions.file_browser.config").setup(opts) end,
   },
   {
     "debugloop/telescope-undo.nvim",
