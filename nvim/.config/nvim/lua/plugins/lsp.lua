@@ -1,10 +1,6 @@
 return {
   {
     "nvim-lspconfig",
-    dependencies = {
-      "smjonas/inc-rename.nvim",
-      opts = {},
-    },
     keys = {
       { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     },
