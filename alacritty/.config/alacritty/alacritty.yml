@@ -2,21 +2,21 @@ import:
   - ~/.config/alacritty/themes/neosolarized_dark.yml
 font:
   normal:
-    family: CaskaydiaMono NF
+    family: PlemolJP35 Console NF
     style: Light
   bold:
-    family: CaskaydiaMono NF
+    family: PlemolJP35 Console NF
     style: Regular
   italic:
-    family: CaskaydiaMono NF
+    family: PlemolJP35 Console NF
     style: Light Italic
   bold_italic:
-    family: CaskaydiaMono NF
+    family: PlemolJP35 Console NF
     style: Italic
   size: 16
   offset:
-    x: 1
-    y: 1
+    x: 0
+    y: 0
 
 cursor:
   unfocused_hollow: true
