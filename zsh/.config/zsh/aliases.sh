@@ -7,6 +7,7 @@ alias alc="nvim ~/.config/alacritty/"
 alias tlc="nvim ~/.tmux.conf"
 
 # util
+alias f="fd --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim"
 alias nv="nvim"
 alias cl="clear"
 alias tl="tmux clear-history"
