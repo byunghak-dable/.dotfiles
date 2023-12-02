@@ -15,8 +15,8 @@ font:
     style: Italic
   size: 16
   offset:
-    x: 1
-    y: 1
+    x: 0
+    y: 0
 
 cursor:
   unfocused_hollow: true

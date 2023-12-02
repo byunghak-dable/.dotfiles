@@ -33,6 +33,8 @@ return {
       { "<A-l>", "<cmd>NavigatorRight<cr>", mode = { "n", "t" }, desc = "Navigator Right" },
       { "<A-p>", "<cmd>NavigatorPrevious<cr>", mode = { "n", "t" }, desc = "Navigator Previous" },
     },
-    opts = { disable_on_zoom = true },
+    opts = {
+      disable_on_zoom = true,
+    },
   },
 }
