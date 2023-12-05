@@ -6,8 +6,4 @@ return {
       transparent = false,
     },
   },
-  {
-    "AlexvZyl/nordic.nvim",
-    lazy = true,
-  },
 }
