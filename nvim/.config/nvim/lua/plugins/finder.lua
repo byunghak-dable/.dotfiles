@@ -52,6 +52,16 @@ return {
     },
     config = function(_, opts)
       local telescope = require("telescope")
+      local fb_utils = require("telescope._extensions.file_browser.utils")
+
+      for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
+        local rename_func = fb_utils[name]
+
+        fb_utils[name] = function(old_path, new_path)
+          rename_func(old_path, new_path)
+          require("lazyvim.util").lsp.on_rename(old_path, new_path)
+        end
+      end
 
       telescope.setup({ extensions = { file_browser = opts } })
       telescope.load_extension("file_browser")
