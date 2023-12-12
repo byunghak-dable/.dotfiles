@@ -37,6 +37,7 @@ return {
     },
     opts = {
       path = "%:p:h",
+      no_ignore = true,
       cwd_to_path = true,
       hide_parent_dir = true,
       hidden = true,
