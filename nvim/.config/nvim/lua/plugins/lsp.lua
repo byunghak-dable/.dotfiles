@@ -1,19 +1,30 @@
 return {
   {
     "nvim-lspconfig",
+    dependencies = {
+      {
+        "pmizio/typescript-tools.nvim",
+        opts = {
+          settings = {
+            expose_as_code_action = "all",
+            separate_diagnostic_server = false,
+            tsserver_file_preferences = {
+              includeCompletionsForModuleExports = true,
+              importModuleSpecifierPreference = "relative",
+            },
+          },
+        },
+      },
+    },
     keys = {
       { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     },
     opts = {
       servers = {
-        tsserver = {
-          init_options = {
-            preferences = {
-              importModuleSpecifierPreference = "relative",
-              importModuleSpecifierEnding = "minimal",
-            },
-          },
-        },
+        tsserver = { mason = false },
+      },
+      setup = {
+        tsserver = function() return true end,
       },
     },
     init = function()
