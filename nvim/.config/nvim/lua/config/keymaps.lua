@@ -16,4 +16,5 @@ vim.keymap.set("v", "p", '"_dP', opts) -- paste
 vim.keymap.set("n", "J", "mzJ`z", opts) -- move line up
 vim.keymap.set("n", "<C-a>", "ggVG", opts) -- select all
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', opts)
+vim.keymap.set({ "n", "v" }, "<leader>c", '"_c', opts)
 vim.keymap.set("n", "<leader>dm", ":delm!<cr>", opts) -- delete all marks
