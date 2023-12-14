@@ -10,7 +10,12 @@ return {
       defaults = {
         sorting_strategy = "ascending",
         layout_strategy = "flex",
-        layout_config = { prompt_position = "top" },
+        layout_config = {
+          prompt_position = "top",
+          width = 0.9,
+          height = 0.9,
+          preview_cutoff = 120,
+        },
         preview = { treesitter = false },
         mappings = {
           n = {
