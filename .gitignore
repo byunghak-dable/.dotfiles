@@ -1,4 +1,5 @@
-alacritty/**/themes/*
+alacritty/**/theme/*
+alacritty/**/font/*
 
 nvim/.config/nvim/plugin
 

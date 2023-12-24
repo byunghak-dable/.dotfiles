@@ -1,25 +1,6 @@
 import:
-  - ~/.config/alacritty/themes/neosolarized_dark.yml
-font:
-  normal:
-    family: MonaspiceNe Nerd Font
-    style: Light
-  bold:
-    family: MonaspiceNe Nerd Font
-    style: Regular
-  italic:
-    family: MonaspiceNe Nerd Font
-    style: Light Italic
-  bold_italic:
-    family: MonaspiceNe Nerd Font
-    style: Italic
-  size: 16
-  offset:
-    x: 1
-    y: 1
-  glyph_offset:
-    x: 0
-    y: 0
+  - ~/.config/alacritty/theme/neosolarized_dark.yml
+  - ~/.config/alacritty/font/monaspice_font.yml
 
 cursor:
   unfocused_hollow: true
