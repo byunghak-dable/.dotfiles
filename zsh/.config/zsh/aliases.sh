@@ -5,6 +5,7 @@ alias zrc="nvim ~/.config/zsh/"
 alias nvimrc="nvim ~/.config/nvim/"
 alias alc="nvim ~/.config/alacritty/"
 alias tlc="nvim ~/.tmux.conf"
+alias hlc="nvim ~/.config/hypr/"
 
 # util
 alias f="fd --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim"
