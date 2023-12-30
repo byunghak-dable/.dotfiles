@@ -48,6 +48,7 @@ return {
       hidden = true,
       grouped = true,
       select_buffer = true,
+      follow_symlinks = true,
       mappings = {
         i = {
           ["<C-w>"] = function() vim.cmd("normal vbd") end,
