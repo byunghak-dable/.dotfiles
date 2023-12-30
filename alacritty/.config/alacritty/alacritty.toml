@@ -1,15 +1,20 @@
+import = ["~/.config/alacritty/theme/solarized_dark.toml"]
+
+live_config_reload = true
+
 [window]
 decorations = "none"
 opacity = 1
-padding.x = 0
-padding.y = 0
+padding = { x = 0, y = 0 }
 
 [font]
 size = 12
-normal.family = "MonaspiceNe Nerd Font"
-bold.family = "MonaspiceNe Nerd Font"
-italic.family = "MonaspiceNe Nerd Font"
-bold_italic.family = "MonaspiceNe Nerd Font"
+normal = { family = "MonaspiceNe Nerd Font" }
+bold = { family = "MonaspiceNe Nerd Font" }
+italic = { family = "MonaspiceNe Nerd Font" }
+bold_italic = { family = "MonaspiceNe Nerd Font" }
+offset = { x = 0, y = 0 }
+
 
 [selection]
 semantic_escape_chars = " ,:;()[]{}"
