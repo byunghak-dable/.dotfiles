@@ -1,0 +1,42 @@
+[window]
+decorations = "none"
+opacity = 1
+padding.x = 0
+padding.y = 0
+
+[font]
+size = 12
+normal.family = "MonaspiceNe Nerd Font"
+bold.family = "MonaspiceNe Nerd Font"
+italic.family = "MonaspiceNe Nerd Font"
+bold_italic.family = "MonaspiceNe Nerd Font"
+
+[selection]
+semantic_escape_chars = " ,:;()[]{}"
+save_to_clipboard = false
+
+[keyboard]
+bindings = [
+  { key = "H", mods = "Command", chars = "\\x1bh" },
+  { key = "L", mods = "Command", chars = "\\x1bl" },
+  { key = "W", mods = "Command", chars = "\\x1bw" },
+  { key = "C", mods = "Command", chars = "\\x1bc" },
+  { key = "R", mods = "Command", chars = "\\x1br" },
+  { key = "M", mods = "Command", chars = "\\x1bm" },
+  { key = "Y", mods = "Command", chars = "\\x1by" },
+  { key = "D", mods = "Command", chars = "\\x1bd" },
+  { key = "J", mods = "Command", chars = "\\x1bj" },
+  { key = "K", mods = "Command", chars = "\\x1bk" },
+  { key = "P", mods = "Command", chars = "\\x1bp" },
+  { key = "D", mods = "Control|Shift", action = "Paste" },
+  { key = "C", mods = "Control|Shift", action = "Copy" },
+  { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+  { key = "NumpadAdd", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "NumpadSubtract", mods = "Control", action = "DecreaseFontSize" },
+  { key = "Key0", mods = "Control", action = "ResetFontSize" },
+  { key = "N", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
+  { key = "Space", mods = "Control", chars = "\\x00" },
+]
