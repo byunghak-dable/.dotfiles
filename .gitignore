@@ -9,6 +9,3 @@ zsh/**/.zcomp*
 karabiner/**/automatic_backups/*
 
 lazygit/**/state.yml
-
-hypr/.config/hypr/*
-!hypr/.config/hypr/userprefs.conf
