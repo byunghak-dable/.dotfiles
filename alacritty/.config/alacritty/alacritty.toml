@@ -1,47 +1,67 @@
-import = ["~/.config/alacritty/theme/solarized_dark.toml"]
-
 live_config_reload = true
+
+[colors.bright]
+black = "0x002b36"
+blue = "0x839496"
+cyan = "0x93a1a1"
+green = "0x586e75"
+magenta = "0x6c71c4"
+red = "0xcb4b16"
+white = "0xfdf6e3"
+yellow = "0x657b83"
+
+[colors.normal]
+black = "0x002b36"
+blue = "0x268bd2"
+cyan = "0x2aa198"
+green = "0x859900"
+magenta = "0xd33682"
+red = "0xdc322f"
+white = "0xeee8d5"
+yellow = "0xb58900"
+
+[colors.primary]
+background = "0x001217"
+foreground = "0x708183"
+
+[font]
+size = 16
+normal = { family = "MonaspiceNe Nerd Font", style = "Light" }
+bold = { family = "MonaspiceNe Nerd Font", style = "Regular" }
+italic = { family = "MonaspiceNe Nerd Font", style = "Light Italic" }
+bold_italic = { family = "MonaspiceNe Nerd Font", style = "Italic" }
+glyph_offset = { x = 0, y = 0 }
+offset = { x = 1, y = 1 }
+
+
+[cursor]
+unfocused_hollow = true
+
+[scrolling]
+history = 10000
+multiplier = 10
+
+[selection]
+save_to_clipboard = false
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
 decorations = "none"
 opacity = 1
+title = "Alacritty"
 padding = { x = 0, y = 0 }
 
-[font]
-size = 12
-normal = { family = "MonaspiceNe Nerd Font" }
-bold = { family = "MonaspiceNe Nerd Font" }
-italic = { family = "MonaspiceNe Nerd Font" }
-bold_italic = { family = "MonaspiceNe Nerd Font" }
-offset = { x = 0, y = 0 }
-
-
-[selection]
-semantic_escape_chars = " ,:;()[]{}"
-save_to_clipboard = false
 
 [keyboard]
 bindings = [
-  { key = "H", mods = "Command", chars = "\\x1bh" },
-  { key = "L", mods = "Command", chars = "\\x1bl" },
-  { key = "W", mods = "Command", chars = "\\x1bw" },
-  { key = "C", mods = "Command", chars = "\\x1bc" },
-  { key = "R", mods = "Command", chars = "\\x1br" },
-  { key = "M", mods = "Command", chars = "\\x1bm" },
-  { key = "Y", mods = "Command", chars = "\\x1by" },
-  { key = "D", mods = "Command", chars = "\\x1bd" },
-  { key = "J", mods = "Command", chars = "\\x1bj" },
-  { key = "K", mods = "Command", chars = "\\x1bk" },
-  { key = "P", mods = "Command", chars = "\\x1bp" },
-  { key = "D", mods = "Control|Shift", action = "Paste" },
-  { key = "C", mods = "Control|Shift", action = "Copy" },
-  { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
-  { key = "NumpadAdd", mods = "Control", action = "IncreaseFontSize" },
-  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
-  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
-  { key = "NumpadSubtract", mods = "Control", action = "DecreaseFontSize" },
-  { key = "Key0", mods = "Control", action = "ResetFontSize" },
-  { key = "N", mods = "Control|Shift", action = "SpawnNewInstance" },
-  { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
-  { key = "Space", mods = "Control", chars = "\\x00" },
+  { chars = "\u001Bh", key = "H", mods = "Command" },
+  { chars = "\u001Bl", key = "L", mods = "Command" },
+  { chars = "\u001Bw", key = "W", mods = "Command" },
+  { chars = "\u001Bc", key = "C", mods = "Command" },
+  { chars = "\u001Br", key = "R", mods = "Command" },
+  { chars = "\u001Bm", key = "M", mods = "Command" },
+  { chars = "\u001By", key = "Y", mods = "Command" },
+  { chars = "\u001Bd", key = "D", mods = "Command" },
+  { chars = "\u001Bj", key = "J", mods = "Command" },
+  { chars = "\u001Bk", key = "K", mods = "Command" },
 ]
