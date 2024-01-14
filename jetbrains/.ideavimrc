@@ -1,0 +1,30 @@
+"" -- Options --
+set incsearch
+set clipboard+=unnamed
+
+" -- Plugins(https://jb.gg/ideavim-plugins) --
+set NERDTree
+set highlighted-yank
+set vim-commentary
+set easymotion
+
+
+" -- Keymaps --
+let mapleader=" "
+
+" Action
+map gcc <Action>(CommentByLineComment)
+map <leader><leader> <Action>(GotoFile)
+map <leader>/ <Action>(SearchEverywhere)
+map <leader>fu <Action>(RecentFiles)
+map <leader>ca <Action>(ShowIntentionActions)
+map <c-w>m <Action>(HideActiveWindow)
+
+" Navigation
+nnoremap <a-h> <c-w>h
+nnoremap <a-l> <c-w>l
+nnoremap <a-k> <c-w>k
+nnoremap <a-j> <c-w>j
+nnoremap <s-l> :bn<cr>
+nnoremap <s-h> :bp<cr>
+nnoremap <a-w> :bd<cr>
