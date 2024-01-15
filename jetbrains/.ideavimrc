@@ -23,14 +23,22 @@ map <leader>fs <Action>(GotoSymbol)
 "map <leader>ca <Action>(ShowIntentionActions)
 map <leader>ca <Action>()
 map <c-w>m <Action>(HideActiveWindow)
+map gl <Action>(ShowErrorDescription)
 
-" Navigation
+
+" - Navigation -
+" linux
 nnoremap <a-h> <c-w>h
 nnoremap <a-l> <c-w>l
 nnoremap <a-k> <c-w>k
 nnoremap <a-j> <c-w>j
+nnoremap <a-w> :bd<cr>
 nnoremap <s-l> :bn<cr>
 nnoremap <s-h> :bp<cr>
-nnoremap <a-w> :bd<cr>
 
-inoremap <c-space> <Action>(SmartCodeCompletion)
+" mac
+nnoremap <d-h> <c-w>h
+nnoremap <d-l> <c-w>l
+nnoremap <d-k> <c-w>k
+nnoremap <d-j> <c-w>j
+nnoremap <d-w> :bd<cr>
