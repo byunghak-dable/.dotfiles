@@ -1,5 +1,14 @@
 return {
   {
+    "williamboman/mason.nvim",
+    opts = {
+      registries = {
+        "github:nvim-java/mason-registry",
+        "github:mason-org/mason-registry",
+      },
+    },
+  },
+  {
     "mini.bufremove",
     keys = {
       { "<A-w>", "<leader>bd", remap = true, desc = "Delete Buffer" },
