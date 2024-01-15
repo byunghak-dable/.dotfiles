@@ -14,10 +14,14 @@ let mapleader=" "
 
 " Action
 map gcc <Action>(CommentByLineComment)
-map <leader><leader> <Action>(GotoFile)
 map <leader>/ <Action>(SearchEverywhere)
+map <leader><leader> <Action>(GotoFile)
+map <leader>fa <Action>(GotoAction)
 map <leader>fu <Action>(RecentFiles)
-map <leader>ca <Action>(ShowIntentionActions)
+map <leader>fc <Action>(GotoClass)
+map <leader>fs <Action>(GotoSymbol)
+"map <leader>ca <Action>(ShowIntentionActions)
+map <leader>ca <Action>()
 map <c-w>m <Action>(HideActiveWindow)
 
 " Navigation
@@ -28,3 +32,5 @@ nnoremap <a-j> <c-w>j
 nnoremap <s-l> :bn<cr>
 nnoremap <s-h> :bp<cr>
 nnoremap <a-w> :bd<cr>
+
+inoremap <c-space> <Action>(SmartCodeCompletion)
