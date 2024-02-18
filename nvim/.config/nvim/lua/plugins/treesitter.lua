@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter",
     opts = {
+      ensure_installed = { "kotlin" },
       highlight = {
         disable = function(_, buf)
           local filesize_limit = 10000 * 1024
