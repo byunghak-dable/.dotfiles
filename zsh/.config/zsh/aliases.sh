@@ -24,3 +24,8 @@ alias dbuild='podman build -f ${DOCKERFILE_PATH} --build-arg NODE_ENV=${NODE_ENV
 
 # env
 alias setenv='export $(xargs < .env)'
+
+# process by port
+function port() {
+  lsof -i :$1
+}
