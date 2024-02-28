@@ -16,25 +16,71 @@ let g:NERDTreeMapJumpParent='h'
 " -- Keymaps --
 let mapleader=" "
 
-" - Search -
-nnoremap <leader>/ :action SearchEverywhere<cr>
-nnoremap <leader><leader> :action GotoFile<cr>
-nnoremap <leader>fa :action GotoAction<cr>
-nnoremap <leader>fu :action RecentFiles<cr>
-nnoremap <leader>fc :action GotoClass<cr>
-nnoremap <leader>fs :action GotoSymbol<cr>
-
 " - Action -
-map <leader>ca :action ShowIntentionActions<cr>
-map <c-w>m :action HideActiveWindow<cr>
-map gl :action ShowErrorDescription<cr>
+" search
+nmap <leader>/ <Action>(SearchEverywhere)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>fa <Action>(GotoAction)
+nmap <leader>fu <Action>(RecentFiles)
+nmap <leader>fc <Action>(GotoClass)
+nmap <leader>fs <Action>(GotoSymbol)
 
+" tab
+nmap <s-l> <Action>(NextTab)
+nmap <s-h> <Action>(PreviousTab)
 
-" - Tab -
-nnoremap <s-l> :action NextTab<cr>
-nnoremap <s-h> :action PreviousTab<cr>
+" lsp
+nmap <leader>ca <Action>(ShowIntentionActions)
+nmap <buffer>gD <Action>(GotoDeclaration)
+nmap <buffer>gy <Action>(GotoTypeDeclaration)
+nmap <buffer> ge <Action>(EditorCodeBlockEnd)
+nmap <buffer> gi <Action>(GotoImplementation)
+"nmap <buffer> gn <Action>(MethodDown)
+"nmap <buffer> gp <Action>(MethodUp)
+nmap <leader>rn <Action>(RenameElement)
+nmap gl <Action>(ShowErrorDescription)
+nmap ]e <Action>(GotoNextError)
+nmap [e <Action>(GotoPreviousError)
+nmap <leader>no <Action>(NextO)
 
-" - Navigation -
+" git
+nmap <leader>gc <Action>(Git.Branches)
+nmap <leader>gp <Action>(Git.Commit.And.Push.Executor)
+nmap <leader>gP <Action>(Vcs.Push)
+nmap <leader>gm <Action>(VcsGroups)
+nmap <leader>gf <Action>(Git.Fetch)
+nmap <leader>ga <Action>(Annotate)
+nmap <leader>gl <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gt <Action>(ActivateCommitToolWindow)
+
+map <leader>DR <Action>(Diff.MagicResolveConflicts)
+map <leader>DN <Action>(NextDiff)
+map <leader>DP <Action>(PreviousDiff)
+
+" run
+nmap <leader>rc <Action>(ChooseRunConfiguration)
+nmap <leader>rs <Action>(Stop)
+nmap <leader>rr <Action>(Rerun)
+nmap <leader>rd <Action>(DebugClass)
+nmap <leader>rh <Action>(ImportTests)
+nmap <leader>rm <Action>(RunMenu)
+nmap <leader>rf <Action>(RerunFailedTests)
+
+" debug
+map <leader>db <Action>(ToggleLineBreakpoint)
+map <leader>do <Action>(StepOver)
+map <leader>di <Action>(StepInto)
+map <leader>dr <Action>(EvaluateExpression)
+map <leader>dC <Action>(RunToCursor)
+map <leader>dc <Action>(Resume)
+
+" etc
+nmap <c-w>m <Action>(HideActiveWindow)
+map <leader>ft <Action>(ActivateTerminalToolWindow)
+
+" - vim -
+nnoremap <c-s> :w<cr>
+
 " linux
 nnoremap <a-h> <c-w>h
 nnoremap <a-l> <c-w>l
