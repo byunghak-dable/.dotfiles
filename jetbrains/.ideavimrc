@@ -1,5 +1,6 @@
 "" -- Options --
 set relativenumber
+set number
 set incsearch
 set clipboard+=unnamed
 
@@ -17,17 +18,21 @@ let g:NERDTreeMapJumpParent='h'
 let mapleader=" "
 
 " - Action -
-" search
 nmap <leader>/ <Action>(SearchEverywhere)
 nmap <leader><leader> <Action>(GotoFile)
 nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fu <Action>(RecentFiles)
 nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
+nmap <leader>ft <Action>(Terminal)
+nmap <leader>fp <Action>($LRU)
+nmap <leader>gb <Action>(Annotate)
 
 " tab
 nmap <s-l> <Action>(NextTab)
 nmap <s-h> <Action>(PreviousTab)
+nmap <c-b>n <Action>(PreviousProjectWindow)
+nmap <c-b>p <Action>(NextProjectWindow)
 
 " lsp
 nmap <leader>ca <Action>(ShowIntentionActions)
