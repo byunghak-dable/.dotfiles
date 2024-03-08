@@ -26,7 +26,18 @@ nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
 nmap <leader>ft <Action>(Terminal)
 nmap <leader>fp <Action>($LRU)
+nmap <leader>ft <Action>(ActivateTerminalToolWindow)
 nmap <leader>gb <Action>(Annotate)
+
+" window
+nmap <c-b>x <Action>(CloseProject)
+nmap <c-b>m <Action>(HideActiveWindow)
+nmap <c-w>m <Action>(MaximizeEditorInSplit)
+
+" editor
+imap <c-f> <Action>(EditorChooseLookupItem)
+imap <c-j> <Action>(EditorDown)
+imap <c-k> <Action>(EditorUp)
 
 " tab
 nmap <s-l> <Action>(NextTab)
@@ -36,17 +47,20 @@ nmap <c-b>p <Action>(NextProjectWindow)
 
 " lsp
 nmap <leader>ca <Action>(ShowIntentionActions)
-nmap <buffer>gD <Action>(GotoDeclaration)
-nmap <buffer>gy <Action>(GotoTypeDeclaration)
+nmap <buffer> gD <Action>(GotoDeclaration)
+nmap <buffer> gr <Action>(ShowUsages)
+nmap <buffer> gy <Action>(GotoTypeDeclaration)
 nmap <buffer> ge <Action>(EditorCodeBlockEnd)
 nmap <buffer> gi <Action>(GotoImplementation)
-"nmap <buffer> gn <Action>(MethodDown)
-"nmap <buffer> gp <Action>(MethodUp)
 nmap <leader>rn <Action>(RenameElement)
 nmap gl <Action>(ShowErrorDescription)
 nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
-nmap <leader>no <Action>(NextO)
+nmap ]] <Action>(GotoNextElementUnderCaretUsage)
+nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
+"nmap <buffer> gn <Action>(MethodDown)
+"nmap <buffer> gp <Action>(MethodUp)
+"nmap <leader>no <Action>(NextO)
 
 " git
 nmap <leader>gc <Action>(Git.Branches)
@@ -57,10 +71,9 @@ nmap <leader>gf <Action>(Git.Fetch)
 nmap <leader>ga <Action>(Annotate)
 nmap <leader>gl <Action>(ActivateVersionControlToolWindow)
 nmap <leader>gt <Action>(ActivateCommitToolWindow)
-
-map <leader>DR <Action>(Diff.MagicResolveConflicts)
-map <leader>DN <Action>(NextDiff)
-map <leader>DP <Action>(PreviousDiff)
+nmap <leader>DR <Action>(Diff.MagicResolveConflicts)
+nmap <leader>DN <Action>(NextDiff)
+nmap <leader>DP <Action>(PreviousDiff)
 
 " run
 nmap <leader>rc <Action>(ChooseRunConfiguration)
@@ -72,16 +85,12 @@ nmap <leader>rm <Action>(RunMenu)
 nmap <leader>rf <Action>(RerunFailedTests)
 
 " debug
-map <leader>db <Action>(ToggleLineBreakpoint)
-map <leader>do <Action>(StepOver)
-map <leader>di <Action>(StepInto)
-map <leader>dr <Action>(EvaluateExpression)
-map <leader>dC <Action>(RunToCursor)
-map <leader>dc <Action>(Resume)
-
-" etc
-nmap <c-w>m <Action>(HideActiveWindow)
-map <leader>ft <Action>(ActivateTerminalToolWindow)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>do <Action>(StepOver)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>dr <Action>(EvaluateExpression)
+nmap <leader>dC <Action>(RunToCursor)
+nmap <leader>dc <Action>(Resume)
 
 " - vim -
 nnoremap <c-s> :w<cr>
