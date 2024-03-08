@@ -7,6 +7,7 @@ return {
     opts = {
       servers = {
         tsserver = { mason = false },
+        kotlin_language_server = {},
       },
       setup = {
         tsserver = function() return true end,
