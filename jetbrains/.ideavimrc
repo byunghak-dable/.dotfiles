@@ -18,6 +18,7 @@ let g:NERDTreeMapJumpParent='h'
 let mapleader=" "
 
 " - Action -
+" search
 nmap <leader>/ <Action>(SearchEverywhere)
 nmap <leader><leader> <Action>(GotoFile)
 nmap <leader>fa <Action>(GotoAction)
@@ -29,12 +30,16 @@ nmap <leader>fp <Action>($LRU)
 nmap <leader>ft <Action>(ActivateTerminalToolWindow)
 nmap <leader>gb <Action>(Annotate)
 
+
 " window
 nmap <c-b>x <Action>(CloseProject)
 nmap <c-b>m <Action>(HideActiveWindow)
 nmap <c-w>m <Action>(MaximizeEditorInSplit)
+nmap <c-b>n <Action>(NextProjectWindow)
+nmap <c-b>p <Action>(PreviousProjectWindow)
 
 " editor
+nmap <c-a> <Action>($SelectAll)
 imap <c-f> <Action>(EditorChooseLookupItem)
 imap <c-j> <Action>(EditorDown)
 imap <c-k> <Action>(EditorUp)
@@ -42,8 +47,6 @@ imap <c-k> <Action>(EditorUp)
 " tab
 nmap <s-l> <Action>(NextTab)
 nmap <s-h> <Action>(PreviousTab)
-nmap <c-b>n <Action>(PreviousProjectWindow)
-nmap <c-b>p <Action>(NextProjectWindow)
 
 " lsp
 nmap <leader>ca <Action>(ShowIntentionActions)
@@ -94,6 +97,12 @@ nmap <leader>dc <Action>(Resume)
 
 " - vim -
 nnoremap <c-s> :w<cr>
+nnoremap J mzJ`z
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap Y y$
+vnoremap <s-j> :m '>+1<cr>gv=gv
+vnoremap p \"_dP
 
 " linux
 nnoremap <a-h> <c-w>h
