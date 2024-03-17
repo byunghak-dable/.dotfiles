@@ -19,7 +19,7 @@ let mapleader=" "
 
 " - Action -
 " search
-nmap <leader>/ <Action>(SearchEverywhere)
+nmap <leader>/ <Action>(TextSearchAction)
 nmap <leader><leader> <Action>(GotoFile)
 nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fu <Action>(RecentFiles)
@@ -33,10 +33,11 @@ nmap <leader>gb <Action>(Annotate)
 
 " window
 nmap <c-b>x <Action>(CloseProject)
-nmap <c-b>m <Action>(HideActiveWindow)
+nmap <c-b>m <Action>(HideAllWindows)
 nmap <c-w>m <Action>(MaximizeEditorInSplit)
 nmap <c-b>n <Action>(NextProjectWindow)
 nmap <c-b>p <Action>(PreviousProjectWindow)
+nmap ZZ <Action>(CloseAllEditors)
 
 " editor
 nmap <c-a> <Action>($SelectAll)
