@@ -41,7 +41,8 @@ nmap ZZ <Action>(CloseAllEditors)
 
 " editor
 nmap <c-a> <Action>($SelectAll)
-imap <c-f> <Action>(EditorChooseLookupItem)
+nmap <c-f> <Action>(EditorTab)
+imap <c-f> <Action>(EditorChooseLookupItemReplace)
 imap <c-j> <Action>(EditorDown)
 imap <c-k> <Action>(EditorUp)
 
@@ -57,13 +58,13 @@ nmap <buffer> gy <Action>(GotoTypeDeclaration)
 nmap <buffer> ge <Action>(EditorCodeBlockEnd)
 nmap <buffer> gi <Action>(GotoImplementation)
 nmap <leader>rn <Action>(RenameElement)
+nmap <buffer> ]f <Action>(MethodDown)
+nmap <buffer> [f <Action>(MethodUp)
 nmap gl <Action>(ShowErrorDescription)
 nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
 nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
-"nmap <buffer> gn <Action>(MethodDown)
-"nmap <buffer> gp <Action>(MethodUp)
 "nmap <leader>no <Action>(NextO)
 
 " git
