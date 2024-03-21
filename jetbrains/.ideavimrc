@@ -1,6 +1,6 @@
+let mapleader=" "
+
 "" -- Options --
-set relativenumber
-set number
 set incsearch
 set clipboard+=unnamed
 
@@ -12,10 +12,6 @@ set surround
 set NERDTree
 
 let g:NERDTreeMapActivateNode='l'
-let g:NERDTreeMapJumpParent='h'
-
-" -- Keymaps --
-let mapleader=" "
 
 " - Action -
 " search
@@ -25,11 +21,7 @@ nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fu <Action>(RecentFiles)
 nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
-nmap <leader>ft <Action>(Terminal)
 nmap <leader>fp <Action>($LRU)
-nmap <leader>ft <Action>(ActivateTerminalToolWindow)
-nmap <leader>gb <Action>(Annotate)
-
 
 " window
 nmap <c-b>x <Action>(CloseProject)
@@ -45,6 +37,7 @@ nmap <c-f> <Action>(EditorTab)
 imap <c-f> <Action>(EditorChooseLookupItemReplace)
 imap <c-j> <Action>(EditorDown)
 imap <c-k> <Action>(EditorUp)
+vmap p <Action>(EditorPaste)
 
 " tab
 nmap <s-l> <Action>(NextTab)
@@ -65,7 +58,6 @@ nmap ]e <Action>(GotoNextError)
 nmap [e <Action>(GotoPreviousError)
 nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
-"nmap <leader>no <Action>(NextO)
 
 " git
 nmap <leader>gc <Action>(Git.Branches)
@@ -73,9 +65,7 @@ nmap <leader>gp <Action>(Git.Commit.And.Push.Executor)
 nmap <leader>gP <Action>(Vcs.Push)
 nmap <leader>gm <Action>(VcsGroups)
 nmap <leader>gf <Action>(Git.Fetch)
-nmap <leader>ga <Action>(Annotate)
-nmap <leader>gl <Action>(ActivateVersionControlToolWindow)
-nmap <leader>gt <Action>(ActivateCommitToolWindow)
+nmap <leader>gb <Action>(Annotate)
 nmap <leader>DR <Action>(Diff.MagicResolveConflicts)
 nmap <leader>DN <Action>(NextDiff)
 nmap <leader>DP <Action>(PreviousDiff)
@@ -104,7 +94,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap Y y$
 vnoremap <s-j> :m '>+1<cr>gv=gv
-vnoremap p \"_dP
+vnoremap <s-k> :m '>-2<cr>gv=gv
 
 " linux
 nnoremap <a-h> <c-w>h
