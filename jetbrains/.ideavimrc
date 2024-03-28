@@ -1,22 +1,27 @@
 let mapleader=" "
 
-"" -- Options --
+"" - Options -
+set number
 set incsearch
 set clipboard+=unnamed
 
-" -- Plugins(https://jb.gg/ideavim-plugins) --
+" - Plugins(https://jb.gg/ideavim-plugins) -
 set highlighted-yank
 set commentary
 set easymotion
 set surround
 set NERDTree
 
-let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapActivateNode = 'l'
+let g:EasyMotion_do_mapping = 0
+
+nmap s <Plug>(easymotion-s)
 
 " - Action -
 " search
-nmap <leader>/ <Action>(TextSearchAction)
+nmap <leader>/ <Action>(FindInPath)
 nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>fe <Action>(ActivateProjectToolWindow)
 nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fu <Action>(RecentFiles)
 nmap <leader>fc <Action>(GotoClass)
@@ -60,12 +65,12 @@ nmap ]] <Action>(GotoNextElementUnderCaretUsage)
 nmap [[ <Action>(GotoPrevElementUnderCaretUsage)
 
 " git
-nmap <leader>gc <Action>(Git.Branches)
+nmap <leader>gb <Action>(Git.Branches)
 nmap <leader>gp <Action>(Git.Commit.And.Push.Executor)
 nmap <leader>gP <Action>(Vcs.Push)
 nmap <leader>gm <Action>(VcsGroups)
 nmap <leader>gf <Action>(Git.Fetch)
-nmap <leader>gb <Action>(Annotate)
+nmap <leader>ghb <Action>(Annotate)
 nmap <leader>DR <Action>(Diff.MagicResolveConflicts)
 nmap <leader>DN <Action>(NextDiff)
 nmap <leader>DP <Action>(PreviousDiff)
