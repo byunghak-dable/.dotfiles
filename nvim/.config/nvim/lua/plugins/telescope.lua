@@ -26,9 +26,7 @@ return {
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
             ["<A-d>"] = "delete_buffer",
-            -- disabling lazyvim "trouble" keymap
-            ["<c-t>"] = false,
-            ["<a-t>"] = false,
+            ["<ESC>"] = "close",
           },
         },
       },
@@ -38,47 +36,6 @@ return {
         },
       },
     },
-  },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = "telescope.nvim",
-    keys = {
-      { "<leader>fe", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
-    },
-    opts = {
-      path = "%:p:h",
-      no_ignore = true,
-      cwd_to_path = true,
-      hide_parent_dir = true,
-      hidden = true,
-      grouped = true,
-      select_buffer = true,
-      follow_symlinks = true,
-      mappings = {
-        i = {
-          ["<C-w>"] = function() vim.cmd("normal vbd") end,
-          ["<A-d>"] = function(bufnr) require("telescope").extensions.file_browser.actions.remove(bufnr) end,
-          ["<C-r>"] = function(bufnr) require("telescope").extensions.file_browser.actions.goto_cwd(bufnr) end,
-        },
-      },
-    },
-    config = function(_, opts)
-      local telescope = require("telescope")
-
-      local fb_utils = require("telescope._extensions.file_browser.utils")
-
-      for _, name in pairs({ "rename_buf", "rename_dir_buf" }) do
-        local rename_func = fb_utils[name]
-
-        fb_utils[name] = function(old_path, new_path)
-          rename_func(old_path, new_path)
-          require("lazyvim.util").lsp.on_rename(old_path, new_path)
-        end
-      end
-
-      telescope.setup({ extensions = { file_browser = opts } })
-      telescope.load_extension("file_browser")
-    end,
   },
   {
     "debugloop/telescope-undo.nvim",

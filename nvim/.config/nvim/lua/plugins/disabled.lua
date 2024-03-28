@@ -4,7 +4,6 @@ return {
   { "nvim-spectre", enabled = false },
   { "vim-startuptime", enabled = false },
   { "trouble.nvim", enabled = false },
-  { "neo-tree.nvim", enabled = false },
   { "mini.ai", enabled = false },
   { "mini.indentscope", enabled = false },
 }
