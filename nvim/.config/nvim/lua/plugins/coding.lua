@@ -4,6 +4,8 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
 
+      opts.preselect = cmp.PreselectMode.None
+      opts.completion.completeopt = "menu,menuone,noinsert,noselect"
       opts.mapping["<C-f>"] = cmp.mapping.confirm({ select = true })
       opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
       opts.mapping["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
