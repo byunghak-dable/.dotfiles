@@ -15,7 +15,6 @@ return {
           ["/"] = "noop",
           ["l"] = "open",
           ["h"] = "close_node",
-          ["<C-h>"] = "navigate_up",
         },
       },
       filesystem = { hijack_netrw_behavior = "disabled" },
