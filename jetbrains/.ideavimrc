@@ -21,7 +21,7 @@ nmap s <Plug>(easymotion-s)
 " search
 nmap <leader>/ <Action>(FindInPath)
 nmap <leader><leader> <Action>(GotoFile)
-nmap <leader>fe <Action>(ActivateProjectToolWindow)
+nmap <leader>e <Action>(ActivateProjectToolWindow)
 nmap <leader>fa <Action>(GotoAction)
 nmap <leader>fu <Action>(RecentFiles)
 nmap <leader>fc <Action>(GotoClass)
