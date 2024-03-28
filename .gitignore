@@ -2,7 +2,7 @@
 alacritty/**/theme/*
 alacritty/**/font/*
 
-nvim/.config/nvim/plugin
+nvim/.config/nvim/spell
 
 zsh/**/.plugins
 zsh/**/.zcomp*
