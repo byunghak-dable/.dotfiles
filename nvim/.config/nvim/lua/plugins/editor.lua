@@ -1,23 +1,9 @@
 return {
   {
-    "neo-tree.nvim",
-    keys = {
-      {
-        "<leader>fe",
-        function() require("neo-tree.command").execute({ toggle = true, reveal = true }) end,
-        desc = "Explorer NeoTree",
-      },
-    },
+    "craftzdog/solarized-osaka.nvim",
+    lazy = true,
     opts = {
-      window = {
-        position = "float",
-        mappings = {
-          ["/"] = "noop",
-          ["l"] = "open",
-          ["h"] = "close_node",
-        },
-      },
-      filesystem = { hijack_netrw_behavior = "disabled" },
+      transparent = false,
     },
   },
   {
@@ -26,6 +12,49 @@ return {
     dependencies = "SmiteshP/nvim-navic",
     opts = {
       show_modified = true,
+    },
+  },
+  {
+    "flash.nvim",
+    opts = {
+      modes = {
+        char = { enabled = false },
+        search = { enabled = false },
+      },
+    },
+  },
+  {
+    "nvim-treesitter",
+    opts = {
+      highlight = {
+        disable = function(_, buf)
+          local filesize_limit = 10000 * 1024
+          local _, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+
+          return stats and stats.size > filesize_limit
+        end,
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<C-n>"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<C-p>"] = "@parameter.inner",
+          },
+        },
+      },
     },
   },
 }

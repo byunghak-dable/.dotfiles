@@ -1,5 +1,17 @@
 return {
   {
+    "nvim-lspconfig",
+    keys = {
+      { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+    },
+    init = function()
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+
+      keys[#keys + 1] = { "gi", "gI", remap = true, desc = "Goto Implementation" }
+      keys[#keys + 1] = { "<leader>rn", "<leader>cr", remap = true, desc = "Rename" }
+    end,
+  },
+  {
     "nvim-cmp",
     opts = function(_, opts)
       local cmp = require("cmp")
@@ -7,17 +19,7 @@ return {
       opts.preselect = cmp.PreselectMode.None
       opts.completion.completeopt = "menu,menuone,noinsert,noselect"
       opts.mapping["<C-f>"] = cmp.mapping.confirm({ select = true })
-      opts.mapping["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-      opts.mapping["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
     end,
-  },
-  {
-    "conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        kotlin = { "ktlint" },
-      },
-    },
   },
   {
     "flash.nvim",
