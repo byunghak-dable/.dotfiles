@@ -16,9 +16,15 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
 
-      opts.preselect = cmp.PreselectMode.None
-      opts.completion.completeopt = "menu,menuone,noinsert,noselect"
-      opts.mapping["<C-f>"] = cmp.mapping.confirm({ select = true })
+      opts.mapping = cmp.mapping.preset.insert({
+        ["<C-f>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<C-j>"] = cmp.mapping.select_next_item({ select = false, behavior = cmp.SelectBehavior.Select }),
+        ["<C-k>"] = cmp.mapping.select_prev_item({ select = false, behavior = cmp.SelectBehavior.Select }),
+      })
     end,
   },
   {
