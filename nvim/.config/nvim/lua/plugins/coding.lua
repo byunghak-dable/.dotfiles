@@ -27,13 +27,4 @@ return {
       })
     end,
   },
-  {
-    "flash.nvim",
-    opts = {
-      modes = {
-        char = { enabled = false },
-        search = { enabled = false },
-      },
-    },
-  },
 }
