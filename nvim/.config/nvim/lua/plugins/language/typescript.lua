@@ -25,7 +25,7 @@ return {
     },
   },
   {
-    "nvim-neotest/neotest",
+    "neotest",
     dependencies = {
       "haydenmeade/neotest-jest",
     },
