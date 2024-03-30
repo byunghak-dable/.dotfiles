@@ -28,6 +28,7 @@ nmap <leader>fu <Action>(RecentFiles)
 nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
 nmap <leader>fp <Action>($LRU)
+nmap <leader>sp <Action>(OpenProjectWindows)
 
 " window
 nmap <c-b>x <Action>(CloseProject)
