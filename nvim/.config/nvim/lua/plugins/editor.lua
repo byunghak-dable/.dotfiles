@@ -34,13 +34,6 @@ return {
     },
   },
   {
-    "craftzdog/solarized-osaka.nvim",
-    lazy = true,
-    opts = {
-      transparent = false,
-    },
-  },
-  {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
     dependencies = "SmiteshP/nvim-navic",

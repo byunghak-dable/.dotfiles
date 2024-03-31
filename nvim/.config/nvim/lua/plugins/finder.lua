@@ -42,6 +42,7 @@ return {
         mappings = {
           n = {
             l = "select_default",
+            ["<leader>gc"] = false,
           },
           i = {
             ["<C-l>"] = "select_default",

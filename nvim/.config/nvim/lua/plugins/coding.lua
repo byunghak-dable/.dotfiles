@@ -4,6 +4,11 @@ return {
     keys = {
       { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     },
+    opts = {
+      inlay_hints = {
+        enabled = true,
+      },
+    },
     init = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
 
