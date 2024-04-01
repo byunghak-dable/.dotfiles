@@ -32,4 +32,10 @@ return {
       })
     end,
   },
+  {
+    "nvim-dap",
+    keys = {
+      { "<leader>dx", function() require("dap").clear_breakpoints() end },
+    },
+  },
 }
