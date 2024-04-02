@@ -1,4 +1,22 @@
 return {
+  { "bufferline.nvim", enabled = false },
+  {
+    "utilyre/barbecue.nvim",
+    event = "VeryLazy",
+    dependencies = "SmiteshP/nvim-navic",
+    opts = {
+      show_modified = true,
+    },
+  },
+  {
+    "flash.nvim",
+    opts = {
+      modes = {
+        char = { enabled = false },
+        search = { enabled = false },
+      },
+    },
+  },
   {
     "nvim-treesitter",
     opts = {
@@ -30,23 +48,6 @@ return {
             ["<C-p>"] = "@parameter.inner",
           },
         },
-      },
-    },
-  },
-  {
-    "utilyre/barbecue.nvim",
-    event = "VeryLazy",
-    dependencies = "SmiteshP/nvim-navic",
-    opts = {
-      show_modified = true,
-    },
-  },
-  {
-    "flash.nvim",
-    opts = {
-      modes = {
-        char = { enabled = false },
-        search = { enabled = false },
       },
     },
   },
