@@ -20,7 +20,6 @@ require("lazy").setup({
         colorscheme = "tokyonight",
         news = {
           lazyvim = true,
-          neovim = true,
         },
       },
     },
@@ -32,7 +31,9 @@ require("lazy").setup({
     version = false,
   },
   performance = {
-    cache = { enabled = true },
+    cache = {
+      enabled = true,
+    },
     rtp = {
       disabled_plugins = {
         "gzip",
