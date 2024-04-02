@@ -1,5 +1,6 @@
 return {
   { "bufferline.nvim", enabled = false },
+  { "dashboard-nvim", enabled = false },
   {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
