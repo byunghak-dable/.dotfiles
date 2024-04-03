@@ -15,16 +15,6 @@ return {
     opts = {},
   },
   {
-    "sindrets/diffview.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    keys = {
-      { "<leader>gf", "<cmd>DiffviewFileHistory<cr>", desc = "Diffvew" },
-      { "<leader>gF", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview (cwd)" },
-      { "<leader>go", "<cmd>DiffviewOpen<cr>", desc = "Diffview Open" },
-      { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
-    },
-  },
-  {
     "numToStr/Navigator.nvim",
     keys = {
       { "<A-k>", "<cmd>NavigatorUp<cr>", mode = { "n", "t" }, desc = "Navigate Up" },
