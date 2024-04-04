@@ -1,8 +1,8 @@
 local opts = { noremap = true, silent = true }
 
 -- vertical center
-vim.keymap.set("n", "<C-d>", "m'<C-d>zz", opts)
-vim.keymap.set("n", "<C-u>", "m'<C-u>zz", opts)
+vim.keymap.set("n", "<C-d>", "m'<C-d>M", opts)
+vim.keymap.set("n", "<C-u>", "m'<C-u>M", opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 -- indent
