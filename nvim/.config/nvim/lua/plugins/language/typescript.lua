@@ -20,6 +20,12 @@ return {
         tsserver_file_preferences = {
           includeCompletionsForModuleExports = true,
           importModuleSpecifierPreference = "relative",
+          includeInlayParameterNameHints = "all",
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
         },
       },
     },
