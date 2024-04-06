@@ -1,5 +1,17 @@
 return {
   {
+    "williamboman/mason.nvim",
+    opts = function(_, opts) table.insert(opts.ensure_installed, "google-java-format") end,
+  },
+  {
+    "conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        java = { "google-java-format" },
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-jdtls",
     opts = {
       jdtls = function(opts)
