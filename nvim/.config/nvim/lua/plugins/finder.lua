@@ -54,9 +54,7 @@ return {
         },
       },
       pickers = {
-        find_files = {
-          follow = true,
-        },
+        find_files = { follow = true },
       },
     },
   },

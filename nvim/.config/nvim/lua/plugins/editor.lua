@@ -1,19 +1,12 @@
 return {
   { "bufferline.nvim", enabled = false },
   { "dashboard-nvim", enabled = false },
-  {
-    "catppuccin",
-    opts = {
-      transparent_background = true,
-    },
-  },
+  { "catppuccin", opts = { transparent_background = true } },
   {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
     dependencies = "SmiteshP/nvim-navic",
-    opts = {
-      show_modified = true,
-    },
+    opts = { show_modified = true },
   },
   {
     "flash.nvim",
@@ -58,12 +51,8 @@ return {
         },
         swap = {
           enable = true,
-          swap_next = {
-            ["<C-n>"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<C-p>"] = "@parameter.inner",
-          },
+          swap_next = { ["<C-n>"] = "@parameter.inner" },
+          swap_previous = { ["<C-p>"] = "@parameter.inner" },
         },
       },
     },
