@@ -2,6 +2,12 @@ return {
   { "bufferline.nvim", enabled = false },
   { "dashboard-nvim", enabled = false },
   {
+    "catppuccin",
+    opts = {
+      transparent_background = true,
+    },
+  },
+  {
     "utilyre/barbecue.nvim",
     event = "VeryLazy",
     dependencies = "SmiteshP/nvim-navic",
