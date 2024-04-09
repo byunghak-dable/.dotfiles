@@ -77,14 +77,11 @@ index = 17
 color = "#F4DBD6"
 
 [font]
-size = 16
-normal = { family = "MonaspiceNe Nerd Font", style = "Light" }
-bold = { family = "MonaspiceNe Nerd Font", style = "Regular" }
-italic = { family = "MonaspiceNe Nerd Font", style = "Light Italic" }
-bold_italic = { family = "MonaspiceNe Nerd Font", style = "Italic" }
+size = 20
+normal = { family = "Agave Nerd Font Mono", style = "Regular" }
+bold = { family = "Agave Nerd Font Mono", style = "Bold" }
 glyph_offset = { x = 0, y = 0 }
-offset = { x = 1, y = 1 }
-
+offset = { x = 0, y = 0 }
 
 [cursor]
 unfocused_hollow = true
