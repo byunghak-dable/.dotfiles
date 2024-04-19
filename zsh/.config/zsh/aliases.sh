@@ -20,7 +20,7 @@ alias rm="rm -i"
 
 # docker
 alias decr='aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login -u AWS --password-stdin '
-alias dbuild='podman build -f ${DOCKERFILE_PATH} --build-arg NODE_ENV=${NODE_ENV} --build-arg AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --build-arg AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --build-arg AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --platform linux/x86_64 .'
+alias dbuild='docker build -f ${DOCKERFILE_PATH} -t local-build-app --build-arg NODE_ENV=${NODE_ENV} --build-arg AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} --build-arg AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} --build-arg AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} --platform linux/x86_64 .'
 
 # env
 alias setenv='export $(xargs < .env)'
