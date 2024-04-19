@@ -16,8 +16,11 @@ return {
   },
   {
     "nvim-cmp",
+    dependencies = { "hrsh7th/cmp-emoji" },
     opts = function(_, opts)
       local cmp = require("cmp")
+
+      table.insert(opts.sources, { name = "emoji" })
 
       opts.mapping = cmp.mapping.preset.insert({
         ["<C-f>"] = cmp.mapping.confirm({ select = true }),
