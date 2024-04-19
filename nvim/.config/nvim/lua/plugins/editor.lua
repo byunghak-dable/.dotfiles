@@ -3,10 +3,10 @@ return {
   { "dashboard-nvim", enabled = false },
   { "catppuccin", opts = { transparent_background = true } },
   {
-    "utilyre/barbecue.nvim",
-    event = "VeryLazy",
-    dependencies = "SmiteshP/nvim-navic",
-    opts = { show_modified = true },
+    "lualine.nvim",
+    opts = {
+      options = { globalstatus = false },
+    },
   },
   {
     "flash.nvim",
