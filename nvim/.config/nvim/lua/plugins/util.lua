@@ -1,6 +1,6 @@
 return {
   {
-    "mini.bufremove",
+    "echasnovski/mini.bufremove",
     keys = {
       { "<A-w>", "<leader>bd", remap = true, desc = "Delete Buffer" },
     },
