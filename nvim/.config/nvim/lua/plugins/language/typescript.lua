@@ -1,36 +1,5 @@
 return {
   {
-    "nvim-lspconfig",
-    opts = {
-      servers = {
-        tsserver = { mason = false },
-      },
-      setup = {
-        tsserver = function() return true end,
-      },
-    },
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    opts = {
-      settings = {
-        expose_as_code_action = "all",
-        separate_diagnostic_server = false,
-        tsserver_file_preferences = {
-          includeCompletionsForModuleExports = true,
-          importModuleSpecifierPreference = "relative",
-          includeInlayParameterNameHints = "all",
-          includeInlayEnumMemberValueHints = true,
-          includeInlayFunctionLikeReturnTypeHints = true,
-          includeInlayFunctionParameterTypeHints = true,
-          includeInlayPropertyDeclarationTypeHints = true,
-          includeInlayVariableTypeHints = true,
-        },
-      },
-    },
-  },
-  {
     "neotest",
     dependencies = {
       "haydenmeade/neotest-jest",
