@@ -15,5 +15,9 @@ return {
         })
       )
     end,
+    -- NOTE: code actions
+    -- <leader>co : Organize Imports
+    -- <leader>cu : Remove Unused
+    -- <leader>cM : Add Missing Imports
   },
 }
