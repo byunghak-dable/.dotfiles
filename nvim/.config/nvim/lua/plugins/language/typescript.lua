@@ -1,5 +1,21 @@
 return {
   {
+    "nvim-lspconfig",
+    opts = {
+      servers = {
+        vtsls = {
+          settings = {
+            typescript = {
+              preferences = {
+                importModuleSpecifier = "relative",
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     "neotest",
     dependencies = {
       "haydenmeade/neotest-jest",
