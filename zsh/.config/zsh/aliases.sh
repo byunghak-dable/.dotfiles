@@ -4,6 +4,7 @@ alias src="source ~/.zshrc"
 alias zrc="nvim ~/.config/zsh/"
 alias nvimrc="nvim ~/.config/nvim/"
 alias alc="nvim ~/.config/alacritty/"
+alias hlc="nvim ~/.config/hypr/"
 alias tlc="nvim ~/.tmux.conf"
 
 # util
