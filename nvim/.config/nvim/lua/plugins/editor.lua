@@ -1,6 +1,4 @@
 return {
-  { "bufferline.nvim", enabled = false },
-  { "dashboard-nvim", enabled = false },
   { "catppuccin", opts = { transparent_background = true } },
   {
     "lualine.nvim",
