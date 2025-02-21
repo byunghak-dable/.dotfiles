@@ -16,6 +16,12 @@ return {
     },
   },
   {
+    "folke/snacks.nvim",
+    opts = {
+      scroll = { enabled = false },
+    },
+  },
+  {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     keys = {
