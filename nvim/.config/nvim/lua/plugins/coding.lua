@@ -28,6 +28,7 @@ return {
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-f>"] = { "select_and_accept" },
       },
     },
   },
