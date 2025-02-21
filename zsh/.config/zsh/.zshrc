@@ -6,6 +6,7 @@ ZDOTDIR=$HOME/.config/zsh
 (( $+commands[cargo] )) && export PATH=$HOME/.cargo/bin:$PATH # cargo(rust)
 (( $+commands[bob] )) && export PATH=$HOME/.local/share/bob/nvim-bin:$PATH # cargo(rust)
 (( $+commands[pyenv] )) && eval "$(pyenv init -)" && eval "$(pyenv init --path)" 
+(( $+commands[sdkman] )) && export PATH=$HOME/.sdkman/candidates/java/current/bin:$PATH # sdkman
 
 # --- bash word select ---
 autoload -U select-word-style
