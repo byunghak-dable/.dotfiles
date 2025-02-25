@@ -16,7 +16,7 @@ stow nvim # symlink config ex) nvim
 
 ### Neovim
 
-- Neovim >= **0.8.0**
+- Neovim >= **0.10.0**
 - [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 - [Lazygit](https://github.com/jesseduffield/lazygit)
 - [fzf](https://github.com/junegunn/fzf)
