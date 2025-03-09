@@ -92,7 +92,10 @@
               {
                 "conditions": [
                   {
-                    "bundle_identifiers": ["org.alacritty"],
+                    "bundle_identifiers": [
+                      "org.alacritty",
+                      "com.mitchellh.ghostty"
+                    ],
                     "type": "frontmost_application_unless"
                   }
                 ],
@@ -109,7 +112,10 @@
               {
                 "conditions": [
                   {
-                    "bundle_identifiers": ["org.alacritty"],
+                    "bundle_identifiers": [
+                      "org.alacritty",
+                      "com.mitchellh.ghostty"
+                    ],
                     "type": "frontmost_application_unless"
                   }
                 ],
