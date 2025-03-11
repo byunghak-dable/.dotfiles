@@ -9,7 +9,10 @@ return {
         "<leader>e",
         function()
           Snacks.explorer({
-            layout = { preset = "default", preview = true },
+            layout = {
+              preview = true,
+              layout = { position = "bottom" },
+            },
             auto_close = true,
           })
         end,
