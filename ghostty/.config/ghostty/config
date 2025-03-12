@@ -4,6 +4,7 @@ theme = catppuccin-mocha
 background-blur-radius = 25
 background-opacity = 0.9
 window-save-state = always
+window-decoration = none
 
 # Font
 font-size = 20
@@ -13,13 +14,6 @@ font-family = Agave Nerd Font
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
-
-# Keybind
-## Split
-keybind = ctrl+k=ignore
-keybind = ctrl+j=ignore
-keybind = ctrl+h=ignore
-keybind = ctrl+l=ignore
 
 ## Tab
 keybind = cmd+shift+n=new_tab
