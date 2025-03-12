@@ -43,12 +43,6 @@ return {
             {
               mode = { "n", "v" },
               { "<leader>a", group = "+ai", icon = { icon = "ﮧ", hl = "false" } },
-              {
-                "<leader>ar",
-                "<cmd>AvanteRefresh<cr>",
-                desc = "avante: refresh",
-                icon = { icon = "", hl = "false" },
-              },
             },
           },
         },
