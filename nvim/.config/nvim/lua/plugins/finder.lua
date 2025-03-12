@@ -23,6 +23,15 @@ return {
       explorer = {
         replace_netrw = false, -- Replace netrw with the snacks explorer
       },
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<C-l>"] = { "confirm", mode = { "i" } },
+            },
+          },
+        },
+      },
     },
   },
 }
