@@ -3,7 +3,9 @@
 alias src="source ~/.zshrc"
 alias zrc="nvim ~/.config/zsh/"
 alias nvimrc="nvim ~/.config/nvim/"
+alias krc="nvim ~/.config/karabiner/"
 alias alc="nvim ~/.config/alacritty/"
+alias glc="nvim ~/.config/ghostty/"
 alias hlc="nvim ~/.config/hypr/"
 alias tlc="nvim ~/.tmux.conf"
 
