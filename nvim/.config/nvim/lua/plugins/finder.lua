@@ -10,7 +10,6 @@ return {
         function()
           Snacks.explorer({
             layout = {
-              preview = true,
               layout = { position = "bottom" },
             },
             auto_close = true,
