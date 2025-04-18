@@ -13,6 +13,8 @@ return {
               layout = { position = "bottom" },
             },
             auto_close = true,
+            hidden = true,
+            ignored = true,
           })
         end,
         desc = "File Explorer",
