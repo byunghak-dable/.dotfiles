@@ -18,3 +18,4 @@ vim.keymap.set("n", "<C-a>", "ggVG", opts) -- select all
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', opts)
 vim.keymap.set({ "n", "v" }, "<leader>c", '"_c', opts)
 vim.keymap.set("n", "<leader>dm", ":delm!<cr>", opts) -- delete all marks
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", opts)
