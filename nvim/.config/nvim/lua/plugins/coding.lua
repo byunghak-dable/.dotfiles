@@ -31,6 +31,7 @@ return {
       opts.keymap["<C-u>"] = { "scroll_documentation_up", "fallback" }
       opts.keymap["<C-d>"] = { "scroll_documentation_down", "fallback" }
       opts.keymap["<C-f>"] = { "select_and_accept" }
+      opts.keymap["<Tab>"] = { "select_and_accept", "fallback" }
 
       table.insert(opts.sources.default, 1, "avante")
       opts.sources.providers.avante = {
