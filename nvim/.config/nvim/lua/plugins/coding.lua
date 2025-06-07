@@ -22,9 +22,6 @@ return {
   },
   {
     "saghen/blink.cmp",
-    dependencies = {
-      "Kaiser-Yang/blink-cmp-avante",
-    },
     opts = function(_, opts)
       opts.keymap["<C-j>"] = { "select_next", "fallback" }
       opts.keymap["<C-k>"] = { "select_prev", "fallback" }
@@ -32,12 +29,6 @@ return {
       opts.keymap["<C-d>"] = { "scroll_documentation_down", "fallback" }
       opts.keymap["<C-f>"] = { "select_and_accept" }
       opts.keymap["<Tab>"] = { "select_and_accept", "fallback" }
-
-      table.insert(opts.sources.default, 1, "avante")
-      opts.sources.providers.avante = {
-        module = "blink-cmp-avante",
-        name = "Avante",
-      }
     end,
   },
 }
