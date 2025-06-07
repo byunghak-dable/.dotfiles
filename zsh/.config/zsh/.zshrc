@@ -44,6 +44,10 @@ Linux) # linux
 	;;
 esac
 
+# --- fzf ---
+export FZF_DEFAULT_OPTS="--layout reverse"
+export FZF_DEFAULT_COMMAND='fd --type f'
+
 # --- setttings ---
 source $ZDOTDIR/aliases.sh
 source $ZDOTDIR/prompt.sh
@@ -52,3 +56,4 @@ source $ZDOTDIR/plugins.sh
 # --- custom ----
 export PYTHON_ENV=${PYTHON_ENV}; 
 export PYTHONPATH=${REPO_PATH}:$PYTHONPATH;
+
