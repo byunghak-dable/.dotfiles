@@ -115,4 +115,5 @@ bindings = [
   { chars = "\u001Bd", key = "D", mods = "Command" },
   { chars = "\u001Bj", key = "J", mods = "Command" },
   { chars = "\u001Bk", key = "K", mods = "Command" },
+  { action = "Copy", key = "C", mods = "Command" },
 ]
