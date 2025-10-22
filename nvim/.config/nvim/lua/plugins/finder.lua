@@ -2,8 +2,6 @@ return {
   {
     "folke/snacks.nvim",
     keys = {
-      { "<leader><space>", "<leader>fF", remap = true, desc = "Find Files (cwd)" },
-      { "<leader>/", "<leader>sG", remap = true, desc = "Grep (cwd)" },
       { "<leader>fu", "<leader>fb", remap = true, desc = "Buffers" },
       {
         "<leader>e",
