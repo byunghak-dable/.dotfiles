@@ -2,7 +2,6 @@ return {
   {
     "folke/snacks.nvim",
     keys = {
-      { "<leader>fu", "<leader>fb", remap = true, desc = "Buffers" },
       {
         "<leader>e",
         function()
