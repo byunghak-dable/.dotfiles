@@ -1,18 +1,19 @@
 return {
   {
     "nvim-lspconfig",
-    keys = {
-      { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-    },
     opts = {
       inlay_hints = { enabled = true },
+      servers = {
+        ["*"] = {
+          keys = {
+            { "gl", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+            { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "Goto Definition" },
+            { "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "Goto Implementation" },
+            { "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", desc = "Rename" },
+          },
+        },
+      },
     },
-    init = function()
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-      keys[#keys + 1] = { "gi", "gI", remap = true, desc = "Goto Implementation" }
-      keys[#keys + 1] = { "<leader>rn", "<leader>cr", remap = true, desc = "Rename" }
-    end,
   },
   {
     "nvim-dap",
