@@ -1,5 +1,4 @@
 return {
-  { "catppuccin", opts = { transparent_background = true } },
   {
     "lualine.nvim",
     opts = {
@@ -53,6 +52,31 @@ return {
           swap_previous = { ["<C-p>"] = "@parameter.inner" },
         },
       },
+    },
+  },
+  {
+    "nvim-mini/mini.bufremove",
+    keys = {
+      { "<A-w>", "<leader>bd", remap = true, desc = "Delete Buffer" },
+    },
+  },
+  {
+    "anuvyklack/windows.nvim",
+    dependencies = "anuvyklack/middleclass",
+    keys = {
+      { "<C-w>m", "<cmd>WindowsMaximize<cr>", desc = "Windows Maximize" },
+      { "<C-w>=", "<cmd>WindowsEqualize<cr>", desc = "Windows Equalize" },
+    },
+    opts = {},
+  },
+  {
+    "alexghergh/nvim-tmux-navigation",
+    opts = { disable_when_zoomed = true },
+    keys = {
+      { "<C-h>", "<cmd>NvimTmuxNavigateLeft<cr>", desc = "Navigate Left" },
+      { "<C-j>", "<cmd>NvimTmuxNavigateDown<cr>", desc = "Navigate Down" },
+      { "<C-k>", "<cmd>NvimTmuxNavigateUp<cr>", desc = "Navigate Up" },
+      { "<C-l>", "<cmd>NvimTmuxNavigateRight<cr>", desc = "Navigate Right" },
     },
   },
 }
