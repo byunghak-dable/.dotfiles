@@ -1,12 +1,28 @@
 ZDOTDIR=$HOME/.config/zsh
 
-(( $+commands[brew] )) && eval $(/opt/homebrew/bin/brew shellenv)
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
-(( $+commands[go] )) && export PATH=$(go env GOPATH)/bin:$PATH # go binaries
-(( $+commands[cargo] )) && export PATH=$HOME/.cargo/bin:$PATH # cargo(rust)
-(( $+commands[bob] )) && export PATH=$HOME/.local/share/bob/nvim-bin:$PATH # cargo(rust)
-(( $+commands[pyenv] )) && eval "$(pyenv init -)" && eval "$(pyenv init --path)" && eval "$(pyenv virtualenv-init -)"
-(( $+commands[sdkman] )) && export PATH=$HOME/.sdkman/candidates/java/current/bin:$PATH # sdkman
+# --- setttings ---
+source $ZDOTDIR/aliases.zsh
+source $ZDOTDIR/prompt.zsh
+source $ZDOTDIR/plugins.zsh
+
+# PATH 설정 (eval 없이 직접 추가)
+[[ -d $HOME/.volta/bin ]] && export VOLTA_HOME="$HOME/.volta" && export PATH="$VOLTA_HOME/bin:$PATH"
+[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
+[[ -d $HOME/.local/share/bob/nvim-bin ]] && export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+[[ -d $HOME/.sdkman/candidates/java/current/bin ]] && export PATH="$HOME/.sdkman/candidates/java/current/bin:$PATH"
+
+# pyenv PATH (초기화는 zinit에서 lazy loading)
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+
+# go PATH lazy loading
+if (( $+commands[go] )); then
+  __go_lazy_init() {
+    unfunction go 2>/dev/null
+    export PATH="$(command go env GOPATH)/bin:$PATH"
+  }
+  go() { __go_lazy_init && command go "$@" }
+fi
 
 # --- bash word select ---
 autoload -U select-word-style
@@ -47,11 +63,6 @@ esac
 # --- fzf ---
 export FZF_DEFAULT_OPTS="--layout reverse"
 export FZF_DEFAULT_COMMAND='fd --type f'
-
-# --- setttings ---
-source $ZDOTDIR/aliases.sh
-source $ZDOTDIR/prompt.sh
-source $ZDOTDIR/plugins.sh
 
 # --- custom ----
 export PYTHON_ENV=${PYTHON_ENV}; 
