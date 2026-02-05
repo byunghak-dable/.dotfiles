@@ -15,6 +15,3 @@ zinit light davidparsson/zsh-pyenv-lazy
 # direnv - turbo mode
 zinit ice wait"0" lucid
 zinit snippet OMZ::plugins/direnv/direnv.plugin.zsh
-
-# zoxide - 직접 초기화 (0.007초로 충분히 빠름)
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"

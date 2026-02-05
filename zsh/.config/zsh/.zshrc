@@ -1,6 +1,6 @@
 ZDOTDIR=$HOME/.config/zsh
 
-# --- setttings ---
+# --- settings ---
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/prompt.zsh
 source $ZDOTDIR/plugins.zsh
@@ -10,10 +10,11 @@ source $ZDOTDIR/plugins.zsh
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 [[ -d $HOME/.local/share/bob/nvim-bin ]] && export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 [[ -d $HOME/.sdkman/candidates/java/current/bin ]] && export PATH="$HOME/.sdkman/candidates/java/current/bin:$PATH"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 # pyenv PATH (초기화는 zinit에서 lazy loading)
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+[[ -d $PYENV_ROOT ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 
 # go PATH lazy loading
 if (( $+commands[go] )); then
@@ -52,19 +53,17 @@ Darwin) # mac
   alias ls="ls -G"
   alias ll="ls -lGFh"
   alias la="ls -laGFh"
-	;;
+  ;;
 Linux) # linux
   alias ls='ls --color=auto'
   alias ll='ls -l --color=auto'
   alias la='ls -al --color=auto'
-	;;
+  ;;
 esac
 
 # --- fzf ---
 export FZF_DEFAULT_OPTS="--layout reverse"
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-# --- custom ----
-export PYTHON_ENV=${PYTHON_ENV}; 
-export PYTHONPATH=${REPO_PATH}:$PYTHONPATH;
-
+# --- custom ---
+[[ -n $REPO_PATH ]] && export PYTHONPATH="${REPO_PATH}:$PYTHONPATH"
