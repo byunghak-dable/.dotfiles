@@ -1,4 +1,5 @@
 return {
+  { "bufferline.nvim", enabled = false },
   {
     "lualine.nvim",
     opts = {
