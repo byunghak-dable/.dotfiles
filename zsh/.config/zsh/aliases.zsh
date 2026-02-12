@@ -1,4 +1,14 @@
 #!/bin/sh
+# process by port
+function port() {
+  lsof -i :$1
+}
+
+# fabric-ai
+function _fabric_ai() {
+  fabric-ai "$*"
+}
+
 # config
 alias src="source ~/.zshrc"
 alias zrc="nvim ~/.config/zsh/"
@@ -28,7 +38,6 @@ alias dbuild='podman build -f ${DOCKERFILE_PATH} -t local-build-app --build-arg 
 # env
 alias setenv='export $(xargs < .env)'
 
-# process by port
-function port() {
-  lsof -i :$1
-}
+# ai
+alias '??'='noglob _fabric_ai'
+alias '?'="w3m"
