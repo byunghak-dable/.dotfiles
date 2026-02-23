@@ -16,28 +16,37 @@ function nc() {
     return 1
   fi
 
+  # Determine working directory from argument
+  local target="${1:-$PWD}"
+  local dir
+  if [[ -d "$target" ]]; then
+    dir="$(realpath "$target")"
+  else
+    dir="$(realpath "$(dirname "$target")")"
+  fi
+
   # Split right (30% width) for claude — full height
-  tmux split-window -h -c "$PWD" -l 30% "claude; exec $SHELL"
+  tmux split-window -h -c "$dir" -l 30% "claude; exec $SHELL"
 
   # Go back to left pane and split bottom (20% height) for terminal only under neovim
   tmux select-pane -L
-  tmux split-window -v -c "$PWD" -l 20%
+  tmux split-window -v -c "$dir" -l 20%
 
   # Focus back to top-left pane and open neovim
   tmux select-pane -U
-  nvim
+  nvim "$@"
 }
 
 
 # config
 alias src="source ~/.zshrc"
-alias zrc="nvim ~/.config/zsh/"
-alias nvimrc="nvim ~/.config/nvim/"
-alias krc="nvim ~/.config/karabiner/"
-alias alc="nvim ~/.config/alacritty/"
-alias glc="nvim ~/.config/ghostty/"
-alias hlc="nvim ~/.config/hypr/"
-alias tlc="nvim ~/.tmux.conf"
+alias zrc="nc ~/.config/zsh/"
+alias nvimrc="nc ~/.config/nvim/"
+alias krc="nc ~/.config/karabiner/"
+alias alc="nc ~/.config/alacritty/"
+alias glc="nc ~/.config/ghostty/"
+alias hlc="nc ~/.config/hypr/"
+alias tlc="nc ~/.tmux.conf"
 
 # util
 alias f="fd --hidden --exclude .git | fzf-tmux -p --reverse | xargs nvim"
