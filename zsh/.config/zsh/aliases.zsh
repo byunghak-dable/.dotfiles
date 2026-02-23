@@ -9,6 +9,26 @@ function _fabric_ai() {
   fabric-ai "$*"
 }
 
+
+function nc() {
+  if [[ -z "$TMUX" ]]; then
+    echo "Not inside a tmux session. Run from within tmux."
+    return 1
+  fi
+
+  # Split right (30% width) for claude — full height
+  tmux split-window -h -c "$PWD" -l 30% "claude; exec $SHELL"
+
+  # Go back to left pane and split bottom (20% height) for terminal only under neovim
+  tmux select-pane -L
+  tmux split-window -v -c "$PWD" -l 20%
+
+  # Focus back to top-left pane and open neovim
+  tmux select-pane -U
+  nvim
+}
+
+
 # config
 alias src="source ~/.zshrc"
 alias zrc="nvim ~/.config/zsh/"
