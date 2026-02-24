@@ -25,6 +25,10 @@ function nc() {
     dir="$(realpath "$(dirname "$target")")"
   fi
 
+  # nvim을 실행할 현재 pane ID 저장
+  local nvim_pane
+  nvim_pane="$(tmux display-message -p '#{pane_id}')"
+
   # Split right (30% width) for claude — full height
   tmux split-window -h -c "$dir" -l 30% "claude; exec $SHELL"
 
@@ -32,8 +36,8 @@ function nc() {
   tmux select-pane -L
   tmux split-window -v -c "$dir" -l 20%
 
-  # Focus back to top-left pane and open neovim
-  tmux select-pane -U
+  # nvim pane으로 포커스 이동 후 neovim 실행
+  tmux select-pane -t "$nvim_pane"
   nvim "$@"
 }
 
