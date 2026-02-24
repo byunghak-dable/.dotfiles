@@ -5,6 +5,7 @@
 	helper = store
 
 [delta]
+  side-by-side                  = true
   minus-style                   = syntax "#37222c"
   minus-non-emph-style          = syntax "#37222c"
   minus-emph-style              = syntax "#713137"
@@ -18,3 +19,4 @@
   line-numbers-zero-style       = "#3b4261"
 [core]
 	excludesFile = ~/.gitignore
+	pager = delta
