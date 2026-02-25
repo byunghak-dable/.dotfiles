@@ -11,10 +11,13 @@ description: Commit, push, and open a PR using the project PR template
 - Default remote branch: !`git remote show origin 2>/dev/null | grep 'HEAD branch' | sed 's/.*: //'`
 - Commits on this branch: !`git log --oneline origin/HEAD..HEAD 2>/dev/null || git log --oneline -5`
 - PR template: !`cat .github/PULL_REQUEST_TEMPLATE.md 2>/dev/null || cat .github/pull_request_template.md 2>/dev/null || cat docs/pull_request_template.md 2>/dev/null || echo "__NO_TEMPLATE__"`
+- Project commit convention: !`cat .claude/commit-convention.md 2>/dev/null || grep -A 60 -m 1 "## Commit" CLAUDE.md 2>/dev/null || echo "__USE_DEFAULT__"`
 
 ## Commit Rules
 
-### Message Format
+> **프로젝트 우선**: 위 "Project commit convention"이 `__USE_DEFAULT__`가 아닌 경우, 아래 기본 규칙 대신 해당 내용을 따르세요.
+
+### Default Message Format
 ```
 <type>: <description>
 ```

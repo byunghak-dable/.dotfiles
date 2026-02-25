@@ -9,10 +9,13 @@ description: Create a git commit following team conventions
 - Current git diff (staged and unstaged changes): !`git diff HEAD`
 - Current branch: !`git branch --show-current`
 - Recent commits: !`git log --oneline -10`
+- Project commit convention: !`cat .claude/commit-convention.md 2>/dev/null || grep -A 60 -m 1 "## Commit" CLAUDE.md 2>/dev/null || echo "__USE_DEFAULT__"`
 
 ## Commit Rules
 
-### Message Format
+> **프로젝트 우선**: 위 "Project commit convention"이 `__USE_DEFAULT__`가 아닌 경우, 아래 기본 규칙 대신 해당 내용을 따르세요.
+
+### Default Message Format
 
 ```
 <type>: <description>
