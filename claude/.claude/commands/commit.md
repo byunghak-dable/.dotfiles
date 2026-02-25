@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*)
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*), Bash(mkdir:*)
 description: Create a git commit following team conventions
 ---
 
@@ -61,9 +61,18 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 
 ## Your Task
 
-위 규칙을 준수하여 변경 사항에 맞는 커밋을 생성하세요.
+**한 번의 응답에서 모든 스테이징과 커밋을 처리하세요.**
 
-- 여러 관심사가 섞인 경우: 커밋을 분리할지 사용자에게 먼저 물어보세요
-- 단일 관심사인 경우: 바로 스테이징 후 커밋 생성
+### Step 1: 커밋 컨벤션 확인
 
-한 번의 응답에서 스테이징과 커밋을 모두 처리하세요.
+"Project commit convention"이 `__USE_DEFAULT__`인 경우:
+1. `git log --oneline -50`으로 기존 커밋 히스토리를 분석하여 컨벤션 패턴을 파악
+2. `.claude/` 디렉토리 생성 후 `.claude/commit-convention.md` 파일을 작성
+3. 이후 커밋부터 해당 컨벤션을 적용
+
+### Step 2: 관심사별 커밋 분리
+
+변경 사항을 관심사별로 그룹핑하여 **항상 별도 커밋으로 처리**하세요. 분리 여부를 사용자에게 묻지 않습니다.
+
+- 관심사가 하나인 경우 → 단일 커밋
+- 관심사가 여러 개인 경우 → 각각 별도 커밋 (순서대로 처리)

@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git checkout:*), Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git push:*), Bash(git commit:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(cat:*)
+allowed-tools: Bash(git checkout:*), Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git push:*), Bash(git commit:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(cat:*), Bash(mkdir:*)
 description: Commit, push, and open a PR using the project PR template
 ---
 
@@ -39,13 +39,21 @@ description: Commit, push, and open a PR using the project PR template
 
 **한 번의 응답에서 모든 tool call을 처리하세요.**
 
-### Step 1: 브랜치 확인
+### Step 1: 커밋 컨벤션 확인
+
+"Project commit convention"이 `__USE_DEFAULT__`인 경우:
+1. `git log --oneline -50`으로 기존 커밋 히스토리를 분석하여 컨벤션 패턴을 파악
+2. `.claude/` 디렉토리 생성 후 `.claude/commit-convention.md` 파일을 작성
+3. 이후 커밋부터 해당 컨벤션을 적용
+
+### Step 2: 브랜치 확인
 - default 브랜치(main/master)라면 적절한 feature 브랜치를 먼저 생성
 - 이미 feature 브랜치라면 그대로 진행
 
-### Step 2: 커밋 생성
-- 변경 사항을 분석하여 위 커밋 규칙에 맞는 메시지로 커밋
-- 여러 관심사가 섞인 경우 분리하여 커밋
+### Step 3: 커밋 생성
+- 변경 사항을 관심사별로 그룹핑하여 **항상 별도 커밋으로 처리**하세요. 분리 여부를 사용자에게 묻지 않습니다.
+- 관심사가 하나인 경우 → 단일 커밋
+- 관심사가 여러 개인 경우 → 각각 별도 커밋 (순서대로 처리)
 
 ### Step 3: Push
 ```bash
