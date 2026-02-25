@@ -16,12 +16,12 @@ description: Use when asked to rename a symbol, type, method, variable, or const
 
 작업 전 Before → After 테이블을 명시한다:
 
-| Before | After | 대상 |
-|--------|-------|------|
-| `tablePath` | `tableConfig` | 파라미터명, 변수명 |
-| `SensitiveTablePath` | `SensitiveTableConfig` | 타입명 |
-| `TablePathNotFoundError` | `TableConfigNotFoundError` | 에러 클래스명 |
-| `fetchByTablePath` | `fetchByTableConfig` | 메소드명 |
+| Before                   | After                      | 대상               |
+| ------------------------ | -------------------------- | ------------------ |
+| `tablePath`              | `tableConfig`              | 파라미터명, 변수명 |
+| `SensitiveTablePath`     | `SensitiveTableConfig`     | 타입명             |
+| `TablePathNotFoundError` | `TableConfigNotFoundError` | 에러 클래스명      |
+| `fetchByTablePath`       | `fetchByTableConfig`       | 메소드명           |
 
 ### 2단계: 영향 범위 탐색
 
@@ -39,6 +39,7 @@ grep -rn "tablePath\|SensitiveTablePath" . \
 ```
 
 탐색 결과를 카테고리별로 분류:
+
 - **타입 정의** (interface, type alias, class)
 - **메소드/함수 시그니처** (파라미터명, 반환 타입)
 - **변수/상수** (let, const, 클래스 필드)
@@ -86,18 +87,18 @@ pyright src/
 
 ## 주의 사항
 
-| 상황 | 처리 |
-|------|------|
+| 상황                                          | 처리                                                   |
+| --------------------------------------------- | ------------------------------------------------------ |
 | 문자열 리터럴 안 이름 (Secret Manager key 등) | **변경하지 않음** - 외부 시스템과 계약이므로 별도 확인 |
-| public API / export된 타입 | 하위 호환성 확인 후 변경 |
-| 테스트 파일 | 구현 변경 후 마지막에 변경 |
-| 주석 | 코드 변경과 함께 업데이트 |
+| public API / export된 타입                    | 하위 호환성 확인 후 변경                               |
+| 테스트 파일                                   | 구현 변경 후 마지막에 변경                             |
+| 주석                                          | 코드 변경과 함께 업데이트                              |
 
 ## Common Mistakes
 
-| 실수 | 교정 |
-|------|------|
-| `sed -i` 전체 치환으로 시작 | 탐색 → 범위 확인 → 순차 변경 |
-| 문자열 리터럴까지 변경 | 코드 심볼과 문자열을 구분해서 처리 |
-| 타입 체크 없이 완료 선언 | `tsc --noEmit` 통과 후 완료 |
-| 테스트 먼저 변경 | 구현 코드 변경 후 테스트 |
+| 실수                        | 교정                               |
+| --------------------------- | ---------------------------------- |
+| `sed -i` 전체 치환으로 시작 | 탐색 → 범위 확인 → 순차 변경       |
+| 문자열 리터럴까지 변경      | 코드 심볼과 문자열을 구분해서 처리 |
+| 타입 체크 없이 완료 선언    | `tsc --noEmit` 통과 후 완료        |
+| 테스트 먼저 변경            | 구현 코드 변경 후 테스트           |

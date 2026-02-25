@@ -23,6 +23,7 @@ To do this, follow these steps precisely:
    - 비어있는 필수 섹션 (섹션 제목만 있고 내용 없음)
 
    미완성 섹션이 있으면 PR에 아래 형식으로 코멘트 후 리뷰를 중단:
+
    ```
    ### PR Template 미완성 항목
 
@@ -31,6 +32,7 @@ To do this, follow these steps precisely:
 
    🤖 Generated with [Claude Code](https://claude.ai/code)
    ```
+
    미완성 섹션이 없으면 Step 3으로 진행.
 
 3. Use a Haiku agent to give you a list of file paths to (but not the contents of) any relevant CLAUDE.md files from the codebase: the root CLAUDE.md file (if one exists), as well as any CLAUDE.md files in the directories whose files the pull request modified.

@@ -48,6 +48,7 @@ def train(self, sample_weights: pd.Series):
 ```
 
 **확인 포인트:**
+
 - 런타임에 항상 값이 있는데 `Optional`인가?
 - 진입점(use case)에서 `raise`로 검증하면 이후 분기가 필요 없는가?
 - 동일 함수 내 직전에 할당한 변수를 `is not None` 체크하는가?
@@ -93,10 +94,10 @@ grep -n "Optional\[" <파일>
 
 ## Common Mistakes
 
-| 실수 | 교정 |
-|------|------|
-| `def _validate_internal()` (내부 전용) | `def __validate_internal()` |
-| `Optional[Config]` (항상 주입되는 의존성) | `Config` 필수 타입으로 변경 |
-| `if config is not None:` 반복 분기 | 진입점 검증 + 분기 제거 |
-| `__init__.py` 생성 | 삭제, namespace package 사용 |
-| `sample_weights: Optional[...]` (항상 있음) | `sample_weights: pd.Series` |
+| 실수                                        | 교정                         |
+| ------------------------------------------- | ---------------------------- |
+| `def _validate_internal()` (내부 전용)      | `def __validate_internal()`  |
+| `Optional[Config]` (항상 주입되는 의존성)   | `Config` 필수 타입으로 변경  |
+| `if config is not None:` 반복 분기          | 진입점 검증 + 분기 제거      |
+| `__init__.py` 생성                          | 삭제, namespace package 사용 |
+| `sample_weights: Optional[...]` (항상 있음) | `sample_weights: pd.Series`  |

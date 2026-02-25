@@ -15,6 +15,7 @@ description: Create a git branch following project conventions
 ### Step 1: 브랜치 컨벤션 확인
 
 "Project branch convention"이 `__USE_DEFAULT__`인 경우:
+
 1. 위 "Recent branches" 목록을 분석하여 네이밍 패턴을 파악
 2. `.claude/` 디렉토리 생성 후 `.claude/branch-convention.md` 파일을 작성
 3. 이후 브랜치 생성에 해당 컨벤션 적용

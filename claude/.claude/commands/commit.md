@@ -23,14 +23,14 @@ description: Create a git commit following team conventions
 
 ### Allowed Types
 
-| type | 사용 상황 |
-|------|----------|
-| `feature` | 새로운 기능 추가 |
-| `fix` | 버그 수정 |
-| `chore` | 빌드, 설정, 리팩토링, 이름 변경 등 기능 외 변경 |
-| `refactor` | 기능 변경 없이 코드 구조 개선 |
-| `test` | 테스트 추가/수정 |
-| `docs` | 문서 수정 |
+| type       | 사용 상황                                       |
+| ---------- | ----------------------------------------------- |
+| `feature`  | 새로운 기능 추가                                |
+| `fix`      | 버그 수정                                       |
+| `chore`    | 빌드, 설정, 리팩토링, 이름 변경 등 기능 외 변경 |
+| `refactor` | 기능 변경 없이 코드 구조 개선                   |
+| `test`     | 테스트 추가/수정                                |
+| `docs`     | 문서 수정                                       |
 
 ### Rules
 
@@ -66,6 +66,7 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 ### Step 1: 커밋 컨벤션 확인
 
 "Project commit convention"이 `__USE_DEFAULT__`인 경우:
+
 1. `git log --oneline -50`으로 기존 커밋 히스토리를 분석하여 컨벤션 패턴을 파악
 2. `.claude/` 디렉토리 생성 후 `.claude/commit-convention.md` 파일을 작성
 3. 이후 커밋부터 해당 컨벤션을 적용
@@ -81,6 +82,7 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
   ```
 
 **파일 내 일부 변경만 스테이징이 필요한 경우** `git add -p`를 사용하세요:
+
 ```bash
 git add -p <파일>   # hunk 단위로 선택적 스테이징
 ```
