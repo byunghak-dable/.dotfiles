@@ -28,5 +28,18 @@
     "learning-output-style@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/format-file.sh"
+          }
+        ]
+      }
+    ]
+  }
 }

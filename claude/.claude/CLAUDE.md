@@ -6,7 +6,7 @@
 - **커밋 금지**: 명시적으로 요청받기 전까지 절대 커밋하지 말 것
 - **리팩토링**: 항상 가장 단순한 방법을 먼저 시도. 접근법 거부 시 완전히 롤백 후 대안 시도
 - **코드 수정 전 검증**: 반드시 관련 코드를 실제로 읽어 가정을 검증할 것
-- **파일 수정 후 Formatter 실행**: 프로젝트 설정 파일(Makefile, package.json, pyproject.toml)에서 formatter를 판단하여 실행. 없으면 물어볼 것
+- **파일 수정 후 Formatter**: PostToolUse hook이 자동 실행. hook이 없는 프로젝트는 설정 파일(Makefile, package.json, pyproject.toml)에서 formatter를 판단하여 수동 실행. 없으면 물어볼 것
 
 # Communication (커뮤니케이션)
 
