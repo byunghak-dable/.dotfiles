@@ -36,7 +36,7 @@ description: Create a git commit following team conventions
 
 1. **type은 소문자**로 작성 (`Feature` ❌ → `feature` ✅)
 2. **description은 영어 소문자**로 시작, 마침표 없이
-3. **한 커밋 = 한 가지 관심사** — 섞이면 커밋 분리 (`/split-commits` 사용)
+3. **한 커밋 = 한 가지 관심사** — 섞이면 커밋 분리
 4. **`git add .` 사용 금지** — 관련 파일만 명시적으로 스테이징
 5. **secrets 파일 커밋 금지** (`.env`, credentials 등)
 6. description은 **무엇을(what)이 아닌 왜(why)/어떤 행위**를 표현
@@ -75,4 +75,12 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 변경 사항을 관심사별로 그룹핑하여 **항상 별도 커밋으로 처리**하세요. 분리 여부를 사용자에게 묻지 않습니다.
 
 - 관심사가 하나인 경우 → 단일 커밋
-- 관심사가 여러 개인 경우 → 각각 별도 커밋 (순서대로 처리)
+- 관심사가 여러 개인 경우 → 의존성 순서대로 별도 커밋:
+  ```
+  기반 타입/에러 정의 → 하위 레이어 구현 → 상위 레이어 핸들링 → 테스트
+  ```
+
+**파일 내 일부 변경만 스테이징이 필요한 경우** `git add -p`를 사용하세요:
+```bash
+git add -p <파일>   # hunk 단위로 선택적 스테이징
+```
