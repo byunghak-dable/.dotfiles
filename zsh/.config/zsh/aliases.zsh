@@ -34,7 +34,7 @@ function nc() {
 
   # Go back to left pane and split bottom (20% height) for terminal only under neovim
   tmux select-pane -L
-  tmux split-window -v -c "$dir" -l 20%
+  tmux split-window -v -c "$dir" -l 15%
 
   # nvim pane으로 포커스 이동 후 neovim 실행
   tmux select-pane -t "$nvim_pane"
