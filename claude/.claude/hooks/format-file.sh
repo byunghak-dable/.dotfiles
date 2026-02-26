@@ -5,8 +5,7 @@
 # Mason 경로를 PATH 앞에 추가하여 우선 탐색
 export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
-# jq 의존성 제거: grep + sed로 file_path 추출
-FILE_PATH=$(grep -o '"file_path"\s*:\s*"[^"]*"' | sed 's/.*:.*"\(.*\)"/\1/')
+FILE_PATH=$(jq -r '.tool_input.file_path // empty')
 [ -z "$FILE_PATH" ] || [ ! -f "$FILE_PATH" ] && exit 0
 
 case "$FILE_PATH" in
