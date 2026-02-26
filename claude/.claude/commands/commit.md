@@ -71,7 +71,7 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 2. `.claude/` 디렉토리 생성 후 `.claude/commit-convention.md` 파일을 작성
 3. 이후 커밋부터 해당 컨벤션을 적용
 
-### Step 2: 관심사별 커밋 분리
+### Step 2: 관심사별 리뷰 & 커밋
 
 변경 사항을 관심사별로 그룹핑하여 **항상 별도 커밋으로 처리**하세요. 분리 여부를 사용자에게 묻지 않습니다.
 
@@ -86,3 +86,12 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 ```bash
 git add -p <파일>   # hunk 단위로 선택적 스테이징
 ```
+
+**각 관심사 그룹 커밋 전 코드 리뷰:**
+
+스테이징 완료 후 커밋 전에 `/review-staged`와 동일한 리뷰를 수행하세요:
+
+1. staged diff + 관련 컨텍스트를 Read tool로 읽고 4관점(버그, 컨벤션, 보안, 설계) 리뷰
+2. confidence 70+ 이슈만 보고, false positive 제외 (linter가 잡을 이슈, pre-existing, nitpick)
+3. 이슈 발견 시 결과를 보여주고 사용자에게 확인: **"이슈를 수정하시겠습니까, 아니면 그대로 커밋하시겠습니까?"**
+4. 이슈 없으면 바로 커밋 진행
