@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(cat:*), Read, Glob, Grep, Task
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh repo view:*), Bash(cat:*), Read, Glob, Grep, Task
 description: PR 변경점을 구조적으로 분석하여 목적, 핵심 변경, 데이터 흐름, 인사이트를 정리
 ---
 
@@ -34,7 +34,7 @@ gh pr diff <number>
 | Domain / Business Logic | entities, services, use_cases                |
 | Infrastructure          | repositories, clients, adapters              |
 | API / Entry Point       | controllers, routes, app.py, run.ts          |
-| Test                    | _.spec.ts, __test.py, test_\*.py             |
+| Test                    | _.spec.ts, \_\_test.py, test_\*.py           |
 
 ### Step 3: 핵심 변경 분석
 
