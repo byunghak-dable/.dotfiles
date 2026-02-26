@@ -6,8 +6,8 @@ description: Create a git branch following project conventions
 ## Context
 
 - Current branch: !`git branch --show-current`
-- Recent branches: !`git branch --sort=-committerdate -a | grep -v HEAD | sed 's/remotes\/origin\///' | sort -u | head -20`
-- Default remote branch: !`git remote show origin 2>/dev/null | grep 'HEAD branch' | sed 's/.*: //'`
+- Recent branches: !`git branch --sort=-committerdate --all --format='%(refname:short)' --no-contains=HEAD | head -20`
+- Default remote branch: !`git remote show origin 2>/dev/null | grep 'HEAD branch'`
 - Project branch convention: !`cat .claude/branch-convention.md 2>/dev/null || grep -A 40 -m 1 "## Branch" CLAUDE.md 2>/dev/null || echo "__USE_DEFAULT__"`
 
 ## Your Task
