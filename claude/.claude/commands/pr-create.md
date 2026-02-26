@@ -1,6 +1,6 @@
 ---
-allowed-tools: Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(cat:*)
-description: Push current branch and open a PR using the project PR template
+allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(cat:*)
+description: Review branch, push, and open a PR using the project PR template
 ---
 
 ## Context
@@ -12,15 +12,24 @@ description: Push current branch and open a PR using the project PR template
 
 ## Your Task
 
-**한 번의 응답에서 모든 tool call을 처리하세요.**
+### Step 1: Branch Diff 리뷰
 
-### Step 1: Push
+`/pr-review-branch`와 동일한 리뷰를 수행하세요:
+
+1. `git diff origin/HEAD..HEAD`로 전체 branch diff를 확인
+2. 변경 파일의 관련 컨텍스트를 Read tool로 읽기
+3. 4관점(버그, 컨벤션, 보안, 설계) 리뷰, confidence 70+ 이슈만 보고
+4. false positive 제외 (linter가 잡을 이슈, pre-existing, nitpick)
+5. 이슈 발견 시 결과를 보여주고 사용자에게 확인: **"이슈를 수정하시겠습니까, 아니면 그대로 진행하시겠습니까?"**
+6. 이슈 없으면 Step 2로 진행
+
+### Step 2: Push
 
 ```bash
 git push -u origin <branch>
 ```
 
-### Step 2: PR 생성
+### Step 3: PR 생성
 
 **PR 제목**: `[JIRA-TICKET] <description>` 형식으로 작성 (type prefix 없음)
 
