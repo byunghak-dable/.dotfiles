@@ -20,3 +20,4 @@
 [core]
 	excludesFile = ~/.gitignore
 	pager = delta
+	hooksPath = ~/.githooks
