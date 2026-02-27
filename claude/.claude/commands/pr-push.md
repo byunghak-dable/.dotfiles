@@ -1,6 +1,6 @@
 ---
-allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(cat:*)
-description: Review branch, push, and open a PR using the project PR template
+allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(gh pr edit:*), Bash(gh label list:*), Bash(cat:*)
+description: Review branch, push, and create or update a PR with auto-inferred assignee/labels
 ---
 
 ## Context
@@ -29,7 +29,27 @@ description: Review branch, push, and open a PR using the project PR template
 git push -u origin <branch>
 ```
 
-### Step 3: PR 생성
+### Step 3: PR 존재 여부 확인
+
+```bash
+gh pr view --json number,title,body,url,assignees,labels
+```
+
+- PR이 존재하면 → **Step 4a** (업데이트)
+- PR이 없으면 → **Step 4b** (신규 생성)
+
+### Step 4a: PR 업데이트 (기존 PR이 있는 경우)
+
+1. 현재 커밋들 기반으로 title, body를 재생성 (Step 4b의 title/body 작성 규칙과 동일)
+2. `gh pr edit <number> --title "<title>" --body "$(cat <<'EOF' ... EOF)"`로 업데이트
+3. assignee/label 처리:
+   - 기존 PR에 assignee가 비어있으면 → **Assignee/Label 자동 추론** 수행
+   - 기존 PR에 label이 비어있으면 → **Assignee/Label 자동 추론** 수행
+   - 이미 설정되어 있으면 유지
+
+### Step 4b: PR 신규 생성 (기존 PR이 없는 경우)
+
+**Assignee/Label 자동 추론**을 먼저 수행한 뒤 PR을 생성합니다.
 
 **PR 제목**: `[JIRA-TICKET] <description>` 형식으로 작성 (type prefix 없음)
 
@@ -81,5 +101,40 @@ https://teamdable.atlassian.net/browse/TICKET
 gh pr create --title "<title>" --body "$(cat <<'EOF'
 <완성된 PR body>
 EOF
-)"
+)" --assignee <assignee> --label <label>
 ```
+
+---
+
+## Assignee/Label 자동 추론
+
+### Assignee
+
+- 기본값: `@me`
+
+### Label
+
+브랜치명 prefix에서 추론:
+
+| 브랜치 prefix                | Label           |
+| ---------------------------- | --------------- |
+| `feature/`, `feat/`          | `enhancement`   |
+| `fix/`, `bugfix/`, `hotfix/` | `bug`           |
+| `refactor/`                  | `refactor`      |
+| `docs/`                      | `documentation` |
+| `chore/`                     | `chore`         |
+
+- 매칭되는 prefix가 없으면 → `gh label list`로 사용 가능한 label 목록을 보여주고 사용자에게 선택 요청
+
+### 확인 절차
+
+추론 결과를 사용자에게 보여주고 확인받으세요:
+
+```
+Assignee: @me
+Label: enhancement (브랜치 prefix `feature/`에서 추론)
+
+이대로 진행할까요? 변경이 필요하면 알려주세요.
+```
+
+사용자가 수정을 요청하면 반영 후 진행합니다.
