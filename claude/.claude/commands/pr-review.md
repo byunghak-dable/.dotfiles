@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh pr comment:*), Bash(gh pr review:*), Bash(git log:*), Bash(git blame:*), Bash(cat:*), Read, Glob, Grep, Task
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh pr comment:*), Bash(gh pr review:*), Bash(gh repo view:*), Bash(git log:*), Bash(git blame:*), Bash(cat:*), Read, Glob, Grep, Task
 description: PR 코드 품질 심층 리뷰 - 버그, 설계 이슈, 잠재적 문제점 분석
 ---
 
