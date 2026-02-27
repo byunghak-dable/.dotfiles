@@ -1,5 +1,17 @@
 {
-  "model": "claude-opus-4-6",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/format-file.sh"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash -c 'node_bin=$(volta which node 2>/dev/null || which node) && \"$node_bin\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)dist/index.js\"'"
@@ -29,17 +41,5 @@
     "security-guidance@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/format-file.sh"
-          }
-        ]
-      }
-    ]
-  }
+  "model": "opus"
 }
