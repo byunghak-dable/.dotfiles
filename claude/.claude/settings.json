@@ -70,7 +70,7 @@
       "Bash(wget *)"
     ]
   },
-  "model": "opus",
+  "model": "opusplan",
   "hooks": {
     "PostToolUse": [
       {
