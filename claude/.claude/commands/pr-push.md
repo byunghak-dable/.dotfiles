@@ -54,7 +54,7 @@ gh pr view --json number,title,body,url,assignees,labels
 **PR 제목**: `[JIRA-TICKET] <description>` 형식으로 작성 (type prefix 없음)
 
 - 브랜치명에서 티켓 패턴 추출 (예: `BE-1376`, `SUPPORT-3210`, `PROJ-123`)
-- 티켓을 찾을 수 없으면 `[JIRA]` 생략
+- 티켓을 찾을 수 없으면 사용자에게 JIRA 번호를 확인 요청
 - 예: `[BE-1376] add r7i.xlarge instance type to node pool`
 
 **PR body 작성 규칙:**

@@ -25,6 +25,8 @@ description: Create a git branch following project conventions
 사용자가 브랜치명 또는 작업 내용을 제공한 경우 → 컨벤션에 맞게 변환하여 생성
 사용자가 아무것도 제공하지 않은 경우 → 어떤 작업을 위한 브랜치인지 물어보세요
 
+**기본 separator**: 컨벤션이 없고 히스토리에서도 판단할 수 없는 경우, 단어 구분자로 underscore(`_`)를 사용
+
 ### Step 3: 브랜치 생성
 
 ```bash
