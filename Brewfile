@@ -4,7 +4,6 @@
 # 필수
 brew "stow"
 brew "git"
-brew "zsh"
 
 # Zsh
 brew "zinit"          # zsh 플러그인 매니저 (plugins.zsh)
