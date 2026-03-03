@@ -207,6 +207,59 @@ Claude가 코드를 작성/수정할 때 자동 적용되는 규칙입니다.
 | Commands 우선       | 재사용 가능한 workflow는 skill이 아닌 `~/.claude/commands/` command로 작성    |
 | 세션 종료 작업 요약 | 요청 시 auto memory에 작업 상태(완료/미완료/핵심 파일) 기록                   |
 
+## Plugins (플러그인)
+
+`claude plugin install`로 설치합니다. 새 환경 설정 시 참고용 목록입니다.
+
+### Core
+
+| 플러그인               | 용도                                              |
+| ---------------------- | ------------------------------------------------- |
+| `superpowers`          | brainstorming, TDD, parallel agents 등 워크플로우 |
+| `claude-md-management` | CLAUDE.md 관리 및 개선                            |
+| `hookify`              | 대화 분석 기반 hook 자동 생성                     |
+| `claude-hud`           | statusline HUD 표시                               |
+| `claude-code-setup`    | Claude Code 초기 설정 가이드                      |
+
+### Integrations
+
+| 플러그인    | 용도                      |
+| ----------- | ------------------------- |
+| `slack`     | Slack 채널 검색/요약      |
+| `atlassian` | Jira/Confluence 연동      |
+| `Notion`    | Notion 페이지/DB 연동     |
+| `context7`  | 라이브러리 최신 문서 조회 |
+| `serena`    | 시맨틱 코드 분석/편집     |
+| `github`    | GitHub PR/이슈 연동       |
+
+### Code Quality
+
+| 플러그인            | 용도                 |
+| ------------------- | -------------------- |
+| `code-review`       | 코드 리뷰            |
+| `code-simplifier`   | 코드 간소화          |
+| `security-guidance` | 보안 가이드          |
+| `pr-review-toolkit` | PR 리뷰 도구         |
+| `feature-dev`       | 기능 개발 워크플로우 |
+| `commit-commands`   | 커밋 관련 커맨드     |
+
+### LSP
+
+| 플러그인            | 언어       |
+| ------------------- | ---------- |
+| `pyright-lsp`       | Python     |
+| `typescript-lsp`    | TypeScript |
+| `rust-analyzer-lsp` | Rust       |
+| `gopls-lsp`         | Go         |
+| `lua-lsp`           | Lua        |
+
+### Output Styles
+
+| 플러그인                   | 설명           |
+| -------------------------- | -------------- |
+| `learning-output-style`    | 학습+설명 모드 |
+| `explanatory-output-style` | 설명 중심 모드 |
+
 ## 커스터마이징
 
 ### 커맨드 추가
