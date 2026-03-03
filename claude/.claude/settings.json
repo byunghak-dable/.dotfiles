@@ -1,57 +1,39 @@
 {
   "permissions": {
     "allow": [
+      "Bash(*)",
+      "Read(*)",
+      "Write(*)",
+      "Edit(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "Task(*)",
+      "Search(*)",
+      "Skill(*)",
+      "ToolSearch(*)",
+      "NotebookEdit(*)",
       "WebSearch",
+      "WebSearch(*)",
       "WebFetch",
-      "Read",
-      "Glob",
-      "Grep",
-      "Task",
-      "ToolSearch",
-      "Bash(git status *)",
-      "Bash(git status)",
-      "Bash(git log *)",
-      "Bash(git log)",
-      "Bash(git diff *)",
-      "Bash(git diff)",
-      "Bash(git show *)",
-      "Bash(git show)",
-      "Bash(git branch)",
-      "Bash(git branch -a)",
-      "Bash(git branch -r)",
-      "Bash(git branch -v *)",
-      "Bash(git branch --list *)",
-      "Bash(git remote)",
-      "Bash(git remote -v)",
-      "Bash(git remote show *)",
-      "Bash(git rev-parse *)",
-      "Bash(git rev-parse)",
-      "Bash(git ls-files *)",
-      "Bash(git ls-files)",
-      "Bash(ls *)",
-      "Bash(ls)",
-      "Bash(pwd)",
-      "Bash(which *)",
-      "Bash(* --version)",
-      "Bash(* --help *)",
-      "Bash(* --help)",
-      "Bash(wc *)",
-      "Bash(file *)",
-      "Bash(date)",
-      "Bash(gh pr view *)",
-      "Bash(gh pr view)",
-      "Bash(gh pr list *)",
-      "Bash(gh pr list)",
-      "Bash(gh issue view *)",
-      "Bash(gh issue view)",
-      "Bash(gh issue list *)",
-      "Bash(gh issue list)",
-      "Bash(npm run *)",
-      "Bash(pnpm run *)",
-      "Bash(npm list *)",
-      "Bash(npm list)",
-      "Bash(pnpm list *)",
-      "Bash(pnpm list)"
+      "WebFetch(*)",
+      "Agent(*)",
+      "SendMessage(*)",
+      "TaskCreate(*)",
+      "TaskUpdate(*)",
+      "TaskGet(*)",
+      "TaskList(*)",
+      "TaskOutput(*)",
+      "TaskStop(*)",
+      "EnterPlanMode(*)",
+      "ExitPlanMode(*)",
+      "AskUserQuestion(*)",
+      "ListMcpResourcesTool(*)",
+      "ReadMcpResourceTool(*)",
+      "mcp__plugin_serena_serena__*",
+      "mcp__plugin_context7_context7__*",
+      "mcp__memory__*",
+      "mcp__sequential-thinking__*",
+      "mcp__dev-workflow-mcp__*"
     ],
     "deny": [
       "Read(**/.env)",
@@ -66,19 +48,101 @@
       "Read(//**/*.key)",
       "Read(//**/credentials.json)",
       "Read(//**/service-account*.json)",
-      "Bash(curl *)",
-      "Bash(wget *)"
+      "Bash(rm -rf /)*",
+      "Bash(rm -rf ~)*",
+      "Bash(rm -rf .)*",
+      "Bash(rm -rf *)*",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(>/dev/*)",
+      "Bash(curl*|*sh)*",
+      "Bash(wget*|*sh)*",
+      "Bash(*>~/.ssh/*)",
+      "Bash(*>~/.zshrc)*",
+      "Bash(*>~/.bashrc)*",
+      "Bash(*>~/.profile)*",
+      "Bash(*>~/.zprofile)*",
+      "Bash(git push --force*main)*",
+      "Bash(git push -f*main)*",
+      "Bash(git push --force*master)*",
+      "Bash(git push -f*master)*",
+      "Bash(git push --force-with-lease*main)*",
+      "Bash(git push --force-with-lease*master)*",
+      "Bash(git push origin +main)*",
+      "Bash(git push origin +master)*",
+      "Bash(git reset --hard origin/*)*",
+      "Bash(git clean -f*)*",
+      "Bash(git checkout -- .)*",
+      "Bash(git restore .)*",
+      "Bash(npm publish)*",
+      "Bash(pnpm publish)*",
+      "Bash(yarn publish)*",
+      "Bash(docker system prune)*",
+      "Bash(mkfs*)*",
+      "Bash(dd if=*)*",
+      "Bash(eval *)*",
+      "Bash(bash -c *)*",
+      "Bash(sh -c *)*",
+      "Bash(osascript*)*",
+      "Bash(crontab*)*",
+      "Bash(launchctl*)*",
+      "Bash(python3 -c *import os*)*",
+      "Bash(node -e *)*",
+      "Bash(perl -e *)*",
+      "Bash(xargs *)*",
+      "Bash(open http*)*",
+      "Bash(source /dev/*)*"
     ]
   },
-  "model": "opusplan",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/remote-command-guard.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/output-secret-filter.sh",
+            "timeout": 5000
+          }
+        ]
+      },
       {
         "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
             "command": "~/.claude/hooks/format-file.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/security-auto-trigger.sh",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/code-quality-reminder.sh",
+            "timeout": 5000
           }
         ]
       }
