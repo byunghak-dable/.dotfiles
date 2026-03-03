@@ -1,9 +1,10 @@
 ZDOTDIR=$HOME/.config/zsh
 
 # --- settings ---
-source $ZDOTDIR/aliases.zsh
-source $ZDOTDIR/prompt.zsh
-source $ZDOTDIR/plugins.zsh
+for _zsh_conf in $ZDOTDIR/*.zsh(N); do
+  source "$_zsh_conf"
+done
+unset _zsh_conf
 
 # PATH 설정 (eval 없이 직접 추가)
 [[ -d $HOME/.volta/bin ]] && export VOLTA_HOME="$HOME/.volta" && export PATH="$VOLTA_HOME/bin:$PATH"
