@@ -1,5 +1,5 @@
 ---
-allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(gh pr edit:*), Bash(gh label list:*), Bash(cat:*)
+allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git push:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git remote:*), Bash(gh pr create:*), Bash(gh pr view:*), Bash(gh pr edit:*), Bash(gh label list:*), Bash(cat:*), Bash(npx eslint:*), Bash(npm run lint:*), Bash(npx pyright:*), Bash(python*), Bash(grep:*), Bash(jq:*)
 description: Review branch, push, and create or update a PR with auto-inferred assignee/labels
 ---
 
@@ -11,6 +11,30 @@ description: Review branch, push, and create or update a PR with auto-inferred a
 - PR template: !`cat .github/PULL_REQUEST_TEMPLATE.md 2>/dev/null || cat .github/pull_request_template.md 2>/dev/null || cat docs/pull_request_template.md 2>/dev/null || echo "__NO_TEMPLATE__"`
 
 ## Your Task
+
+### Step 0: 정적 분석 (Lint / Type Check)
+
+push 전 변경 파일 대상으로 정적 분석을 실행합니다. **해당 도구가 프로젝트에 존재하는 경우에만 실행합니다.**
+
+**대상 파일 수집:**
+
+```bash
+git diff --name-only origin/HEAD..HEAD
+```
+
+**검사 도구 탐지 및 실행:**
+
+| 조건                                                           | 실행                                            |
+| -------------------------------------------------------------- | ----------------------------------------------- |
+| `package.json`의 `scripts.lint` 존재                           | 변경된 JS/TS 파일에 대해 `npx eslint <files>`   |
+| `pyrightconfig.json` 또는 `pyproject.toml`에 pyright 설정 존재 | 변경된 Python 파일에 대해 `npx pyright <files>` |
+
+- 도구가 없으면 skip
+- **warning은 무시**, **error만 보고**
+- error 발견 시 결과를 보여주고 AskUserQuestion으로 선택지 제공:
+  - **수정** — error를 수정한 뒤 진행합니다
+  - **그대로 진행** — error를 무시하고 push합니다
+- error 없으면 Step 1로 진행
 
 ### Step 1: Branch Diff 리뷰
 
