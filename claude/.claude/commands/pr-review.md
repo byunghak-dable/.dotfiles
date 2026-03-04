@@ -1,6 +1,6 @@
 ---
-allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh pr comment:*), Bash(gh pr review:*), Bash(gh repo view:*), Bash(git log:*), Bash(git blame:*), Bash(cat:*), Read, Glob, Grep, Task
-description: PR 코드 품질 심층 리뷰 - 버그, 설계 이슈, 잠재적 문제점 분석
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh pr comment:*), Bash(gh pr review:*), Bash(gh repo view:*), Bash(git log:*), Bash(git blame:*), Read, Glob, Grep, Agent
+description: PR 코드 품질 심층 리뷰 - code-reviewer 에이전트 병렬 호출
 ---
 
 ## Context
@@ -27,35 +27,55 @@ gh pr diff <number>
 
 ### Step 2: CLAUDE.md 규칙 수집
 
-Haiku agent로 PR이 수정한 디렉토리의 CLAUDE.md 파일을 모두 찾아 규칙 목록을 수집하세요.
-
-### Step 3: 5개 병렬 Sonnet agent로 리뷰
-
-각 agent에게 PR diff와 관련 컨텍스트를 전달:
-
-| Agent | 역할                | 집중 영역                                           |
-| ----- | ------------------- | --------------------------------------------------- |
-| #1    | **CLAUDE.md 준수**  | 프로젝트 규칙 위반 여부                             |
-| #2    | **버그 탐지**       | 로직 오류, edge case, off-by-one, null/undefined 등 |
-| #3    | **설계 분석**       | 아키텍처 적합성, 레이어 위반, 의존성 방향, 응집도   |
-| #4    | **보안/성능**       | SQL injection, 메모리 누수, N+1 쿼리, 무한 루프 등  |
-| #5    | **테스트 커버리지** | 테스트 누락, edge case 미검증, mock 적절성          |
-
-각 agent는 발견한 이슈를 아래 형식으로 반환:
+Agent tool (subagent_type: general-purpose, model: haiku)로 CLAUDE.md 규칙 수집:
 
 ```
+PR이 수정한 디렉토리 경로를 기반으로 프로젝트 내 CLAUDE.md 파일을 모두 찾아
+(루트, 서브디렉토리, .claude/ 내부) 규칙 목록을 추출하세요.
+각 규칙을 한 줄로 정리하여 반환하세요.
+```
+
+### Step 3: code-reviewer 에이전트 병렬 리뷰
+
+Agent tool (subagent_type: general-purpose, model: sonnet) × 최대 5개를 **병렬로** 호출.
+
+각 agent에게 PR diff, CLAUDE.md 규칙, 관련 컨텍스트를 전달하되 집중 영역을 분리:
+
+```
+당신은 code-reviewer 에이전트입니다.
+~/.claude/agents/code-reviewer.md의 지침을 따르세요.
+
+PR diff:
+[전체 diff]
+
+CLAUDE.md 규칙:
+[Step 2 결과]
+
+집중 영역: [아래 테이블에서 해당 영역]
+
+발견한 이슈를 아래 형식으로 반환:
 - [severity: critical/major/minor] <이슈 설명>
   파일: <path>:<line>
   근거: <왜 이것이 문제인가>
   제안: <수정 방향>
 ```
 
+| Agent | 집중 영역                                                        |
+| :---- | :--------------------------------------------------------------- |
+| #1    | **CLAUDE.md 준수** — 프로젝트 규칙 위반 여부                     |
+| #2    | **버그 탐지** — 로직 오류, edge case, off-by-one, null/undefined |
+| #3    | **설계 분석** — 아키텍처 적합성, 레이어 위반, 의존성 방향        |
+| #4    | **보안/성능** — injection, 메모리 누수, N+1 쿼리, 무한 루프      |
+| #5    | **테스트 커버리지** — 테스트 누락, edge case 미검증, mock 적절성 |
+
+> 변경 파일이 5개 이하면 agent #3~#5를 생략하여 비용 절감.
+
 ### Step 4: 이슈 검증 및 필터링
 
-각 이슈에 대해 Haiku agent로 신뢰도 점수(0-100)를 매기세요:
+Agent tool (subagent_type: general-purpose, model: haiku)로 각 이슈의 신뢰도 점수(0-100)를 매기세요:
 
 | 점수   | 의미                                               |
-| ------ | -------------------------------------------------- |
+| :----- | :------------------------------------------------- |
 | 0-25   | False positive, 기존 이슈, lint/타입체커가 잡을 것 |
 | 25-50  | 가능성 있으나 미검증, 사소한 스타일 이슈           |
 | 50-75  | 실제 이슈이나 실무 영향 낮음, nitpick              |
@@ -94,29 +114,17 @@ Haiku agent로 PR이 수정한 디렉토리의 CLAUDE.md 파일을 모두 찾아
 ```
 ````
 
-#### 2. [major] ...
-
-### CLAUDE.md 준수 현황
-
-- [x] <준수 항목>
-- [ ] <위반 항목> — <설명>
-
-### 추가 권고 (선택)
-
-<심각하지 않지만 개선하면 좋을 사항>
-
-````
-
 이슈가 없으면:
 
 ```markdown
 ## PR #<number> 코드 리뷰: `<title>`
 
 ### 요약
+
 변경 규모: +<additions> / -<deletions> (파일 <count>개)
 
 신뢰도 75 이상 이슈 없음. CLAUDE.md 준수 확인 완료.
-````
+```
 
 ### 옵션: GitHub에 코멘트
 
