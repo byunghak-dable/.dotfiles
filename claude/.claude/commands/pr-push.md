@@ -20,7 +20,9 @@ description: Review branch, push, and create or update a PR with auto-inferred a
 2. 변경 파일의 관련 컨텍스트를 Read tool로 읽기
 3. 4관점(버그, 컨벤션, 보안, 설계) 리뷰, confidence 70+ 이슈만 보고
 4. false positive 제외 (linter가 잡을 이슈, pre-existing, nitpick)
-5. 이슈 발견 시 결과를 보여주고 사용자에게 확인: **"이슈를 수정하시겠습니까, 아니면 그대로 진행하시겠습니까?"**
+5. 이슈 발견 시 결과를 보여주고 AskUserQuestion으로 선택지 제공:
+   - **수정** — 이슈를 수정한 뒤 진행합니다
+   - **그대로 진행** — 이슈를 무시하고 push합니다
 6. 이슈 없으면 Step 2로 진행
 
 ### Step 2: Push
@@ -124,17 +126,11 @@ EOF
 | `docs/`                      | `documentation` |
 | `chore/`                     | `chore`         |
 
-- 매칭되는 prefix가 없으면 → `gh label list`로 사용 가능한 label 목록을 보여주고 사용자에게 선택 요청
+- 매칭되는 prefix가 없으면 → `gh label list`로 사용 가능한 label 목록을 가져와 AskUserQuestion으로 선택지 제공
 
 ### 확인 절차
 
-추론 결과를 사용자에게 보여주고 확인받으세요:
+추론 결과를 보여준 후 AskUserQuestion으로 선택지를 제공하세요:
 
-```
-Assignee: @me
-Label: enhancement (브랜치 prefix `feature/`에서 추론)
-
-이대로 진행할까요? 변경이 필요하면 알려주세요.
-```
-
-사용자가 수정을 요청하면 반영 후 진행합니다.
+- **이대로 진행** — 추론된 assignee/label로 PR을 생성합니다
+- **변경** — assignee 또는 label을 수정합니다
