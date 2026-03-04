@@ -42,6 +42,17 @@ gh pr view --json number,title,body,url,assignees,labels
 
 ### Step 4a: PR 업데이트 (기존 PR이 있는 경우)
 
+**먼저 body 업데이트 필요 여부를 판단:**
+
+기존 PR body에 아직 반영되지 않은 커밋들을 분석하여 다음 기준으로 분류:
+
+- **주요 변경** (body 업데이트 필요): 새 파일 추가, 아키텍처 변경, 동작 변경, 새 기능
+- **마이너 변경** (push만으로 충분): 기존 변경의 연장선인 bugfix, config 참조 수정, typo, 린트 수정, 리네이밍
+
+**마이너 변경만 있는 경우** → body 업데이트 없이 PR URL만 출력하고 종료
+
+**주요 변경이 포함된 경우:**
+
 1. 현재 커밋들 기반으로 title, body를 재생성 (Step 4b의 title/body 작성 규칙과 동일)
 2. `gh pr edit <number> --title "<title>" --body "$(cat <<'EOF' ... EOF)"`로 업데이트
 3. assignee/label 처리:
