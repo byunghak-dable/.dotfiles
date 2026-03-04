@@ -20,6 +20,11 @@ brew "neovim"
 brew "git-delta"      # git diff pager (.gitconfig, lazygit config)
 brew "w3m"            # 터미널 브라우저 (aliases.zsh: ? 별칭)
 
+# Git / DevOps
+brew "gh"             # GitHub CLI (PR, issue, workflow)
+brew "ankitpokhrel/jira-cli/jira-cli"  # Jira CLI
+brew "4ier/tap/notion-cli"             # Notion CLI (page, db, block, comment)
+
 # AI
 brew "fabric-ai"      # AI 프레임워크 (aliases.zsh: ?? 별칭)
 
