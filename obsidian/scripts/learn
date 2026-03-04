@@ -1,7 +1,0 @@
-#!/bin/zsh
-# 학습 큐에 항목 추가
-VAULT="$HOME/second-brain"
-QUEUE="$VAULT/02-learning/queue.md"
-
-echo "- [ ] $(date +%Y-%m-%d) $*" >> "$QUEUE"
-echo "✓ 학습 큐 추가: $*"
