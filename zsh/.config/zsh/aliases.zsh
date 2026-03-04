@@ -95,6 +95,7 @@ alias nv="nvim"
 alias cl="clear"
 alias tl="tmux clear-history"
 alias g="lazygit"
+alias c="claude"
 
 # confirm before overwriting something
 alias cp="cp -i"
