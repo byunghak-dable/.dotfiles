@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: e2e-runner
-description: End-to-end testing specialist using Vercel Agent Browser (preferred) with Playwright fallback. Use PROACTIVELY for generating, maintaining, and running E2E tests. Manages test journeys, quarantines flaky tests, uploads artifacts (screenshots, videos, traces), and ensures critical user flows work.
+description: E2E 테스트 전문. Playwright 기반 테스트 생성/유지/실행. 주요 사용자 흐름 검증.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
 memory: project
@@ -72,7 +71,6 @@ color: cyan
     - Use Read to examine existing test files and page objects.
     - Use Write/Edit to create/modify test files.
     - Use Grep to find existing selectors and test patterns.
-    - Use `mcp__playwright__*` for browser automation and E2E test execution.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -271,10 +269,4 @@ await page.waitForResponse(resp => resp.url().includes('/api/data'))
 
 ---
 
-## Related MCP Tools
 
-- **mcp__playwright__***: Browser automation and E2E test execution
-
-## Related Skills
-
-- e2e, frontend-testing, react-verify

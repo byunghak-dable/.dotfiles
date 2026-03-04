@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: security-reviewer
-description: Security vulnerability detection and remediation specialist. Use PROACTIVELY after writing code that handles user input, authentication, API endpoints, or sensitive data. Flags secrets, SSRF, injection, unsafe crypto, and OWASP Top 10 vulnerabilities.
+description: 보안 취약점 탐지 전문. 사용자 입력, 인증, API, 민감 데이터 처리 코드 작성 후 사전 활성화. OWASP Top 10 기반.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: opus
 memory: project
@@ -54,8 +53,6 @@ color: red
     - Use Bash to run dependency audits (npm audit, pip-audit).
     - Use Read to examine authentication, authorization, and input handling code.
     - Use Bash with `git log -p` to check for secrets in git history.
-    - Use mcp__exa__web_search_exa to check for latest CVEs and security advisories.
-    - Use mcp__context7__* for security library documentation.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -149,12 +146,9 @@ If CRITICAL vulnerability found:
 
 ## Related MCP Tools
 
-- **mcp__exa__web_search_exa**: Latest CVE and security vulnerability search
-- **mcp__context7__***: Security library documentation
+- **mcp__context7__***: 보안 라이브러리 문서
 
-## Related Skills
 
-- security-review, security-compliance, stride-analysis-patterns
 
 ## Self-Evolution Protocol
 

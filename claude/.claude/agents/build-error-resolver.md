@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: build-error-resolver
-description: Build and TypeScript error resolution specialist. Use PROACTIVELY when build fails or type errors occur. Fixes build/type errors only with minimal diffs, no architectural edits. Focuses on getting the build green quickly.
+description: 빌드/타입 에러 해결 전문. 빌드 실패나 타입 에러 발생 시 사전 활성화. 최소 변경으로 빌드 통과가 목표.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
 memory: project
@@ -115,8 +114,5 @@ color: cyan
 
 ## Related MCP Tools
 
-- **mcp__context7__***: Framework/library API change references
+- **mcp__context7__***: 프레임워크/라이브러리 API 변경 참조
 
-## Related Skills
-
-- build-fix, fix, systematic-debugging

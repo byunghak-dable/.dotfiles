@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: code-reviewer
-description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code. MUST BE USED for all code changes.
+description: 코드 리뷰 전문. 품질, 보안, 유지보수성을 체계적으로 검토. 코드 수정 직후 사전 활성화.
 tools: ["Read", "Grep", "Glob", "Bash"]
 model: opus
 memory: project
@@ -124,11 +123,9 @@ color: blue
 
 ## Related MCP Tools
 
-- **mcp__context7__***: Coding standards and framework best practices
+- **mcp__context7__***: 코딩 표준 및 프레임워크 best practices
 
-## Related Skills
 
-- code-review, coding-standards, frontend-code-review
 
 ## Self-Evolution Protocol
 

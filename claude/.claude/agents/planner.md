@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: planner
-description: Expert planning specialist for complex features and refactoring. Use PROACTIVELY when users request feature implementation, architectural changes, or complex refactoring. Automatically activated for planning tasks.
+description: 작업 계획 수립 전문. 복잡한 기능 구현, 아키텍처 변경, 리팩토링 시 자동 활성화.
 tools: ["Read", "Grep", "Glob"]
 model: opus
 memory: project
@@ -50,7 +49,6 @@ color: blue
   <Tool_Usage>
     - Use AskUserQuestion for all preference/priority questions (provides clickable options).
     - Spawn explore agent (model=haiku) for codebase context questions.
-    - Use mcp__sequential-thinking__sequentialthinking for complex multi-step reasoning during plan creation.
     - Use mcp__context7__* for latest library/framework documentation when plan involves specific technologies.
   </Tool_Usage>
 
@@ -114,12 +112,9 @@ color: blue
 
 ## Related MCP Tools
 
-- **mcp__sequential-thinking__sequentialthinking**: Complex plan decomposition
-- **mcp__context7__***: Latest library/framework documentation
+- **mcp__context7__***: 프레임워크/라이브러리 최신 문서
 
-## Related Skills
 
-- plan, writing-plans, executing-plans, brainstorming, backend-patterns, frontend-patterns
 
 ## Self-Evolution Protocol
 

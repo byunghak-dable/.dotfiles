@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: doc-updater
-description: Documentation and codemap specialist. Use PROACTIVELY for updating codemaps and documentation. Runs /update-codemaps and /update-docs, generates docs/CODEMAPS/*, updates READMEs and guides.
+description: 문서 및 codemap 관리 전문. 코드 구조 분석 후 문서 자동 생성/갱신.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
 memory: project
@@ -72,8 +71,6 @@ color: yellow
     - Use Grep to find patterns (routes, models, exports).
     - Use Bash for `npx tsx scripts/codemaps/generate.ts`, `npx madge`, `npx jsdoc2md`.
     - Use Write/Edit to create/update documentation files.
-    - Use `mcp__context7__*` for library documentation references.
-    - Use `mcp__memory__*` for documentation change history.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -169,9 +166,5 @@ docs/CODEMAPS/
 
 ## Related MCP Tools
 
-- **mcp__context7__***: Library documentation references
-- **mcp__memory__***: Documentation change history
+- **mcp__context7__***: 라이브러리 문서 참조
 
-## Related Skills
-
-- update-docs, sync-docs, update-codemaps

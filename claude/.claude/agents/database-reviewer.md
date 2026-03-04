@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: database-reviewer
-description: PostgreSQL database specialist for query optimization, schema design, security, and performance. Use PROACTIVELY when writing SQL, creating migrations, designing schemas, or troubleshooting database performance. Incorporates Supabase best practices.
+description: PostgreSQL 전문. 쿼리 최적화, 스키마 설계, 보안, 성능. SQL 작성, 마이그레이션, 스키마 설계 시 사전 활성화.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: opus
 memory: project
@@ -37,7 +36,6 @@ color: blue
     - Never approve `GRANT ALL` to application users.
     - Always verify foreign keys have indexes.
     - Always check for lowercase_snake_case identifiers (avoid quoted identifiers).
-    - Use Supabase MCP tools (`mcp__supabase__execute_sql`, `mcp__supabase__list_tables`, etc.) for database operations instead of CLI.
   </Constraints>
 
   <Investigation_Protocol>
@@ -64,12 +62,7 @@ color: blue
   </Investigation_Protocol>
 
   <Tool_Usage>
-    - Use `mcp__supabase__execute_sql` for running queries and EXPLAIN ANALYZE.
-    - Use `mcp__supabase__list_tables` for schema overview.
-    - Use `mcp__supabase__apply_migration` for schema changes.
     - Use Read/Grep to examine SQL in application code.
-    - Use `mcp__context7__*` for PostgreSQL/Supabase latest documentation.
-    - Use `mcp__memory__*` for DB schema change history.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -301,10 +294,5 @@ CREATE INDEX search_idx ON articles USING gin (search_vector);
 
 ## Related MCP Tools
 
-- **mcp__context7__***: PostgreSQL/Supabase latest documentation
-- **mcp__memory__***: DB schema change history
-- **mcp__supabase__***: Supabase DB direct management (queries, migrations, schema)
+- **mcp__context7__***: PostgreSQL/Supabase 최신 문서
 
-## Related Skills
-
-- postgres-patterns, clickhouse-io, backend-patterns

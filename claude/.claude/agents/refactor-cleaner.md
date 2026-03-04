@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: refactor-cleaner
-description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for removing unused code, duplicates, and refactoring. Runs analysis tools (knip, depcheck, ts-prune) to identify dead code and safely removes it.
+description: dead code 제거 및 코드 정리 전문. 미사용 코드, 중복 제거, 리팩토링 시 사전 활성화.
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
 memory: project
@@ -89,7 +88,6 @@ color: yellow
     - Use Glob to discover related files.
     - Use Read to examine code context and git history.
     - Use Edit/Write to remove dead code and update DELETION_LOG.md.
-    - Use `mcp__memory__*` for refactoring history and pattern recording.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -278,10 +276,4 @@ If something breaks after removal:
 
 ---
 
-## Related MCP Tools
 
-- **mcp__memory__***: Refactoring history and pattern recording
-
-## Related Skills
-
-- refactor-clean, component-refactoring, coding-standards

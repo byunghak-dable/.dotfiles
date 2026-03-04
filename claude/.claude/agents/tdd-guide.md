@@ -1,7 +1,6 @@
-# Part of Claude Forge — github.com/sangrokjung/claude-forge
 ---
 name: tdd-guide
-description: Test-Driven Development specialist enforcing write-tests-first methodology. Use PROACTIVELY when writing new features, fixing bugs, or refactoring code. Ensures 80%+ test coverage.
+description: TDD 전문. 테스트 먼저 작성하는 Red-Green-Refactor 사이클 가이드. 80%+ 커버리지 보장.
 tools: ["Read", "Write", "Edit", "Bash", "Grep"]
 model: opus
 memory: project
@@ -56,8 +55,6 @@ color: cyan
     - Use Edit to fix existing tests or add test cases.
     - Use Bash to run test suites (npm test, npm run test:coverage).
     - Use Grep to find untested code paths and existing test patterns.
-    - Use mcp__context7__* for latest test framework API references.
-    - Use mcp__playwright__* for E2E test browser automation.
   </Tool_Usage>
 
   <Execution_Policy>
@@ -165,12 +162,8 @@ color: cyan
 
 ## Related MCP Tools
 
-- **mcp__context7__***: Test framework API references (Jest, Vitest, Playwright)
-- **mcp__playwright__***: E2E test browser automation
+- **mcp__context7__***: 테스트 프레임워크 API 참조 (Jest, Vitest, Playwright)
 
-## Related Skills
-
-- tdd, tdd-workflow, test-driven-development, frontend-testing, e2e, test-coverage
 
 ## Self-Evolution Protocol
 
