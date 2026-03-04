@@ -22,5 +22,8 @@ karabiner/**/automatic_backups/*
 
 lazygit/**/state.yml
 
+# 설계 문서 (로컬 참고용)
+docs/plans/
+
 # dotfiles repo 자체의 claude 프로젝트 설정 (commit convention 등)
 /.claude
