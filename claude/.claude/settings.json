@@ -99,11 +99,6 @@
             "type": "command",
             "command": "~/.claude/hooks/remote-command-guard.sh",
             "timeout": 5000
-          },
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/check-readme-before-push.sh",
-            "timeout": 10000
           }
         ]
       }

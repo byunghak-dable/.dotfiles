@@ -49,22 +49,40 @@ git diff --name-only origin/HEAD..HEAD
    - **그대로 진행** — 이슈를 무시하고 push합니다
 6. 이슈 없으면 Step 2로 진행
 
-### Step 2: Push
+### Step 2: README 검토
+
+변경된 코드 파일 근처에 README.md가 존재하는 경우, 업데이트 필요 여부를 검토합니다.
+
+**통과 조건 (하나라도 해당하면 skip):**
+
+- 의미 있는 코드 변경 없음 (테스트, 설정, lock, 문서만 변경)
+- README.md가 이미 변경에 포함
+- 변경 파일 근처에 README.md가 존재하지 않음
+
+**검토 절차:**
+
+1. 변경 코드 파일에서 가장 가까운 상위 디렉토리의 README.md를 탐색
+2. 해당 README를 읽고 변경 내용과 비교하여 업데이트 필요 여부 판단
+3. 업데이트 필요 시 AskUserQuestion으로 선택지 제공:
+   - **수정** — README를 업데이트한 뒤 진행합니다
+   - **그대로 진행** — README 업데이트 없이 push합니다
+
+### Step 3: Push
 
 ```bash
 git push -u origin <branch>
 ```
 
-### Step 3: PR 존재 여부 확인
+### Step 4: PR 존재 여부 확인
 
 ```bash
 gh pr view --json number,title,body,url,assignees,labels
 ```
 
-- PR이 존재하면 → **Step 4a** (업데이트)
-- PR이 없으면 → **Step 4b** (신규 생성)
+- PR이 존재하면 → **Step 5a** (업데이트)
+- PR이 없으면 → **Step 5b** (신규 생성)
 
-### Step 4a: PR 업데이트 (기존 PR이 있는 경우)
+### Step 5a: PR 업데이트 (기존 PR이 있는 경우)
 
 **먼저 body 업데이트 필요 여부를 판단:**
 
@@ -84,7 +102,7 @@ gh pr view --json number,title,body,url,assignees,labels
    - 기존 PR에 label이 비어있으면 → **Assignee/Label 자동 추론** 수행
    - 이미 설정되어 있으면 유지
 
-### Step 4b: PR 신규 생성 (기존 PR이 없는 경우)
+### Step 5b: PR 신규 생성 (기존 PR이 없는 경우)
 
 **Assignee/Label 자동 추론**을 먼저 수행한 뒤 PR을 생성합니다.
 
