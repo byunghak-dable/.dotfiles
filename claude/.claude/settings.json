@@ -26,7 +26,6 @@
       "TaskStop(*)",
       "EnterPlanMode(*)",
       "ExitPlanMode(*)",
-      "AskUserQuestion(*)",
       "ListMcpResourcesTool(*)",
       "ReadMcpResourceTool(*)",
       "mcp__plugin_serena_serena__*",
