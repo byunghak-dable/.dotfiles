@@ -151,7 +151,6 @@
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
-    "hookify@claude-plugins-official": true,
     "Notion@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
     "serena@claude-plugins-official": true,
