@@ -10,50 +10,11 @@ info()  { echo "\033[34m-->\033[0m $*" }
 ok()    { echo "\033[32m✓\033[0m $*" }
 title() { echo "\n\033[1m==> $*\033[0m" }
 
-# ─── macOS 전용 ───────────────────────────────────────────
+# ─── OS별 패키지 설치 ─────────────────────────────────────
 if [[ "$OS" == "Darwin" ]]; then
-  title "Xcode Command Line Tools"
-  if ! xcode-select -p &>/dev/null; then
-    info "설치 중..."
-    xcode-select --install
-    # 설치 완료 대기
-    until xcode-select -p &>/dev/null; do sleep 5; done
-  else
-    ok "이미 설치됨"
-  fi
-
-  title "Homebrew"
-  if ! command -v brew &>/dev/null; then
-    info "설치 중..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  else
-    ok "이미 설치됨"
-  fi
-
-  title "Brew 패키지 (Brewfile)"
-  brew bundle --file="$DOTFILES/Brewfile"
-  ok "완료"
-fi
-
-# ─── Linux 전용 ───────────────────────────────────────────
-if [[ "$OS" == "Linux" ]]; then
-  title "시스템 패키지"
-  if command -v apt &>/dev/null; then
-    MISSING=()
-    for pkg in git zsh tmux stow fzf; do
-      dpkg -s "$pkg" &>/dev/null || MISSING+=("$pkg")
-    done
-    if [[ ${#MISSING[@]} -gt 0 ]]; then
-      sudo apt update && sudo apt install -y "${MISSING[@]}"
-    else
-      ok "이미 모두 설치됨"
-    fi
-  elif command -v pacman &>/dev/null; then
-    pacman -Q git zsh tmux stow fzf &>/dev/null \
-      || sudo pacman -Sy --noconfirm git zsh tmux stow fzf
-  fi
-  ok "완료"
+  source "$DOTFILES/setup-macos.sh"
+elif [[ "$OS" == "Linux" ]]; then
+  source "$DOTFILES/setup-linux.sh"
 fi
 
 # ─── Dotfiles stow ────────────────────────────────────────
@@ -104,7 +65,6 @@ fi
 # obsidian-cli 기본 vault 등록 (미등록 시에만)
 if command -v obsidian-cli &>/dev/null; then
   if [[ "$(obsidian-cli print-default 2>/dev/null)" != *"second-brain"* ]]; then
-    # Obsidian 앱에서 vault가 미등록된 경우 실패할 수 있으므로 skip
     if obsidian-cli set-default second-brain 2>/dev/null; then
       ok "obsidian-cli 기본 vault 설정 완료"
     else
