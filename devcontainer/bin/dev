@@ -1,0 +1,153 @@
+#!/bin/bash
+# dev - Docker 격리 개발 환경 CLI
+set -e
+
+IMAGE_NAME="dotfiles-dev"
+DEVCONTAINER_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DEFAULT_PROFILE="personal"
+
+# 기본 포트 매핑
+DEFAULT_PORTS=(
+  -p 3000-3010:3000-3010
+  -p 8000-8010:8000-8010
+  -p 5173:5173
+  -p 5432:5432
+)
+
+_usage() {
+  cat <<EOF
+Usage:
+  dev up <project-path> [--profile personal|work] [--port PORT]...
+  dev attach <name>
+  dev down <name>
+  dev list
+  dev rebuild
+EOF
+}
+
+_container_name() {
+  local path="$1"
+  local basename
+  basename=$(basename "$(realpath "$path")")
+  echo "dev-${basename}"
+}
+
+_cmd_up() {
+  local project_path=""
+  local profile="$DEFAULT_PROFILE"
+  local extra_ports=()
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --profile) profile="$2"; shift 2 ;;
+      --port) extra_ports+=(-p "$2:$2"); shift 2 ;;
+      -*) echo "Unknown option: $1" >&2; return 1 ;;
+      *) project_path="$1"; shift ;;
+    esac
+  done
+
+  if [[ -z "$project_path" ]]; then
+    echo "Error: project path required" >&2
+    _usage >&2
+    return 1
+  fi
+
+  local abs_path
+  abs_path="$(realpath "$project_path")"
+  local name
+  name="$(_container_name "$abs_path")"
+  local profile_dir="$DEVCONTAINER_DIR/profiles/$profile"
+
+  if ! docker image inspect "$IMAGE_NAME" &>/dev/null; then
+    echo "Image not found. Building..."
+    _cmd_rebuild
+  fi
+
+  # 이미 실행 중인 컨테이너가 있으면 attach
+  if docker ps --format '{{.Names}}' | grep -q "^${name}$"; then
+    echo "Container '$name' already running. Attaching..."
+    docker exec -it "$name" zsh -c "cd /workspace && exec tmux attach -t dev 2>/dev/null || exec tmux new-session -s dev"
+    return
+  fi
+
+  # 중지된 컨테이너 제거
+  docker rm "$name" 2>/dev/null || true
+
+  local mount_args=(
+    -v "${abs_path}:/workspace:rw"
+    -v "claude-data:/home/dev/.claude"
+    -v "nvim-data:/home/dev/.local/share/nvim"
+  )
+
+  # 프로필 마운트
+  if [[ -f "$profile_dir/gitconfig" ]]; then
+    mount_args+=(-v "${profile_dir}/gitconfig:/home/dev/.gitconfig.profile:ro")
+  fi
+  if [[ -d "$HOME/.ssh" ]]; then
+    mount_args+=(-v "${HOME}/.ssh/id_ed25519:/home/dev/.ssh/id_ed25519:ro")
+    mount_args+=(-v "${HOME}/.ssh/known_hosts:/home/dev/.ssh/known_hosts:ro")
+  fi
+
+  # env 파일
+  local env_args=()
+  if [[ -f "$profile_dir/env" ]]; then
+    env_args+=(--env-file "$profile_dir/env")
+  fi
+
+  echo "Starting '$name' (profile: $profile)..."
+  docker run -it \
+    --name "$name" \
+    --hostname "$name" \
+    -e "PROJECT_DIR=/workspace" \
+    "${env_args[@]}" \
+    "${mount_args[@]}" \
+    "${DEFAULT_PORTS[@]}" \
+    "${extra_ports[@]}" \
+    "$IMAGE_NAME"
+}
+
+_cmd_attach() {
+  local name="${1:?Error: container name required}"
+  [[ "$name" != dev-* ]] && name="dev-${name}"
+
+  if ! docker ps --format '{{.Names}}' | grep -q "^${name}$"; then
+    # 중지된 컨테이너 재시작
+    if docker ps -a --format '{{.Names}}' | grep -q "^${name}$"; then
+      docker start "$name"
+    else
+      echo "Container '$name' not found." >&2
+      return 1
+    fi
+  fi
+
+  docker exec -it "$name" zsh -c "exec tmux attach -t dev 2>/dev/null || exec tmux new-session -s dev"
+}
+
+_cmd_down() {
+  local name="${1:?Error: container name required}"
+  [[ "$name" != dev-* ]] && name="dev-${name}"
+  docker stop "$name" 2>/dev/null && echo "Stopped '$name'"
+}
+
+_cmd_list() {
+  echo "Running:"
+  docker ps --filter "name=dev-" --format "  {{.Names}}\t{{.Status}}\t{{.Ports}}" 2>/dev/null
+  echo ""
+  echo "Stopped:"
+  docker ps -a --filter "name=dev-" --filter "status=exited" --format "  {{.Names}}\t{{.Status}}" 2>/dev/null
+}
+
+_cmd_rebuild() {
+  echo "Building image '$IMAGE_NAME'..."
+  docker build -t "$IMAGE_NAME" "$DEVCONTAINER_DIR"
+  echo "Done."
+}
+
+case "${1:-}" in
+  up)      shift; _cmd_up "$@" ;;
+  attach)  shift; _cmd_attach "$@" ;;
+  down)    shift; _cmd_down "$@" ;;
+  list)    _cmd_list ;;
+  rebuild) _cmd_rebuild ;;
+  *)       _usage ;;
+esac
