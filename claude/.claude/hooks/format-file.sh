@@ -24,6 +24,18 @@ case "$FILE_PATH" in
 *.py)
 	ruff format "$FILE_PATH" 2>/dev/null
 	;;
+*.rs)
+	rustfmt "$FILE_PATH" 2>/dev/null
+	;;
+*.c | *.cpp | *.h | *.hpp)
+	clang-format -i "$FILE_PATH" 2>/dev/null
+	;;
+*.kt | *.kts)
+	ktlint --format "$FILE_PATH" 2>/dev/null
+	;;
+*.toml)
+	taplo fmt "$FILE_PATH" 2>/dev/null
+	;;
 *.sh | *.bash | *.zsh)
 	shfmt -w "$FILE_PATH" 2>/dev/null
 	;;
