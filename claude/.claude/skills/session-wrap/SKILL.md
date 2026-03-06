@@ -3,7 +3,8 @@ name: session-wrap
 description: |
   세션 종료 전 자동 정리 스킬. 4개 병렬 subagent가 문서 업데이트, 반복 패턴, 학습 포인트, 후속 작업을 동시 탐지하고, 1개 검증 subagent가 중복 제거 후 사용자에게 선택지를 제시한다.
   트리거: /session-wrap, 세션 마무리, 세션 정리, 작업 마무리
-argument-hint: '[--dry-run] [--skip-docs] [--skip-learning] [--skip-scout] [--skip-followup]'
+argument-hint: "[--dry-run] [--skip-docs] [--skip-learning] [--skip-scout] [--skip-followup]"
+disable-model-invocation: true
 ---
 
 # /session-wrap 스킬
@@ -38,13 +39,13 @@ argument-hint: '[--dry-run] [--skip-docs] [--skip-learning] [--skip-scout] [--sk
 
 사용자 입력에서 다음을 추출:
 
-| 파라미터 | 기본값 | 설명 |
-|---------|--------|------|
-| --dry-run | false | 탐지만 수행, 실행하지 않음 (Phase 3에서 중단) |
-| --skip-docs | false | doc-updater subagent 생략 |
-| --skip-learning | false | learning-extractor subagent 생략 |
-| --skip-scout | false | automation-scout subagent 생략 |
-| --skip-followup | false | followup-suggester subagent 생략 |
+| 파라미터        | 기본값 | 설명                                          |
+| --------------- | ------ | --------------------------------------------- |
+| --dry-run       | false  | 탐지만 수행, 실행하지 않음 (Phase 3에서 중단) |
+| --skip-docs     | false  | doc-updater subagent 생략                     |
+| --skip-learning | false  | learning-extractor subagent 생략              |
+| --skip-scout    | false  | automation-scout subagent 생략                |
+| --skip-followup | false  | followup-suggester subagent 생략              |
 
 ## Phase 0: 컨텍스트 수집
 
@@ -80,12 +81,12 @@ fi
 
 각 subagent 프롬프트는 `references/` 디렉토리에 위치:
 
-| Subagent | 프롬프트 파일 | 출력 파일 |
-|----------|-------------|----------|
-| doc-updater | `references/prompt-doc-updater.md` | `/tmp/session-wrap/results/doc-updates.json` |
-| automation-scout | `references/prompt-automation-scout.md` | `/tmp/session-wrap/results/automation-patterns.json` |
-| learning-extractor | `references/prompt-learning-extractor.md` | `/tmp/session-wrap/results/learning-points.json` |
-| followup-suggester | `references/prompt-followup-suggester.md` | `/tmp/session-wrap/results/followup-tasks.json` |
+| Subagent           | 프롬프트 파일                             | 출력 파일                                            |
+| ------------------ | ----------------------------------------- | ---------------------------------------------------- |
+| doc-updater        | `references/prompt-doc-updater.md`        | `/tmp/session-wrap/results/doc-updates.json`         |
+| automation-scout   | `references/prompt-automation-scout.md`   | `/tmp/session-wrap/results/automation-patterns.json` |
+| learning-extractor | `references/prompt-learning-extractor.md` | `/tmp/session-wrap/results/learning-points.json`     |
+| followup-suggester | `references/prompt-followup-suggester.md` | `/tmp/session-wrap/results/followup-tasks.json`      |
 
 ### Subagent 실행 패턴
 
@@ -130,6 +131,7 @@ for agent in active_agents:
 ```
 
 카테고리 분류 기준:
+
 - **auto**: 사용자 확인 없이 자동 실행 가능 (문서 타임스탬프 갱신 등)
 - **user**: 사용자 선택이 필요 (스킬 생성, 코드 수정 등)
 - **info**: 정보 제공만 (학습 포인트, 통계 등)
@@ -141,6 +143,7 @@ Phase 1의 모든 결과를 수집하여 duplicate-checker subagent에 전달한
 프롬프트: `references/prompt-duplicate-checker.md`
 
 역할:
+
 1. 4개 subagent 결과를 병합
 2. 의미적으로 중복되는 항목 제거 (더 구체적인 항목 유지)
 3. 최종 카테고리 재분류 (auto/user/info)
@@ -184,12 +187,12 @@ AskUserQuestion으로 사용자 입력을 받는다.
 
 사용자가 선택한 항목을 실행한다:
 
-| 카테고리 | 실행 방식 |
-|---------|----------|
-| docs 업데이트 | Edit/Write로 직접 수정 |
-| scout 스킬 후보 | `/tmp/session-wrap/skill-candidates.md`에 기록 |
+| 카테고리          | 실행 방식                                                 |
+| ----------------- | --------------------------------------------------------- |
+| docs 업데이트     | Edit/Write로 직접 수정                                    |
+| scout 스킬 후보   | `/tmp/session-wrap/skill-candidates.md`에 기록            |
 | learning instinct | `~/.claude/homunculus/instincts/personal/`에 MD 파일 생성 |
-| followup 작업 | `/tmp/session-wrap/session-wrap-followups.md`에 기록 |
+| followup 작업     | `/tmp/session-wrap/session-wrap-followups.md`에 기록      |
 
 ## Phase 5: 리포트 출력
 
@@ -214,26 +217,27 @@ AskUserQuestion으로 사용자 입력을 받는다.
 후속 작업 파일(`session-wrap-followups.md`)은 다음 세션 시작 시 `/sync`로 로드할 수 있다.
 
 ### 권장 다음 단계
+
 - `/sync-docs` - 세션 중 변경된 문서를 프로젝트에 동기화
 - `/sync` - git pull + sync-docs 한 번에 실행 (다음 세션 시작 시)
 
 ## 에러 처리
 
-| 상황 | 대응 |
-|------|------|
-| git repo 아님 | git 관련 컨텍스트 생략, 나머지 진행 |
-| observations.jsonl 없음 | 관찰 데이터 없이 진행, 경고 표시 |
-| subagent 실패 (일부) | 실패 subagent 결과 생략, 나머지로 진행 |
-| 결과가 0건 | "정리할 항목이 없습니다" 출력 |
-| /tmp 쓰기 불가 | 에러 메시지 출력 후 중단 |
+| 상황                    | 대응                                   |
+| ----------------------- | -------------------------------------- |
+| git repo 아님           | git 관련 컨텍스트 생략, 나머지 진행    |
+| observations.jsonl 없음 | 관찰 데이터 없이 진행, 경고 표시       |
+| subagent 실패 (일부)    | 실패 subagent 결과 생략, 나머지로 진행 |
+| 결과가 0건              | "정리할 항목이 없습니다" 출력          |
+| /tmp 쓰기 불가          | 에러 메시지 출력 후 중단               |
 
 ## 관련 파일
 
-| 파일 | 용도 |
-|------|------|
-| `references/prompt-doc-updater.md` | doc-updater subagent 프롬프트 |
-| `references/prompt-automation-scout.md` | automation-scout subagent 프롬프트 |
+| 파일                                      | 용도                                 |
+| ----------------------------------------- | ------------------------------------ |
+| `references/prompt-doc-updater.md`        | doc-updater subagent 프롬프트        |
+| `references/prompt-automation-scout.md`   | automation-scout subagent 프롬프트   |
 | `references/prompt-learning-extractor.md` | learning-extractor subagent 프롬프트 |
 | `references/prompt-followup-suggester.md` | followup-suggester subagent 프롬프트 |
-| `references/prompt-duplicate-checker.md` | duplicate-checker subagent 프롬프트 |
-| `references/output-schema.md` | 출력 JSON 스키마 상세 |
+| `references/prompt-duplicate-checker.md`  | duplicate-checker subagent 프롬프트  |
+| `references/output-schema.md`             | 출력 JSON 스키마 상세                |

@@ -1,5 +1,6 @@
 ---
 name: continuous-learning-v2
+user-invocable: false
 description: Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them into skills/commands/agents.
 version: 2.0.0
 ---
@@ -10,14 +11,14 @@ An advanced learning system that turns your Claude Code sessions into reusable k
 
 ## What's New in v2
 
-| Feature | v1 | v2 |
-|---------|----|----|
-| Observation | Stop hook (session end) | PreToolUse/PostToolUse (100% reliable) |
-| Analysis | Main context | Background agent (Haiku) |
-| Granularity | Full skills | Atomic "instincts" |
-| Confidence | None | 0.3-0.9 weighted |
-| Evolution | Direct to skill | Instincts → cluster → skill/command/agent |
-| Sharing | None | Export/import instincts |
+| Feature     | v1                      | v2                                        |
+| ----------- | ----------------------- | ----------------------------------------- |
+| Observation | Stop hook (session end) | PreToolUse/PostToolUse (100% reliable)    |
+| Analysis    | Main context            | Background agent (Haiku)                  |
+| Granularity | Full skills             | Atomic "instincts"                        |
+| Confidence  | None                    | 0.3-0.9 weighted                          |
+| Evolution   | Direct to skill         | Instincts → cluster → skill/command/agent |
+| Sharing     | None                    | Export/import instincts                   |
 
 ## The Instinct Model
 
@@ -43,6 +44,7 @@ Use functional patterns over classes when appropriate.
 ```
 
 **Properties:**
+
 - **Atomic** — one trigger, one action
 - **Confidence-weighted** — 0.3 = tentative, 0.9 = near certain
 - **Domain-tagged** — code-style, testing, git, debugging, workflow, etc.
@@ -97,20 +99,28 @@ Add to your `~/.claude/settings.json`:
 ```json
 {
   "hooks": {
-    "PreToolUse": [{
-      "matcher": "*",
-      "hooks": [{
-        "type": "command",
-        "command": "~/.claude/skills/continuous-learning-v2/hooks/observe.sh pre"
-      }]
-    }],
-    "PostToolUse": [{
-      "matcher": "*",
-      "hooks": [{
-        "type": "command",
-        "command": "~/.claude/skills/continuous-learning-v2/hooks/observe.sh post"
-      }]
-    }]
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/skills/continuous-learning-v2/hooks/observe.sh pre"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/skills/continuous-learning-v2/hooks/observe.sh post"
+          }
+        ]
+      }
+    ]
   }
 }
 ```
@@ -133,12 +143,12 @@ The observer can run in the background analyzing observations:
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `/instinct-status` | Show all learned instincts with confidence |
-| `/evolve` | Cluster related instincts into skills/commands |
-| `/instinct-export` | Export instincts for sharing |
-| `/instinct-import <file>` | Import instincts from others |
+| Command                   | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| `/instinct-status`        | Show all learned instincts with confidence     |
+| `/evolve`                 | Cluster related instincts into skills/commands |
+| `/instinct-export`        | Export instincts for sharing                   |
+| `/instinct-import <file>` | Import instincts from others                   |
 
 ## Configuration
 
@@ -197,6 +207,7 @@ Edit `config.json`:
 ## Integration with Skill Creator
 
 When you use the [Skill Creator GitHub App](https://skill-creator.app), it now generates **both**:
+
 - Traditional SKILL.md files (for backward compatibility)
 - Instinct collections (for v2 learning system)
 
@@ -206,19 +217,21 @@ Instincts from repo analysis have `source: "repo-analysis"` and include the sour
 
 Confidence evolves over time:
 
-| Score | Meaning | Behavior |
-|-------|---------|----------|
-| 0.3 | Tentative | Suggested but not enforced |
-| 0.5 | Moderate | Applied when relevant |
-| 0.7 | Strong | Auto-approved for application |
-| 0.9 | Near-certain | Core behavior |
+| Score | Meaning      | Behavior                      |
+| ----- | ------------ | ----------------------------- |
+| 0.3   | Tentative    | Suggested but not enforced    |
+| 0.5   | Moderate     | Applied when relevant         |
+| 0.7   | Strong       | Auto-approved for application |
+| 0.9   | Near-certain | Core behavior                 |
 
 **Confidence increases** when:
+
 - Pattern is repeatedly observed
 - User doesn't correct the suggested behavior
 - Similar instincts from other sources agree
 
 **Confidence decreases** when:
+
 - User explicitly corrects the behavior
 - Pattern isn't observed for extended periods
 - Contradicting evidence appears
@@ -228,6 +241,7 @@ Confidence evolves over time:
 > "v1 relied on skills to observe. Skills are probabilistic—they fire ~50-80% of the time based on Claude's judgment."
 
 Hooks fire **100% of the time**, deterministically. This means:
+
 - Every tool call is observed
 - No patterns are missed
 - Learning is comprehensive
@@ -235,6 +249,7 @@ Hooks fire **100% of the time**, deterministically. This means:
 ## Backward Compatibility
 
 v2 is fully compatible with v1:
+
 - Existing `~/.claude/skills/learned/` skills still work
 - Stop hook still runs (but now also feeds into v2)
 - Gradual migration path: run both in parallel
@@ -252,23 +267,23 @@ continuous-learning-v2의 instinct 시스템은 에이전트의 Self-Evolution P
 
 ### 관계도
 
-````
+```
 Continuous Learning v2 (세션 관찰 기반)
   └─ observations.jsonl → instincts/personal/ → evolved/
         ↕ 상호 참조
 Agent Self-Evolution (작업 완료 기반)
   └─ 에이전트 작업 결과 → ~/.claude/agent-memory/{agent-name}/
-````
+```
 
 ### 차이점
 
-| 차원 | Continuous Learning v2 | Agent Self-Evolution |
-|------|----------------------|---------------------|
-| 트리거 | 세션 관찰 (hooks) | 에이전트 작업 완료 |
-| 저장소 | `~/.claude/homunculus/instincts/` | `~/.claude/agent-memory/` |
-| 형태 | 원자적 instinct (trigger + action) | Learnings 리스트 (발견/개선) |
-| 대상 | 전체 (범용) | 개별 에이전트 |
-| 자동화 | Hook → Observer → Instinct (자동) | 에이전트 작업 완료 후 자체 기록 |
+| 차원   | Continuous Learning v2             | Agent Self-Evolution            |
+| ------ | ---------------------------------- | ------------------------------- |
+| 트리거 | 세션 관찰 (hooks)                  | 에이전트 작업 완료              |
+| 저장소 | `~/.claude/homunculus/instincts/`  | `~/.claude/agent-memory/`       |
+| 형태   | 원자적 instinct (trigger + action) | Learnings 리스트 (발견/개선)    |
+| 대상   | 전체 (범용)                        | 개별 에이전트                   |
+| 자동화 | Hook → Observer → Instinct (자동)  | 에이전트 작업 완료 후 자체 기록 |
 
 ### 통합 사용 시나리오
 
@@ -285,4 +300,4 @@ Agent Self-Evolution (작업 완료 기반)
 
 ---
 
-*Instinct-based learning: teaching Claude your patterns, one observation at a time.*
+_Instinct-based learning: teaching Claude your patterns, one observation at a time._
