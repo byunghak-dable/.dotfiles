@@ -9,7 +9,7 @@
 - **파일 지정 편집**: 사용자가 특정 파일을 명시한 경우, 해당 파일만 읽고 바로 수정할 것. 관련 없는 파일 탐색 금지
 - **측정/분석 요청 시**: 코드를 수정하거나 최적화하지 말 것. 현재 상태 그대로 관찰하고 결과만 보고할 것
 - **파일 수정 후 Formatter**: PostToolUse hook이 자동 실행. hook이 없는 프로젝트는 설정 파일(Makefile, package.json, pyproject.toml)에서 formatter를 판단하여 수동 실행. 없으면 물어볼 것
-- **Commands 우선**: 재사용 가능한 workflow는 `~/.claude/commands/` command로 작성 (토큰 효율). skill이 아닌 command 형태로 만들 것
+- **Skills 우선**: 재사용 가능한 workflow는 `~/.claude/skills/<name>/SKILL.md` skill로 작성. 명시적 호출용은 `disable-model-invocation: true` 설정
 
 # Communication (커뮤니케이션)
 
