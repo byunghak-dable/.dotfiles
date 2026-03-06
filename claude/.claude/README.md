@@ -73,6 +73,16 @@ Claude Code 채팅에서 `/`로 호출합니다.
 | `/dependency-upgrade` | 메이저 의존성 업그레이드 (호환성 분석, 단계별 롤아웃) |
 | `/checkpoint`         | 작업 상태 저장/복원                                   |
 
+### DB Encryption Workflow
+
+3-Phase 암호화 마이그레이션 자동화. Pattern A (JSON 부분 암호화) / Pattern B (개별 컬럼 전체 암호화) 지원.
+
+| 커맨드              | 설명                                                                    |
+| ------------------- | ----------------------------------------------------------------------- |
+| `/dable-encrypt-prepare`  | Phase 1: JIRA 파싱 → 의존성 탐색 → data-schema DDL PR → db-cipher PR   |
+| `/dable-encrypt-migrate`  | Phase 2: 기존 데이터를 암호화하여 신규 컬럼에 채우는 마이그레이션       |
+| `/dable-encrypt-cleanup`  | Phase 3: 기존 평문 컬럼 참조 제거 + DDL 정리 + JIRA 완료 댓글          |
+
 ### Utility
 
 | 커맨드              | 설명                                      |
