@@ -1,6 +1,5 @@
 ---
 name: refactor-clean
-disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(git:*), Read, Edit, Write, Grep, Glob, Agent
 description: refactor-cleaner 에이전트로 dead code 제거 및 코드 정리
 ---

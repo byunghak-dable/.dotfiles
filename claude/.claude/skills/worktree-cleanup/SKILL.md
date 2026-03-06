@@ -1,6 +1,5 @@
 ---
 name: worktree-cleanup
-disable-model-invocation: true
 allowed-tools: Bash(git:*), Read, Grep
 description: PR 완료 후 Git Worktree 정리 (v6)
 argument-hint: [브랜치명 - 생략시 현재 워크트리]
@@ -20,11 +19,14 @@ pwd
 ### 1단계: 정리 대상 결정
 
 **$ARGUMENTS 있으면:**
+
 - 해당 브랜치의 워크트리 찾기
 
 **$ARGUMENTS 없으면:**
+
 - 현재 디렉토리가 워크트리인지 확인
 - 메인 레포면:
+
   ```
   ❓ 정리할 워크트리를 지정하세요.
 
@@ -33,6 +35,7 @@ pwd
 
   사용법: /worktree-cleanup feature/auth
   ```
+
   → 중단
 
 ### 2단계: PR 상태 확인
@@ -45,6 +48,7 @@ gh pr view --json state,mergedAt 2>/dev/null
 → 정리 진행
 
 **PR이 아직 열려있음:**
+
 ```
 ⚠️ PR이 아직 머지되지 않았습니다.
 
@@ -57,6 +61,7 @@ PR URL: [URL]
 ```
 
 **PR 없음 (gh CLI 없거나 PR 미생성):**
+
 ```
 ⚠️ PR 상태를 확인할 수 없습니다.
 
@@ -71,6 +76,7 @@ PR URL: [URL]
 ### 3단계: 워크트리 정리
 
 **현재 워크트리에서 실행 중이면:**
+
 ```
 ⚠️ 현재 워크트리에서는 정리할 수 없습니다.
 
@@ -78,9 +84,11 @@ PR URL: [URL]
   cd [메인 레포 경로]
   /worktree-cleanup [브랜치명]
 ```
+
 → 중단
 
 **메인 레포에서 실행:**
+
 ```bash
 # 워크트리 제거
 git worktree remove [워크트리 경로]
@@ -97,6 +105,7 @@ git push origin --delete [브랜치명] 2>/dev/null || true
 워크트리 내 `.claude/web-checklist-state.json` 확인:
 
 **파일 있으면:**
+
 - 완료율 읽기
 - 미완료 항목 있으면 경고
 
@@ -105,6 +114,7 @@ git push origin --delete [브랜치명] 2>/dev/null || true
 ```
 
 미완료 항목이 있으면:
+
 ```
 ⚠️ 미완료 체크리스트 항목 [N]개:
   - [ID:N] [text]
@@ -151,6 +161,7 @@ git diff [base]...[branch] --stat | tail -1
 ### 에러 처리
 
 **워크트리에 커밋되지 않은 변경사항:**
+
 ```
 ❌ 커밋되지 않은 변경사항이 있습니다.
 
@@ -162,6 +173,7 @@ git diff [base]...[branch] --stat | tail -1
 ```
 
 **브랜치가 머지되지 않음 (삭제 실패):**
+
 ```
 ⚠️ 브랜치가 머지되지 않아 삭제하지 않았습니다.
 

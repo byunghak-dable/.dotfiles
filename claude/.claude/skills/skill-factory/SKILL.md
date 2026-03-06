@@ -7,7 +7,6 @@ description: >
   "convert to skill", "스킬 팩토리", "자동 스킬 생성".
   Differs from skill-creator (archived) and manage-skills (drift detection):
   this skill actively analyzes sessions, checks for duplicates, and creates skills via Agent Teams.
-disable-model-invocation: true
 argument-hint: "[--dry-run] [--no-team] [--target name] [--scope global|project]"
 ---
 
@@ -16,22 +15,22 @@ argument-hint: "[--dry-run] [--no-team] [--target name] [--scope global|project]
 Automated pipeline: session analysis -> duplicate check -> skill creation.
 Requires: Python 3.8+, bash, git. Agent Teams path requires `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`.
 
-| Existing Skill | Role | skill-factory Difference |
-|----------------|------|--------------------------|
-| skill-creator (archived) | Manual 6-step guide | Automated pipeline |
-| manage-skills | Drift detection (verify-* skills) | Proactive skill generation (manage-skills verifies existing; skill-factory creates new) |
-| continuous-learning | Passive pattern extraction | On-demand + team execution |
+| Existing Skill           | Role                               | skill-factory Difference                                                                |
+| ------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------- |
+| skill-creator (archived) | Manual 6-step guide                | Automated pipeline                                                                      |
+| manage-skills            | Drift detection (verify-\* skills) | Proactive skill generation (manage-skills verifies existing; skill-factory creates new) |
+| continuous-learning      | Passive pattern extraction         | On-demand + team execution                                                              |
 
 ## Parameter Parsing
 
 Parse `$ARGUMENTS` for flags:
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--dry-run` | false | Analyze and report only, no file creation |
-| `--no-team` | false | Run sequentially without Agent Teams |
-| `--target` | (auto) | Specific pattern name to extract |
-| `--scope` | global | `global` (~/. claude/skills/) or `project` (.claude/skills/) |
+| Flag        | Default | Description                                                  |
+| ----------- | ------- | ------------------------------------------------------------ |
+| `--dry-run` | false   | Analyze and report only, no file creation                    |
+| `--no-team` | false   | Run sequentially without Agent Teams                         |
+| `--target`  | (auto)  | Specific pattern name to extract                             |
+| `--scope`   | global  | `global` (~/. claude/skills/) or `project` (.claude/skills/) |
 
 If no arguments, run full auto-detection pipeline.
 
@@ -95,11 +94,13 @@ Wait for user selection before proceeding.
 For each selected pattern, check against existing inventory.
 
 **Step 1: Scan inventory**
+
 ```bash
 bash $HOME/.claude/skills/skill-factory/scripts/scan-inventory.sh --scope all > /tmp/sf-manifest.json
 ```
 
 **Step 2: Score similarity**
+
 ```bash
 python3 $HOME/.claude/skills/skill-factory/scripts/similarity-scorer.py \
   --candidate "<pattern description>" \
@@ -139,6 +140,7 @@ For each CREATE/UPDATE/MERGE decision, design the skill structure.
 ### CREATE Blueprint
 
 Select template type from [references/skill-templates.md](references/skill-templates.md):
+
 - **Workflow** for sequential processes
 - **Task/Tool** for operation collections
 - **Reference** for domain knowledge
@@ -203,9 +205,11 @@ Estimated diff: +60-100 lines in SKILL.md, +1 script
 Two paths based on `--no-team` flag and Agent Teams availability.
 
 Check Agent Teams availability:
+
 ```bash
 [ "${CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS:-0}" = "1" ] && echo "teams" || echo "no-team"
 ```
+
 If `--no-team` is set or env var is missing/0, use Path B automatically.
 
 ### Path A: Agent Teams (default)
@@ -233,6 +237,7 @@ Task -> duri (general-purpose, sonnet, yellow)
 ```
 
 Pipeline:
+
 1. **tami** completes analysis -> reports to lead
 2. Lead confirms with user (Checkpoint 1-2)
 3. **jiwon** creates skill files -> reports to lead
@@ -273,6 +278,7 @@ No files were created. Remove --dry-run to execute.
 After validation passes:
 
 1. **Log creation** - Append to `~/.claude/skill-factory.log`:
+
    ```
    [2026-02-18T14:30:00] CREATED api-load-test (global) from session patterns
    [2026-02-18T14:30:00] MERGED batch-operations into nano-pdf
@@ -315,23 +321,23 @@ Next steps:
 
 ## Error Handling
 
-| Situation | Action |
-|-----------|--------|
-| No git history | Analyze only staged/unstaged changes |
-| No patterns found | "No reusable patterns detected. Try after a more complex session." |
-| scan-inventory.sh fails | Fall back to manual inventory (glob SKILL.md files) |
-| similarity-scorer.py fails | Skip similarity check, default to CREATE |
-| Agent Teams unavailable | Auto-fallback to `--no-team` mode |
-| validate-skill.sh fails | Show errors, let user fix or cancel |
-| User cancels at checkpoint | Abort gracefully, no partial files left |
+| Situation                  | Action                                                             |
+| -------------------------- | ------------------------------------------------------------------ |
+| No git history             | Analyze only staged/unstaged changes                               |
+| No patterns found          | "No reusable patterns detected. Try after a more complex session." |
+| scan-inventory.sh fails    | Fall back to manual inventory (glob SKILL.md files)                |
+| similarity-scorer.py fails | Skip similarity check, default to CREATE                           |
+| Agent Teams unavailable    | Auto-fallback to `--no-team` mode                                  |
+| validate-skill.sh fails    | Show errors, let user fix or cancel                                |
+| User cancels at checkpoint | Abort gracefully, no partial files left                            |
 
 ## Related Files
 
-| File | Purpose | When to Read |
-|------|---------|--------------|
-| [scripts/scan-inventory.sh](scripts/scan-inventory.sh) | Scan all skills/commands/agents to JSON | Phase 2 - always |
-| [scripts/similarity-scorer.py](scripts/similarity-scorer.py) | 4-dim similarity scoring | Phase 2 - per pattern |
-| [scripts/validate-skill.sh](scripts/validate-skill.sh) | Validate created skill structure | Phase 5 - after creation |
-| [references/decision-tree.md](references/decision-tree.md) | CREATE/UPDATE/MERGE/SKIP logic | Phase 2 - for decisions |
-| [references/team-composition.md](references/team-composition.md) | tami/jiwon/duri team setup | Phase 4 - Agent Teams path |
-| [references/skill-templates.md](references/skill-templates.md) | Skill type templates | Phase 3 - blueprint design |
+| File                                                             | Purpose                                 | When to Read               |
+| ---------------------------------------------------------------- | --------------------------------------- | -------------------------- |
+| [scripts/scan-inventory.sh](scripts/scan-inventory.sh)           | Scan all skills/commands/agents to JSON | Phase 2 - always           |
+| [scripts/similarity-scorer.py](scripts/similarity-scorer.py)     | 4-dim similarity scoring                | Phase 2 - per pattern      |
+| [scripts/validate-skill.sh](scripts/validate-skill.sh)           | Validate created skill structure        | Phase 5 - after creation   |
+| [references/decision-tree.md](references/decision-tree.md)       | CREATE/UPDATE/MERGE/SKIP logic          | Phase 2 - for decisions    |
+| [references/team-composition.md](references/team-composition.md) | tami/jiwon/duri team setup              | Phase 4 - Agent Teams path |
+| [references/skill-templates.md](references/skill-templates.md)   | Skill type templates                    | Phase 3 - blueprint design |

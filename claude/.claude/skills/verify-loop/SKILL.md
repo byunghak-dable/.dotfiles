@@ -1,6 +1,5 @@
 ---
 name: verify-loop
-disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(python:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Bash(git:*), Bash(rm:*), Read, Edit, Grep, Glob, Agent
 description: verify-agent 서브에이전트로 fresh-context 자동 검증
 argument-hint: [의도 설명 - handoff.md 없으면 필수] [--max-retries N] [--only build|test|lint]
@@ -33,6 +32,7 @@ This command invokes the **verify-agent** via Agent tool (fresh-context subagent
 - handoff.md 있으면 → handoff.md 기반
 - $ARGUMENTS에 의도 있으면 → $ARGUMENTS 기반
 - 둘 다 없으면 → 안내 후 중단:
+
   ```
   ⚠️ 의도를 알 수 없습니다.
   /verify-loop "변경 의도 설명"으로 재시도하세요.

@@ -1,7 +1,6 @@
 ---
 name: database-review
-disable-model-invocation: true
-allowed-tools: Read, Grep, Glob, Bash(psql:*), Bash(git diff:*), Bash(git log:*)
+allowed-tools: Read, Grep, Glob, Bash(psql:*), Bash(git diff:*), Bash(git log:*), Agent
 description: database-reviewer 에이전트로 SQL/스키마/RLS 리뷰
 argument-hint:
   [파일 경로 또는 --schema|--query|--security - 생략 시 변경된 SQL 파일 대상]
@@ -11,24 +10,7 @@ argument-hint:
 
 This command invokes the **database-reviewer** agent for SQL and schema audits.
 
-## 사용 시점
-
-- SQL 쿼리 작성/수정 후
-- 마이그레이션 파일 작성 후
-- 스키마 설계 검토
-- 성능 이슈 진단
-
-## 작동 방식
-
-database-reviewer agent가 다음을 수행한다:
-
-1. **범위 결정**: $ARGUMENTS 또는 `git diff`에서 SQL 관련 파일 식별
-2. **쿼리 리뷰**: WHERE/JOIN 인덱스 확인, N+1 패턴 탐지, EXPLAIN ANALYZE
-3. **스키마 리뷰**: 데이터 타입, 제약조건, 네이밍 컨벤션
-4. **보안 리뷰**: RLS 정책, 권한 설정, `(SELECT auth.uid())` 패턴
-5. **결과 출력**: severity별 이슈 + SQL 수정 예시
-
-## 리뷰 범위
+## Step 1: 범위 결정
 
 | $ARGUMENTS   | 동작                              |
 | :----------- | :-------------------------------- |
@@ -38,28 +20,40 @@ database-reviewer agent가 다음을 수행한다:
 | `--security` | RLS/권한만 리뷰                   |
 | 생략         | `git diff`에서 SQL 변경 파일 대상 |
 
-## 핵심 체크리스트 (Never Approve)
+1. $ARGUMENTS 파싱하여 리뷰 범위 결정
+2. `git diff --name-only` — SQL 관련 변경 파일 목록
+3. 프로젝트 타입 감지
 
-- `int` for IDs → `bigint` 필수
-- `varchar(255)` without reason → `text` 사용
-- `timestamp` without timezone → `timestamptz` 필수
-- `float` for money → `numeric` 필수
-- RLS policy에서 per-row 함수 호출 → `(SELECT auth.uid())` 패턴
-- `GRANT ALL` to application users → least privilege
+## Step 2: database-reviewer 서브에이전트 호출
 
-## 사용 예시
+Agent tool (subagent_type: general-purpose, model: opus)로 호출:
 
 ```
-/database-review supabase/migrations/20260304_orders.sql
-/database-review --schema
-/database-review --security
-/database-review 결제 테이블의 쿼리 성능이 느린데 원인을 찾아줘
+당신은 database-reviewer 에이전트입니다.
+~/.claude/agents/database-reviewer.md의 지침을 따르세요.
+
+리뷰 범위: [Step 1에서 결정된 범위]
+변경 파일: [git diff 결과 또는 지정 파일]
+
+수행할 검토:
+- 쿼리 리뷰: WHERE/JOIN 인덱스 확인, N+1 패턴 탐지, EXPLAIN ANALYZE
+- 스키마 리뷰: 데이터 타입, 제약조건, 네이밍 컨벤션
+- 보안 리뷰: RLS 정책, 권한 설정, (SELECT auth.uid()) 패턴
+
+Never Approve 체크리스트:
+- int for IDs → bigint 필수
+- varchar(255) without reason → text 사용
+- timestamp without timezone → timestamptz 필수
+- float for money → numeric 필수
+- RLS per-row 함수 호출 → (SELECT auth.uid()) 패턴
+- GRANT ALL → least privilege
+
+severity별 이슈 + SQL 수정 예시 포함하여 보고
 ```
 
-## Related Agent
+## Step 3: 결과 출력
 
-This command invokes the `database-reviewer` agent located at:
-`~/.claude/agents/database-reviewer.md`
+서브에이전트의 DB 리뷰 보고서를 사용자에게 전달한다.
 
 ---
 

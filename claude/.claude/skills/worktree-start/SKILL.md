@@ -1,6 +1,5 @@
 ---
 name: worktree-start
-disable-model-invocation: true
 allowed-tools: Bash(git:*), Read, Grep
 description: 병렬 개발용 Git Worktree 생성 + 도메인 템플릿 (v6)
 argument-hint: [브랜치명] [--type feature|bugfix|refactor]
@@ -17,10 +16,12 @@ git branch -a
 ```
 
 **git 레포 아니면:**
+
 ```
 ❌ git 레포가 아닙니다.
 git init 먼저 실행하세요.
 ```
+
 → 중단
 
 ### 0.5단계: 충돌 방지 확인
@@ -34,6 +35,7 @@ git ls-files | grep "^\.claude/"
 ```
 
 **Claude Code 파일이 .gitignore에 없으면:**
+
 ```
 ⚠️ 충돌 방지 설정 필요
 ════════════════════════════════════════
@@ -59,9 +61,11 @@ git ls-files | grep "^\.claude/"
 계속 진행하시겠습니까? [y/N]
 ════════════════════════════════════════
 ```
+
 → 사용자 응답 대기
 
 **Claude Code 파일이 Git에 추적 중이면:**
+
 ```
 ⚠️ Claude Code 파일이 Git에 추적 중입니다
 ════════════════════════════════════════
@@ -77,11 +81,13 @@ git ls-files | grep "^\.claude/"
 계속 진행하시겠습니까? [y/N]
 ════════════════════════════════════════
 ```
+
 → 사용자 응답 대기
 
 ### 1단계: 인자 파싱
 
 **$ARGUMENTS에서 옵션 추출:**
+
 - `--type feature` → 워크플로우 타입: feature (기본값)
 - `--type bugfix` → 워크플로우 타입: bugfix
 - `--type refactor` → 워크플로우 타입: refactor
@@ -90,6 +96,7 @@ git ls-files | grep "^\.claude/"
 **브랜치명 결정:**
 
 **브랜치명 있으면:**
+
 - `feature/`, `fix/`, `refactor/` 접두사 없으면 타입에 따라 자동 추가:
   - `--type feature` (기본) → `feature/` 접두사
   - `--type bugfix` → `fix/` 접두사
@@ -97,6 +104,7 @@ git ls-files | grep "^\.claude/"
 - 예: `auth --type bugfix` → `fix/auth`
 
 **브랜치명 없으면:**
+
 ```
 ❓ 브랜치명을 입력하세요.
 
@@ -105,6 +113,7 @@ git ls-files | grep "^\.claude/"
         /worktree-start fix/login-bug
         /worktree-start refactor/utils --type refactor
 ```
+
 → 중단
 
 ### 2단계: 워크트리 생성
@@ -120,11 +129,13 @@ git show-ref --verify --quiet refs/heads/$BRANCH_NAME
 ```
 
 **브랜치 없으면 (새 기능):**
+
 ```bash
 git worktree add -b $BRANCH_NAME $WORKTREE_DIR
 ```
 
 **브랜치 있으면 (기존 작업 계속):**
+
 ```bash
 git worktree add $WORKTREE_DIR $BRANCH_NAME
 ```
@@ -142,16 +153,16 @@ ls tsconfig.json 2>/dev/null
 
 **도메인 감지 매핑:**
 
-| 감지 파일 | 도메인 | 프레임워크 |
-|-----------|--------|------------|
-| `next.config.*` + `package.json` | Node.js/TypeScript | Next.js |
-| `nuxt.config.*` + `package.json` | Node.js/TypeScript | Nuxt.js |
-| `vite.config.*` + `package.json` | Node.js/TypeScript | Vite (React/Vue) |
-| `package.json` (only) | Node.js | Express/기타 |
-| `pyproject.toml` / `setup.py` | Python | Django/FastAPI/기타 |
-| `go.mod` | Go | Go 서비스 |
-| `Cargo.toml` | Rust | Rust 서비스 |
-| `Makefile` (only) | Generic | Make 프로젝트 |
+| 감지 파일                        | 도메인             | 프레임워크          |
+| -------------------------------- | ------------------ | ------------------- |
+| `next.config.*` + `package.json` | Node.js/TypeScript | Next.js             |
+| `nuxt.config.*` + `package.json` | Node.js/TypeScript | Nuxt.js             |
+| `vite.config.*` + `package.json` | Node.js/TypeScript | Vite (React/Vue)    |
+| `package.json` (only)            | Node.js            | Express/기타        |
+| `pyproject.toml` / `setup.py`    | Python             | Django/FastAPI/기타 |
+| `go.mod`                         | Go                 | Go 서비스           |
+| `Cargo.toml`                     | Rust               | Rust 서비스         |
+| `Makefile` (only)                | Generic            | Make 프로젝트       |
 
 ### 4단계: 완료 안내
 
@@ -181,6 +192,7 @@ ls tsconfig.json 2>/dev/null
 ### 에러 처리
 
 **워크트리 디렉토리 이미 존재:**
+
 ```
 ⚠️ 디렉토리가 이미 존재합니다: [경로]
 
@@ -190,6 +202,7 @@ ls tsconfig.json 2>/dev/null
 ```
 
 **브랜치가 다른 워크트리에서 체크아웃 중:**
+
 ```
 ❌ 브랜치 '[브랜치명]'이 다른 워크트리에서 사용 중입니다.
 
@@ -203,12 +216,12 @@ ls tsconfig.json 2>/dev/null
 
 ## 인자 설명
 
-| 인자 | 설명 |
-|------|------|
-| `[브랜치명]` | 워크트리 브랜치명 (접두사 자동 추가) |
-| `--type feature` | 기능 개발 모드 (기본값) |
-| `--type bugfix` | 버그 수정 모드 (빠른 사이클) |
-| `--type refactor` | 리팩토링 모드 (아키텍처 중심) |
+| 인자              | 설명                                 |
+| ----------------- | ------------------------------------ |
+| `[브랜치명]`      | 워크트리 브랜치명 (접두사 자동 추가) |
+| `--type feature`  | 기능 개발 모드 (기본값)              |
+| `--type bugfix`   | 버그 수정 모드 (빠른 사이클)         |
+| `--type refactor` | 리팩토링 모드 (아키텍처 중심)        |
 
 ## 사용 예시
 

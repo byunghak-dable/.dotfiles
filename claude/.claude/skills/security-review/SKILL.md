@@ -1,7 +1,6 @@
 ---
 name: security-review
-disable-model-invocation: true
-allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(npm audit:*), Bash(npx:*)
+allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*), Bash(npm audit:*), Bash(npx:*), Agent
 description: security-reviewer 에이전트로 보안 취약점 분석 (OWASP Top 10)
 argument-hint: [파일 경로 또는 --full - 생략 시 변경된 파일 대상]
 ---
@@ -10,26 +9,7 @@ argument-hint: [파일 경로 또는 --full - 생략 시 변경된 파일 대상
 
 This command invokes the **security-reviewer** agent for vulnerability detection.
 
-## 사용 시점
-
-- 사용자 입력 처리 코드 작성 후
-- 인증/인가 로직 변경 후
-- API 엔드포인트 추가/수정 후
-- 민감 데이터 처리 코드 작성 후
-- 배포 전 최종 점검
-
-## 작동 방식
-
-security-reviewer agent (opus)가 다음을 수행한다:
-
-1. **범위 결정**: $ARGUMENTS 또는 `git diff`에서 변경 파일 식별
-2. **OWASP Top 10 분석**: Injection, Broken Auth, XSS, SSRF 등
-3. **Secrets 탐지**: 하드코딩된 credentials, API 키, 토큰
-4. **입력 검증 리뷰**: 사용자 입력의 validation/sanitization
-5. **의존성 보안**: `npm audit`, 알려진 취약점
-6. **결과 출력**: severity × exploitability × blast radius 우선순위
-
-## 리뷰 범위
+## Step 1: 범위 결정
 
 | $ARGUMENTS | 동작                          |
 | :--------- | :---------------------------- |
@@ -37,20 +17,34 @@ security-reviewer agent (opus)가 다음을 수행한다:
 | `--full`   | 프로젝트 전체 보안 감사       |
 | 생략       | `git diff`에서 변경 파일 대상 |
 
-## 핵심 체크리스트 (CRITICAL)
+1. $ARGUMENTS 파싱하여 리뷰 범위 결정
+2. `git diff --name-only` — 변경 파일 목록
+3. 프로젝트 타입 감지: `package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`
 
-- SQL/NoSQL injection
-- XSS (reflected, stored, DOM-based)
-- 하드코딩된 secrets
-- 인증 우회 경로
-- Path traversal
-- CSRF 보호 누락
-- 권한 상승 가능성
+## Step 2: security-reviewer 서브에이전트 호출
 
-## Related Agent
+Agent tool (subagent_type: general-purpose, model: opus)로 호출:
 
-This command invokes the `security-reviewer` agent located at:
-`~/.claude/agents/security-reviewer.md`
+```
+당신은 security-reviewer 에이전트입니다.
+~/.claude/agents/security-reviewer.md의 지침을 따르세요.
+
+프로젝트 타입: [감지된 타입]
+리뷰 범위: [Step 1에서 결정된 범위]
+변경 파일: [git diff 결과 또는 지정 파일]
+
+OWASP Top 10 전체 카테고리를 평가하세요:
+- Injection, Broken Auth, XSS, SSRF, Path Traversal, CSRF, 권한 상승
+- 하드코딩된 secrets 탐지 (api_key, password, secret, token)
+- 의존성 보안 감사 (npm audit 등)
+
+우선순위: severity × exploitability × blast radius
+각 발견에: location(file:line), category, severity, remediation(secure code 예시) 포함
+```
+
+## Step 3: 결과 출력
+
+서브에이전트의 보안 리뷰 보고서를 사용자에게 전달한다.
 
 ---
 

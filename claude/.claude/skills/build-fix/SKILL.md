@@ -1,6 +1,5 @@
 ---
 name: build-fix
-disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(yarn:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Bash(git diff:*), Read, Edit, Write, Grep, Glob, Agent
 description: build-error-resolver 에이전트로 빌드 에러 자동 수정
 argument-hint: [빌드 커맨드 - 생략 시 자동 감지]
