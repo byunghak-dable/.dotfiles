@@ -66,5 +66,8 @@ esac
 export FZF_DEFAULT_OPTS="--layout reverse"
 export FZF_DEFAULT_COMMAND='fd --type f'
 
+# --- devcontainer dev CLI ---
+[[ -d $HOME/.dotfiles/devcontainer/bin ]] && export PATH="$HOME/.dotfiles/devcontainer/bin:$PATH"
+
 # --- custom ---
 [[ -n $REPO_PATH ]] && export PYTHONPATH="${REPO_PATH}:$PYTHONPATH"

@@ -96,6 +96,7 @@ alias cl="clear"
 alias tl="tmux clear-history"
 alias g="lazygit"
 alias c="claude"
+alias cr="caffeinate -i claude remote-control"
 
 # confirm before overwriting something
 alias cp="cp -i"
