@@ -1,6 +1,5 @@
 ---
 name: pr-respond
-disable-model-invocation: true
 allowed-tools: Bash(gh api:*), Bash(gh pr view:*), Bash(gh repo view:*), Bash(git log:*), Bash(git diff:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git status:*), Bash(git branch:*), Read, Glob, Grep, Edit
 description: PR 리뷰 코멘트에 대해 순차적으로 반영 여부를 확인하고 답변을 게시
 ---

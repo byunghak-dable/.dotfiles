@@ -1,6 +1,5 @@
 ---
 name: analyze-insights
-disable-model-invocation: true
 allowed-tools: Bash(cat:*), Bash(ls:*), Bash(find:*), Read, Glob, Grep
 description: Insights 분석 결과를 Claude Code 설정과 대조하여 실제 gap을 찾아 보고
 ---

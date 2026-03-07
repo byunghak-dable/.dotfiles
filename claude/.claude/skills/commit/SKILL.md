@@ -1,6 +1,5 @@
 ---
 name: commit
-disable-model-invocation: true
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*), Bash(mkdir:*)
 description: Create a git commit following team conventions
 ---
@@ -79,6 +78,7 @@ feature: add feature and fix bug  ← 두 가지 관심사 혼재
 
 - 관심사가 하나인 경우 → 단일 커밋
 - 관심사가 여러 개인 경우 → 의존성 순서대로 별도 커밋:
+
   ```
   기반 타입/에러 정의 → 하위 레이어 구현 → 상위 레이어 핸들링 → 테스트
   ```
