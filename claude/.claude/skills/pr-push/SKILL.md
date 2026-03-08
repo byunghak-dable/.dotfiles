@@ -186,7 +186,5 @@ EOF
 
 ### 확인 절차
 
-추론 결과를 보여준 후 AskUserQuestion으로 선택지를 제공하세요:
-
-- **이대로 진행** — 추론된 assignee/label로 PR을 생성합니다
-- **변경** — assignee 또는 label을 수정합니다
+- 브랜치 prefix에서 label이 추론되면 → **확인 없이 바로 진행**
+- prefix 매칭 실패 시에만 AskUserQuestion으로 label 선택 요청
