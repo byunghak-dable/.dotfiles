@@ -1,5 +1,5 @@
 ---
-name: jira-summary
+name: dable-jira-summary
 model: sonnet
 disable-model-invocation: true
 allowed-tools: Bash(git log:*), Bash(git diff:*), Bash(git branch:*), Bash(gh repo view:*), Bash(jira issue view:*), Bash(jira issue comment add:*), Read, Glob, Grep

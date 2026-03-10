@@ -1,5 +1,5 @@
 ---
-name: jira-create
+name: dable-jira-create
 model: sonnet
 disable-model-invocation: true
 allowed-tools: Bash(jira issue create:*), Bash(jira me:*), Bash(jira project list:*), Bash(cat > /tmp/jira-*), AskUserQuestion, Read, Glob, Grep
