@@ -3,7 +3,7 @@ name: git-branch
 model: sonnet
 disable-model-invocation: true
 allowed-tools: Bash(git branch:*), Bash(git checkout:*), Bash(git log:*), Bash(git remote:*), Bash(mkdir:*)
-description: Create a git branch following project conventions
+description: 프로젝트 컨벤션에 맞춰 git branch 생성. 기존 브랜치 패턴 자동 감지.
 ---
 
 ## Context

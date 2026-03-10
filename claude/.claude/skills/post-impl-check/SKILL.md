@@ -2,7 +2,7 @@
 name: post-impl-check
 model: opus
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(git:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Read, Grep, Glob, Agent
-description: 구현 후 3개 에이전트 병렬 검증 (코드 리뷰 + 빌드/테스트 + 보안)
+description: 구현 완료 후 코드 품질, 빌드/테스트, 보안 병렬 검증. Use when 기능 구현이 끝나고 커밋 전 종합 점검이 필요할 때.
 argument-hint: [의도 설명 - 생략 시 git diff 기반 추론]
 ---
 

@@ -3,7 +3,7 @@ name: github-pr-review-branch
 model: opus
 disable-model-invocation: true
 allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git rev-parse:*)
-description: Review branch changes before creating a PR
+description: PR 생성 전 브랜치 변경사항 리뷰. 커밋 히스토리, diff 분석 포함.
 ---
 
 ## Context

@@ -2,7 +2,7 @@
 name: plan
 model: opus
 allowed-tools: Read, Grep, Glob
-description: planner 에이전트로 구현 계획 수립
+description: 복잡한 기능 구현, 아키텍처 변경, 리팩토링의 단계별 실행 계획 수립. Use when 3개 이상 파일을 수정하거나 설계 결정이 필요할 때.
 argument-hint: <구현할 기능 또는 작업 설명>
 ---
 

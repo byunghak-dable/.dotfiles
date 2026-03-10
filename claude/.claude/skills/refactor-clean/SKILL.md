@@ -2,7 +2,7 @@
 name: refactor-clean
 model: sonnet
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(git:*), Read, Edit, Write, Grep, Glob, Agent
-description: refactor-cleaner 에이전트로 dead code 제거 및 코드 정리
+description: dead code 제거, 미사용 import/변수 정리, 코드 중복 제거. Use when 코드 정리, 리팩토링, 불필요한 코드 제거가 필요할 때.
 ---
 
 # Refactor Clean

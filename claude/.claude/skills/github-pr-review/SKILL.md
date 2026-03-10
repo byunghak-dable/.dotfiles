@@ -2,7 +2,7 @@
 name: github-pr-review
 model: opus
 allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh pr comment:*), Bash(gh pr review:*), Bash(gh repo view:*), Bash(git log:*), Bash(git blame:*), Read, Glob, Grep, Agent
-description: PR 코드 품질 심층 리뷰 - code-reviewer 에이전트 병렬 호출
+description: GitHub PR 코드 품질 심층 리뷰 (버그, 컨벤션, 보안, 설계). Use when PR 번호를 지정하여 코드 리뷰를 요청할 때.
 ---
 
 ## Context

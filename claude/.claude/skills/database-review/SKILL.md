@@ -2,7 +2,7 @@
 name: database-review
 model: opus
 allowed-tools: Read, Grep, Glob, Bash(psql:*), Bash(git diff:*), Bash(git log:*), Agent
-description: database-reviewer 에이전트로 SQL/스키마/RLS 리뷰
+description: SQL 쿼리 최적화, 스키마 설계, RLS 정책, 마이그레이션 리뷰. Use when DB 관련 코드 작성 또는 변경 시.
 argument-hint:
   [파일 경로 또는 --schema|--query|--security - 생략 시 변경된 SQL 파일 대상]
 ---

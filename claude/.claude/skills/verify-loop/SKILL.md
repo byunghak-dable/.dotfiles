@@ -2,7 +2,7 @@
 name: verify-loop
 model: sonnet
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(python:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Bash(git:*), Bash(rm:*), Read, Edit, Grep, Glob, Agent
-description: verify-agent 서브에이전트로 fresh-context 자동 검증 (verification-engine 통합)
+description: fresh context에서 빌드, 타입 체크, 린트, 테스트를 자동 검증. Use when 구현 완료 후 변경사항이 정상 동작하는지 확인할 때.
 argument-hint: "[의도 설명] [--max-retries N] [--only build|test|lint] [--security] [--coverage]"
 ---
 

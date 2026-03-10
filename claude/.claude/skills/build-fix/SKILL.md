@@ -2,7 +2,7 @@
 name: build-fix
 model: sonnet
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(yarn:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Bash(git diff:*), Read, Edit, Write, Grep, Glob, Agent
-description: build-error-resolver 에이전트로 빌드 에러 자동 수정
+description: 빌드 에러, 타입 에러, 컴파일 실패 자동 수정. Use when 빌드가 깨졌거나 타입 체크 실패 시.
 argument-hint: [빌드 커맨드 - 생략 시 자동 감지]
 ---
 
