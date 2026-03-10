@@ -1,5 +1,6 @@
 ---
 name: large-scale-rename
+model: opus
 description: Use when asked to rename a symbol, type, method, variable, or constant across the entire codebase. Applies when the rename touches more than 2-3 files or crosses layer boundaries. Examples: "tablePath를 tableConfig로 바꿔주세요", "전체적으로 이름 변경이 필요합니다".
 ---
 

@@ -1,8 +1,9 @@
 ---
 name: verify-loop
+model: sonnet
 allowed-tools: Bash(npm:*), Bash(npx:*), Bash(python:*), Bash(go:*), Bash(cargo:*), Bash(make:*), Bash(git:*), Bash(rm:*), Read, Edit, Grep, Glob, Agent
-description: verify-agent 서브에이전트로 fresh-context 자동 검증
-argument-hint: [의도 설명 - handoff.md 없으면 필수] [--max-retries N] [--only build|test|lint]
+description: verify-agent 서브에이전트로 fresh-context 자동 검증 (verification-engine 통합)
+argument-hint: "[의도 설명] [--max-retries N] [--only build|test|lint] [--security] [--coverage]"
 ---
 
 # Verify Loop
@@ -96,3 +97,26 @@ Agent tool (subagent_type: general-purpose, model: sonnet)로 호출:
   - 에러 수동 수정 후 /verify-loop 재실행
   - 아키텍처 문제라면 /architect로 분석
 ```
+
+## 추가 모드 (verification-engine 통합)
+
+### --security 모드
+
+`/verify-loop --security "의도"` — 보안 검증 포함. security-pipeline 스킬과 연동.
+
+### --coverage 모드
+
+`/verify-loop --coverage "의도"` — 테스트 커버리지 분석 포함.
+서브에이전트에 추가 지시: "테스트 커버리지를 측정하고 80% 미만 파일을 보고하세요."
+
+### Fixable Auto-Repair (서브에이전트 내부)
+
+| 유형            | 감지 패턴                | 수정 방법                   |
+| --------------- | ------------------------ | --------------------------- |
+| Missing Import  | `Cannot find module`     | import 문 추가              |
+| Unused Import   | `defined but never used` | import 행 제거              |
+| Lint (auto-fix) | eslint fixable           | `eslint --fix`              |
+| Type Mismatch   | `not assignable`         | 타입 캐스팅/인터페이스 수정 |
+| Formatting      | prettier/gofmt           | 포매터 실행                 |
+
+Non-fixable (로직 오류, 아키텍처 이슈)는 보고만 하고 수정하지 않음.

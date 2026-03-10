@@ -1,5 +1,6 @@
 ---
 name: skill-factory
+model: opus
 description: >
   Analyze session work and automatically convert reusable patterns into Claude Code skills.
   Use when: "세션을 스킬로", "스킬 만들어", "이거 스킬로", "skill factory",

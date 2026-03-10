@@ -1,5 +1,6 @@
 ---
 name: plan
+model: opus
 allowed-tools: Read, Grep, Glob
 description: planner 에이전트로 구현 계획 수립
 argument-hint: <구현할 기능 또는 작업 설명>

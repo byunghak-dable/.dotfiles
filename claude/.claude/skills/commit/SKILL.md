@@ -1,5 +1,6 @@
 ---
 name: commit
+model: sonnet
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git commit:*), Bash(mkdir:*)
 description: Create a git commit following team conventions
 ---

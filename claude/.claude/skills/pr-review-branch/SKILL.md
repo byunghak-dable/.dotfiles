@@ -1,5 +1,6 @@
 ---
 name: pr-review-branch
+model: opus
 disable-model-invocation: true
 allowed-tools: Read, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(git rev-parse:*)
 description: Review branch changes before creating a PR

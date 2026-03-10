@@ -1,5 +1,6 @@
 ---
 name: architect
+model: opus
 allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git blame:*), Agent
 description: architect 에이전트로 코드베이스 분석 및 아키텍처 진단
 argument-hint: <분석 요청 - 구조 분석, 근본 원인 진단, 영향도 분석 등>

@@ -1,5 +1,6 @@
 ---
 name: obsidian
+model: sonnet
 disable-model-invocation: true
 allowed-tools: Bash(obsidian-cli *), WebSearch, WebFetch
 description: Obsidian vault 통합 워크플로우 — 노트 생성, 정리, 리서치, 학습 관리

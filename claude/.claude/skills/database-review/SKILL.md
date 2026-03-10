@@ -1,5 +1,6 @@
 ---
 name: database-review
+model: opus
 allowed-tools: Read, Grep, Glob, Bash(psql:*), Bash(git diff:*), Bash(git log:*), Agent
 description: database-reviewer 에이전트로 SQL/스키마/RLS 리뷰
 argument-hint:
