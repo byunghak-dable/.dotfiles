@@ -1,5 +1,5 @@
 ---
-name: branch
+name: git-branch
 model: sonnet
 disable-model-invocation: true
 allowed-tools: Bash(git branch:*), Bash(git checkout:*), Bash(git log:*), Bash(git remote:*), Bash(mkdir:*)

@@ -1,5 +1,5 @@
 ---
-name: pr-analyze
+name: github-pr-analyze
 model: opus
 disable-model-invocation: true
 allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh api:*), Bash(gh pr list:*), Bash(gh repo view:*), Bash(cat:*), Read, Glob, Grep, Task
