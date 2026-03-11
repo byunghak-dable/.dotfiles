@@ -3,7 +3,6 @@ name: dable-sprint-report
 model: sonnet
 disable-model-invocation: true
 description: Sprint Report 자동 작성
-disable-model-invocation: true
 ---
 
 # Sprint Report 자동 작성
