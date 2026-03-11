@@ -82,7 +82,26 @@
       "Bash(perl -e *)*",
       "Bash(xargs *)*",
       "Bash(open http*)*",
-      "Bash(source /dev/*)*"
+      "Bash(source /dev/*)*",
+
+      "Bash(*printenv*)*",
+      "Bash(*export -p*)*",
+
+      "Bash(*/etc/passwd*)*",
+      "Bash(*/etc/shadow*)*",
+      "Bash(*/etc/sudoers*)*",
+
+      "Bash(*kill -9*)*",
+      "Bash(*kill -KILL*)*",
+      "Bash(*killall *)*",
+      "Bash(*pkill *)*",
+      "Bash(*shutdown*)*",
+      "Bash(*reboot*)*",
+
+      "Bash(*chown *)*",
+      "Bash(*mount *)*",
+      "Bash(*umount *)*",
+      "Bash(*dscl *)*"
     ],
     "defaultMode": "default"
   },
