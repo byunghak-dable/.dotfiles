@@ -1,14 +1,26 @@
 ---
 name: work-pre
 model: opus
-allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git blame:*), Bash(git diff:*), Agent
+allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git blame:*), Bash(git diff:*), Agent, Write, Edit
 description: 구현 전 코드베이스 분석 + 실행 계획 수립. brainstorming 후 구현 전에 사용. Use when 3개 이상 파일 수정, 설계 결정, 대규모 변경 전 분석이 필요할 때.
-argument-hint: <작업 설명 - 구현할 기능, 리팩토링 대상, 디버깅 증상 등>
+argument-hint: <작업 설명 또는 spec 파일 경로 (.claude/plans/*.md)>
 ---
 
 # Work Pre — 구현 전 분석 + 계획
 
 구현 전 **분석(architect)**과 **계획(plan)**을 한 번에 수행합니다.
+
+## Step 0: 입력 판별
+
+$ARGUMENTS를 확인한다:
+
+1. **파일 경로인 경우** (`.md`로 끝나거나 `.claude/plans/` 포함):
+   - 해당 파일을 Read로 읽는다
+   - 파일 내용을 spec으로 사용한다
+   - `SPEC_FILE` = 해당 파일 경로 (Step 4에서 plan append 용)
+2. **텍스트 설명인 경우**:
+   - 그대로 작업 설명으로 사용한다
+   - `SPEC_FILE` = 없음 (plan은 대화에만 출력)
 
 ## Step 1: 컨텍스트 수집
 
@@ -91,9 +103,18 @@ architect 에이전트의 분석 결과를 사용자에게 전달한다.
   ### 리스크 — 주의할 점, 영향 범위
 ```
 
-## Step 5: 계획 승인 대기
+## Step 5: Plan 저장 및 승인 대기
 
-planner 에이전트의 계획을 사용자에게 전달하고 승인을 기다린다.
+### SPEC_FILE이 있는 경우 (spec 파일 기반)
+
+planner 에이전트의 계획을 **같은 spec 파일**에 `## Plan` 섹션으로 append한다.
+기존 spec 내용은 유지하고, 파일 끝에 plan을 추가한다.
+
+### SPEC_FILE이 없는 경우 (텍스트 설명 기반)
+
+planner 에이전트의 계획을 대화에만 출력한다. (기존 동작 유지)
+
+사용자에게 계획을 전달하고 승인을 기다린다.
 
 ---
 

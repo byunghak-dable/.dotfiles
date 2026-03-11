@@ -23,7 +23,7 @@ argument-hint: "[의도 설명] [--max-retries N] [--only build|test|lint] [--se
 1. `git status --short` — 변경사항 확인 (없으면 중단)
 2. `git diff --name-only` — 변경 파일 목록
 3. Read: `.claude/handoff.md` (있으면)
-4. Read: `CLAUDE.md`, `spec.md`, `prompt_plan.md` (있는 것만)
+4. Read: `CLAUDE.md`, `.claude/plans/*.md` (최신), `spec.md`, `prompt_plan.md` (있는 것만)
 5. 프로젝트 타입 감지:
    - `package.json` → Node.js (npm/pnpm/yarn)
    - `Cargo.toml` → Rust
