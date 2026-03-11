@@ -15,11 +15,10 @@ stow claude   # ~/.claude → symlink
 .claude/
 ├── CLAUDE.md                  # 글로벌 행동 규칙 (Claude가 항상 읽음)
 ├── settings.json              # 권한, hooks, 모델 설정
-├── commands/                  # 슬래시 커맨드 (/commit, /branch, ...)
-├── agents/                    # 서브에이전트 정의 (code-reviewer, architect, ...)
+├── agents/                    # 서브에이전트 정의 (.md)
+├── skills/                    # Workflow 레시피 (SKILL.md)
 ├── hooks/                     # Pre/PostToolUse hook 스크립트
-├── rules/                     # 언어/도메인별 코딩 규칙
-└── skills/                    # 자동 트리거 스킬
+└── rules/                     # 언어/도메인별 코딩 규칙
 ```
 
 ## Quick Start
@@ -32,101 +31,92 @@ cd ~/.dotfiles && stow claude
 cd ~/my-project && claude
 
 # 3. 슬래시 커맨드 사용
-/commit          # 변경 사항 커밋
-/branch feat/xxx # 브랜치 생성
-/pr-push         # PR 생성
+/git-commit          # 변경 사항 커밋
+/git-branch feat/xxx # 브랜치 생성
+/github-pr-push      # PR 생성
 ```
 
-## Commands (슬래시 커맨드)
+## Skills (18개)
 
-Claude Code 채팅에서 `/`로 호출합니다.
+`.claude/skills/<name>/SKILL.md`에 정의합니다. `/skill-name`으로 호출하거나, auto-trigger 설정 시 모델이 자동 호출합니다.
 
 ### Git Workflow
 
-| 커맨드              | 설명                                                     |
-| ------------------- | -------------------------------------------------------- |
-| `/commit`           | 변경 사항을 관심사별로 분리, 리뷰 후 커밋                |
-| `/branch`           | 프로젝트 컨벤션에 맞는 브랜치 생성 (기본 separator: `_`) |
-| `/review-staged`    | staged 변경 사항 4관점 리뷰 (버그, 컨벤션, 보안, 설계)   |
-| `/worktree-start`   | 병렬 개발용 Git Worktree 생성 + 도메인 템플릿            |
-| `/worktree-cleanup` | PR 완료 후 Git Worktree 정리                             |
+| Skill      | 호출          | 모델   | 용도                                      |
+| ---------- | ------------- | ------ | ----------------------------------------- |
+| git-branch | `/git-branch` | sonnet | 프로젝트 컨벤션에 맞는 브랜치 생성        |
+| git-commit | `/git-commit` | sonnet | 관심사별 분리, staged diff 리뷰 포함 커밋 |
 
 ### PR Workflow
 
-| 커맨드              | 설명                                                         |
-| ------------------- | ------------------------------------------------------------ |
-| `/pr-push`          | 브랜치 리뷰 → push → PR 생성/업데이트 (assignee, label 자동) |
-| `/pr-review-branch` | PR 생성 전 브랜치 변경 사항 리뷰                             |
-| `/pr-review`        | PR 코드 품질 심층 리뷰                                       |
-| `/pr-analyze`       | PR 변경점 구조 분석 (목적, 핵심 변경, 데이터 흐름)           |
-| `/pr-respond`       | PR 리뷰 코멘트 순차 반영 확인 및 답변 게시                   |
+| Skill             | 호출                         | 모델   | 용도                                                     |
+| ----------------- | ---------------------------- | ------ | -------------------------------------------------------- |
+| github-pr-push    | `/github-pr-push`            | sonnet | 브랜치 리뷰 → push → PR 생성/업데이트                    |
+| github-pr-analyze | `/github-pr-analyze`         | opus   | PR 변경 구조 분석 (purpose, core changes, data flow)     |
+| github-pr-review  | `/github-pr-review <PR번호>` | opus   | 5개 관점 병렬 PR 리뷰 (버그, 컨벤션, 설계, 보안, 테스트) |
+| github-pr-respond | `/github-pr-respond`         | opus   | PR 리뷰 코멘트 순차 반영 + 답변 게시                     |
 
-### Development
+### 구현 파이프라인 (work-\*)
 
-| 커맨드                | 설명                                                  |
-| --------------------- | ----------------------------------------------------- |
-| `/tdd`                | 테스트 먼저 작성 후 구현 (한 단위 작업용)             |
-| `/build-fix`          | TypeScript/빌드 에러 점진적 수정                      |
-| `/verify-loop`        | 자동 재검증 루프 (최대 3회 재시도, 실패 시 자동 수정) |
-| `/test-coverage`      | 테스트 커버리지 분석 + 누락 테스트 생성               |
-| `/refactor-clean`     | dead code 안전 제거 + 테스트 검증                     |
-| `/dependency-upgrade` | 메이저 의존성 업그레이드 (호환성 분석, 단계별 롤아웃) |
-| `/checkpoint`         | 작업 상태 저장/복원                                   |
+| Skill              | 호출                         | 모델   | 용도                                 | 단계 |
+| ------------------ | ---------------------------- | ------ | ------------------------------------ | ---- |
+| work-brainstorming | `/work-brainstorming "설명"` | opus   | 요구사항 탐색 + spec 문서 작성       | 기획 |
+| work-pre           | `/work-pre`                  | opus   | 코드베이스 분석 + 실행 계획 수립     | 계획 |
+| work               | `/work`                      | opus   | Agent Teams 구성, 병렬 구현 실행     | 실행 |
+| work-post          | `/work-post`                 | opus   | 코드 품질/빌드/보안/DB 병렬 검증     | 검증 |
+| work-fix           | `/work-fix`                  | sonnet | 빌드/타입/린트/테스트 에러 자동 수정 | 수정 |
+| work-clean         | `/work-clean`                | sonnet | dead code, 미사용 import/변수 정리   | 정리 |
 
-### DB Encryption Workflow
+### 사내 도구 연동 (dable-\*)
 
-3-Phase 암호화 마이그레이션 자동화. Pattern A (JSON 부분 암호화) / Pattern B (개별 컬럼 전체 암호화) 지원.
+| Skill               | 호출                   | 모델   | 용도                                         |
+| ------------------- | ---------------------- | ------ | -------------------------------------------- |
+| dable-encrypt       | `/dable-encrypt`       | opus   | DB 컬럼 암호화 마이그레이션 3단계 워크플로우 |
+| dable-jira-create   | `/dable-jira-create`   | sonnet | JIRA 이슈 생성                               |
+| dable-jira-summary  | `/dable-jira-summary`  | sonnet | 브랜치 작업 내용을 JIRA 코멘트로 요약        |
+| dable-sprint-report | `/dable-sprint-report` | sonnet | 스프린트 리포트 생성                         |
 
-| 커맨드              | 설명                                                                    |
-| ------------------- | ----------------------------------------------------------------------- |
-| `/dable-encrypt-prepare`  | Phase 1: JIRA 파싱 → 의존성 탐색 → data-schema DDL PR → db-cipher PR   |
-| `/dable-encrypt-migrate`  | Phase 2: 기존 데이터를 암호화하여 신규 컬럼에 채우는 마이그레이션       |
-| `/dable-encrypt-cleanup`  | Phase 3: 기존 평문 컬럼 참조 제거 + DDL 정리 + JIRA 완료 댓글          |
+### 개인용
 
-### Utility
+| Skill        | 호출            | 모델   | 용도                                                     |
+| ------------ | --------------- | ------ | -------------------------------------------------------- |
+| obsidian     | `/obsidian`     | sonnet | Obsidian vault 통합 — 노트 생성, 정리, 리서치, 학습 관리 |
+| session-wrap | `/session-wrap` | sonnet | 세션 종료 시 4개 병렬 subagent로 문서화/학습/후속 작업   |
 
-| 커맨드              | 설명                                      |
-| ------------------- | ----------------------------------------- |
-| `/resume-session`   | 이전 세션 히스토리에서 관련 컨텍스트 검색 |
-| `/analyze-insights` | Insights 분석 결과와 설정 간 gap 보고     |
-| `/jira-summary`     | 브랜치 작업 내용을 JIRA 카드 댓글로 작성  |
+### 호출 방식
 
-## Agents (서브에이전트)
+| 방식          | 설정                              | 해당 Skills                                                                         |
+| ------------- | --------------------------------- | ----------------------------------------------------------------------------------- |
+| auto-trigger  | `disable-model-invocation` 미설정 | git-commit, github-pr-push, github-pr-respond, github-pr-review, work-\* 전체 (6개) |
+| 명시적 호출만 | `disable-model-invocation: true`  | git-branch, github-pr-analyze, dable-\* 전체 (4개), obsidian, session-wrap          |
 
-Claude가 복잡한 작업 시 별도 컨텍스트에서 전문 에이전트를 실행합니다.
+## Agents (7개)
 
-**분석/설계 (읽기 전용)**
+`.claude/agents/<name>.md`에 정의합니다. Skill에서 dispatch하거나 `Agent` tool의 `subagent_type`으로 직접 호출합니다.
 
-| Agent       | 용도                                 | 호출 시점                     |
-| ----------- | ------------------------------------ | ----------------------------- |
-| `architect` | 아키텍처 분석, 디버깅 근본 원인 진단 | 설계 결정, 대규모 리팩토링 전 |
-| `planner`   | 작업 계획 수립, 단계별 분해          | 복잡한 기능 구현 전           |
+### 분석/설계
 
-**리뷰**
+| Agent       | 모델 | 용도                                 | dispatch하는 Skill                 |
+| ----------- | ---- | ------------------------------------ | ---------------------------------- |
+| `architect` | opus | 아키텍처 분석, 디버깅 근본 원인 진단 | `/work-brainstorming`, `/work-pre` |
+| `planner`   | opus | 작업 분해, step-by-step 계획 수립    | `/work-pre`                        |
 
-| Agent               | 용도                                 | 호출 시점                |
-| ------------------- | ------------------------------------ | ------------------------ |
-| `code-reviewer`     | 2단계 리뷰 (스펙 준수 → 코드 품질)   | 코드 수정 후             |
-| `security-reviewer` | OWASP Top 10 기반 보안 취약점 분석   | 인증/API/DB 코드 수정 후 |
-| `database-reviewer` | 스키마, 쿼리, RLS, 마이그레이션 리뷰 | DB 관련 코드 수정 후     |
+### 리뷰
 
-**실행/수정**
+| Agent               | 모델 | 용도                                 | dispatch하는 Skill                |
+| ------------------- | ---- | ------------------------------------ | --------------------------------- |
+| `code-reviewer`     | opus | 2단계 리뷰 (스펙 준수 → 코드 품질)   | `/work-post`, `/github-pr-review` |
+| `security-reviewer` | opus | OWASP Top 10 기반 보안 취약점 분석   | `/work-post`                      |
+| `database-reviewer` | opus | 스키마, 쿼리, RLS, 마이그레이션 리뷰 | `/work-post` (DB 변경 시)         |
 
-| Agent                  | 용도                        | 호출 시점                |
-| ---------------------- | --------------------------- | ------------------------ |
-| `build-error-resolver` | 빌드 에러 분석 및 자동 수정 | 빌드 실패 시             |
-| `refactor-cleaner`     | 코드 정리, 리팩토링         | 리팩토링 작업 시         |
-| `doc-updater`          | API 문서, README 업데이트   | 기능 변경 후 문서 동기화 |
+### 실행/검증
 
-**검증**
+| Agent              | 모델   | 용도                                       | dispatch하는 Skill        |
+| ------------------ | ------ | ------------------------------------------ | ------------------------- |
+| `refactor-cleaner` | sonnet | dead code 제거, 코드 정리                  | `/work-clean`             |
+| `verify-agent`     | sonnet | 빌드 → 타입체크 → 린트 → 테스트 파이프라인 | `/work-post`, `/work-fix` |
 
-| Agent          | 용도                                       | 호출 시점              |
-| -------------- | ------------------------------------------ | ---------------------- |
-| `verify-agent` | 빌드 → 타입체크 → 린트 → 테스트 파이프라인 | 구현 완료 후 최종 검증 |
-| `tdd-guide`    | TDD 사이클 가이드                          | 테스트 주도 개발 시    |
-| `e2e-runner`   | E2E 테스트 실행 및 결과 분석               | 통합 테스트 필요 시    |
-
-## Hooks (자동 실행)
+## Hooks (6개)
 
 도구 실행 전후에 자동으로 동작합니다. 별도 호출이 필요 없습니다.
 
@@ -135,9 +125,9 @@ Claude가 복잡한 작업 시 별도 컨텍스트에서 전문 에이전트를 
 ```
 [사용자 요청]
   → Claude가 도구 실행 결정
-  → PreToolUse hook 검사 (Bash인 경우 remote-command-guard)
-    → 차단: exit 2 → 실행 거부
-    → 허용: exit 0 → 도구 실행
+  → PreToolUse hook 검사 (Bash인 경우)
+    → remote-command-guard: 위험 명령 차단 (exit 2)
+    → rtk-rewrite: 명령어를 RTK proxy로 rewrite
   → 도구 실행 완료
   → PostToolUse hooks 순차 실행:
     1. output-secret-filter (모든 도구) → 시크릿 마스킹
@@ -148,13 +138,14 @@ Claude가 복잡한 작업 시 별도 컨텍스트에서 전문 에이전트를 
 
 ### Hook 목록
 
-| Hook                    | 트리거            | 동작                                    |
-| ----------------------- | ----------------- | --------------------------------------- |
-| `remote-command-guard`  | Bash 실행 전      | 위험 명령 7개 카테고리 차단             |
-| `output-secret-filter`  | 모든 도구 실행 후 | API 키, 토큰 등 시크릿 자동 마스킹      |
-| `format-file`           | 파일 수정 후      | 프로젝트 포매터 자동 실행               |
-| `security-auto-trigger` | 파일 수정 후      | 보안 관련 파일 수정 감지 시 리뷰 권고   |
-| `code-quality-reminder` | 코드 파일 수정 후 | 에러 핸들링, 불변성, 입력 검증 리마인더 |
+| Hook                    | 트리거            | 동작                                     |
+| ----------------------- | ----------------- | ---------------------------------------- |
+| `remote-command-guard`  | Bash 실행 전      | 위험 명령 7개 카테고리 차단              |
+| `rtk-rewrite`           | Bash 실행 전      | 명령어를 RTK proxy로 rewrite (토큰 절감) |
+| `output-secret-filter`  | 모든 도구 실행 후 | API 키, 토큰 등 시크릿 자동 마스킹       |
+| `format-file`           | 파일 수정 후      | 프로젝트 포매터 자동 실행                |
+| `security-auto-trigger` | 파일 수정 후      | 보안 관련 파일 수정 감지 시 리뷰 권고    |
+| `code-quality-reminder` | 코드 파일 수정 후 | 에러 핸들링, 불변성, 입력 검증 리마인더  |
 
 ### remote-command-guard 차단 카테고리
 
@@ -165,22 +156,6 @@ Claude가 복잡한 작업 시 별도 컨텍스트에서 전문 에이전트를 
 5. **권한 변경** — `chmod 777`, `chown`, `sudo`, `mount`
 6. **프로세스 종료** — `kill -9`, `pkill`, `shutdown`, `reboot`
 7. **명령 주입** — `eval`, `exec`, `| sh`, `base64 -d | bash`
-
-### output-secret-filter 감지 패턴
-
-- API 키: OpenAI(`sk-`), AWS(`AKIA`), GitHub(`ghp_`), GitLab(`glpat-`), Slack(`xoxb-`), NPM(`npm_`)
-- 인증 토큰: Bearer, token=, auth=, api_key=
-- 환경변수 값: `AWS_SECRET_ACCESS_KEY=`, `OPENAI_API_KEY=` 등
-- Private Key 블록
-- Base64/URL 인코딩으로 우회된 시크릿
-
-마스킹 발생 시 `~/.claude/security.log`에 기록됩니다 (값 자체는 기록하지 않음).
-
-### security-auto-trigger 감지 패턴
-
-아래 패턴이 포함된 파일을 수정하면 보안 리뷰를 권고합니다 (세션당 파일별 1회):
-
-`auth`, `login`, `session`, `token`, `jwt`, `oauth`, `credential`, `permission`, `middleware`, `.env`, `security`, `rls`, `policy`, `migration`, `route`, `api/`, `encrypt`, `decrypt`, `hash`, `crypto`
 
 ## Permission 모델
 
@@ -193,72 +168,32 @@ Claude가 복잡한 작업 시 별도 컨텍스트에서 전문 에이전트를 
 
 ### 자동 차단되는 명령 (deny 규칙)
 
-| 카테고리                 | 예시                                        |
-| ------------------------ | ------------------------------------------- |
-| 파괴적 삭제              | `rm -rf /`, `rm -rf ~`, `rm -rf .`          |
-| 권한 상승                | `sudo`, `chmod 777`                         |
-| 외부 스크립트 실행       | `curl \| sh`, `wget \| sh`                  |
-| Force push (main/master) | `git push --force main`                     |
-| 패키지 배포              | `npm publish`, `pnpm publish`               |
-| 코드 실행 주입           | `eval`, `bash -c`, `node -e`, `osascript`   |
-| 시스템 설정 변경         | `crontab`, `launchctl`, `~/.zshrc` 덮어쓰기 |
+| 카테고리                 | 예시                                         |
+| ------------------------ | -------------------------------------------- |
+| 파괴적 삭제              | `rm -rf /`, `rm -rf ~`, `rm -rf .`           |
+| 권한 상승                | `sudo`, `chmod 777`, `chown`, `mount`        |
+| 외부 스크립트 실행       | `curl \| sh`, `wget \| sh`                   |
+| Force push (main/master) | `git push --force main`                      |
+| 패키지 배포              | `npm publish`, `pnpm publish`                |
+| 코드 실행 주입           | `eval`, `bash -c`, `node -e`, `osascript`    |
+| 시스템 설정 변경         | `crontab`, `launchctl`, `~/.zshrc` 덮어쓰기  |
+| 시크릿/환경변수 유출     | `printenv`, `export -p`                      |
+| 민감 경로 접근           | `/etc/passwd`, `/etc/shadow`, `/etc/sudoers` |
+| 프로세스 종료            | `kill -9`, `killall`, `pkill`, `shutdown`    |
 
-## Rules (코딩 규칙)
+## Rules (5개)
 
 Claude가 코드를 작성/수정할 때 자동 적용되는 규칙입니다.
 
-| 파일                  | 내용                                                          |
-| --------------------- | ------------------------------------------------------------- |
-| `code-principles.md`  | fail-fast, 불필요한 Optional 금지, 접근 제어, Stepdown Rule   |
-| `typescript.md`       | destructuring 우선, 중괄호 필수, 모듈 시스템 유지             |
-| `python.md`           | namespace packages, `@property` 접근 제어, name mangling 규칙 |
-| `database.md`         | MySQL DDL 제약 사항                                           |
-| `date-calculation.md` | 날짜 계산 시 `date`/`python3` 필수 사용, 암산 금지            |
+| 파일                 | 내용                                                          |
+| -------------------- | ------------------------------------------------------------- |
+| `code-principles.md` | fail-fast, 불필요한 Optional 금지, 접근 제어, Stepdown Rule   |
+| `typescript.md`      | destructuring 우선, 중괄호 필수, `type` 우선, `enum` 사용     |
+| `python.md`          | namespace packages, `@property` 접근 제어, 타입 힌트 필수     |
+| `go.md`              | `Get` prefix 금지, 에러 wrapping, `panic` 금지, `init()` 지양 |
+| `rust.md`            | `unwrap()` 금지, `&str` 우선, 불필요한 `.clone()` 금지        |
 
-## Skills (자동 트리거)
-
-특정 작업 패턴을 감지하면 Claude가 자동으로 활성화합니다.
-
-### 코드 작성/리뷰
-
-| Skill                  | 트리거 조건                                                       |
-| ---------------------- | ----------------------------------------------------------------- |
-| `large-scale-rename`   | 2-3개 파일 이상에 걸친 심볼 이름 변경                             |
-| `mermaid-architecture` | 아키텍처/흐름 다이어그램 작성 요청                                |
-| `python-oop-review`    | Python 코드 작성/리뷰 시 OOP 컨벤션 검사                          |
-| `security-pipeline`    | 민감 파일(auth, payment 등) 수정 시 CWE Top 25 + STRIDE 자동 검증 |
-
-### 검증/품질
-
-| Skill                 | 트리거 조건                                                    |
-| --------------------- | -------------------------------------------------------------- |
-| `verification-engine` | 구현 완료 후 서브에이전트 기반 빌드/타입/린트/테스트 검증 루프 |
-| `eval-harness`        | eval-driven development (EDD) — pass@k 기반 신뢰도 측정        |
-
-### 오케스트레이션
-
-| Skill               | 트리거 조건                                                 |
-| ------------------- | ----------------------------------------------------------- |
-| `team-orchestrator` | 대규모 구현 시 Agent Teams 병렬 작업 분배/조율              |
-| `strategic-compact` | 긴 세션에서 논리적 구간별 context compaction 제안           |
-| `session-wrap`      | 세션 종료 시 4개 병렬 subagent로 학습/문서화/후속 작업 탐지 |
-
-### 학습/자동화
-
-| Skill                    | 트리거 조건                                              |
-| ------------------------ | -------------------------------------------------------- |
-| `continuous-learning-v2` | hook 기반 세션 관찰 → instinct 생성 → skill/command 진화 |
-| `skill-factory`          | 세션 패턴 분석 → 중복 검사 → 새 skill 자동 생성          |
-
-## CLAUDE.md 행동 규칙
-
-| 규칙                | 설명                                                                          |
-| ------------------- | ----------------------------------------------------------------------------- |
-| 파일 지정 편집      | 사용자가 특정 파일을 명시하면 해당 파일만 읽고 수정. 관련 없는 파일 탐색 금지 |
-| Commands 우선       | 재사용 가능한 workflow는 skill이 아닌 `~/.claude/commands/` command로 작성    |
-| 세션 종료 작업 요약 | 요청 시 auto memory에 작업 상태(완료/미완료/핵심 파일) 기록                   |
-
-## Plugins (플러그인)
+## Plugins (14개)
 
 `claude plugin install`로 설치합니다. 새 환경 설정 시 참고용 목록입니다.
 
@@ -268,31 +203,23 @@ Claude가 코드를 작성/수정할 때 자동 적용되는 규칙입니다.
 | ---------------------- | ------------------------------------------------- |
 | `superpowers`          | brainstorming, TDD, parallel agents 등 워크플로우 |
 | `claude-md-management` | CLAUDE.md 관리 및 개선                            |
-| `hookify`              | 대화 분석 기반 hook 자동 생성                     |
 | `claude-hud`           | statusline HUD 표시                               |
-| `claude-code-setup`    | Claude Code 초기 설정 가이드                      |
 
 ### Integrations
 
-| 플러그인    | 용도                      |
-| ----------- | ------------------------- |
-| `slack`     | Slack 채널 검색/요약      |
-| `atlassian` | Jira/Confluence 연동      |
-| `Notion`    | Notion 페이지/DB 연동     |
-| `context7`  | 라이브러리 최신 문서 조회 |
-| `serena`    | 시맨틱 코드 분석/편집     |
-| `github`    | GitHub PR/이슈 연동       |
+| 플러그인     | 용도                      |
+| ------------ | ------------------------- |
+| `Notion`     | Notion 페이지/DB 연동     |
+| `context7`   | 라이브러리 최신 문서 조회 |
+| `serena`     | 시맨틱 코드 분석/편집     |
+| `playwright` | 브라우저 자동화/테스트    |
 
 ### Code Quality
 
-| 플러그인            | 용도                 |
-| ------------------- | -------------------- |
-| `code-review`       | 코드 리뷰            |
-| `code-simplifier`   | 코드 간소화          |
-| `security-guidance` | 보안 가이드          |
-| `pr-review-toolkit` | PR 리뷰 도구         |
-| `feature-dev`       | 기능 개발 워크플로우 |
-| `commit-commands`   | 커밋 관련 커맨드     |
+| 플러그인            | 용도                      |
+| ------------------- | ------------------------- |
+| `security-guidance` | 보안 가이드               |
+| `frontend-design`   | 프론트엔드 UI 디자인 생성 |
 
 ### LSP
 
@@ -302,28 +229,42 @@ Claude가 코드를 작성/수정할 때 자동 적용되는 규칙입니다.
 | `typescript-lsp`    | TypeScript |
 | `rust-analyzer-lsp` | Rust       |
 | `gopls-lsp`         | Go         |
-| `lua-lsp`           | Lua        |
 
 ### Output Styles
 
-| 플러그인                   | 설명           |
-| -------------------------- | -------------- |
-| `learning-output-style`    | 학습+설명 모드 |
-| `explanatory-output-style` | 설명 중심 모드 |
+| 플러그인                | 설명           |
+| ----------------------- | -------------- |
+| `learning-output-style` | 학습+설명 모드 |
 
 ## 커스터마이징
 
-### 커맨드 추가
+### Skill 추가
 
-`commands/` 디렉토리에 `.md` 파일을 추가하면 `/파일명`으로 호출할 수 있습니다.
+`skills/<name>/SKILL.md` 파일을 생성하면 `/skill-name`으로 호출할 수 있습니다.
 
-```markdown
+```yaml
 ---
+name: my-skill
+model: sonnet
+disable-model-invocation: true
 allowed-tools: Read, Bash(git diff:*)
-description: 커맨드 설명
+description: 스킬 설명
 ---
-
 프롬프트 내용을 여기에 작성합니다.
+```
+
+### Agent 추가
+
+`agents/<name>.md` 파일을 생성하면 `subagent_type`으로 호출할 수 있습니다.
+
+```yaml
+---
+name: my-agent
+description: 에이전트 역할 설명
+tools: ["Read", "Grep", "Glob", "Bash"]
+model: sonnet
+---
+에이전트 프롬프트를 여기에 작성합니다.
 ```
 
 ### 규칙 추가
