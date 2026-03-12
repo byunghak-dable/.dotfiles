@@ -2,7 +2,6 @@
 name: work
 model: opus
 description: work-pre 계획을 기반으로 병렬 에이전트 팀을 구성하여 구현 실행. Use when 독립 작업 2개 이상을 병렬로 처리하거나, plan 기반 구현을 체계적으로 실행할 때.
-version: 1.0.0
 ---
 
 # Work — 구현 실행
