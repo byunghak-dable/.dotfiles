@@ -63,6 +63,7 @@ Agent tool (subagent_type: general-purpose, model: opus):
   ├── Build: ✅/❌
   └── Test: ✅/❌
   상태: PASS/FAIL
+  lint warning: [N건] (unused import, unused variable 등)
 ```
 
 ### Agent C: security-reviewer (보안)
@@ -136,12 +137,15 @@ CRITICAL/HIGH 이슈만 보고
 | NEEDS ATTENTION | 빌드 통과 + major/minor 이슈 있음     |
 | FAIL            | 빌드 실패 또는 critical 이슈 1건 이상 |
 
+verify-agent 결과에 lint warning(unused import, unused variable 등)이 있으면
+`/work-clean`에 `⭐ 추천` 태그를 붙여 안내한다.
+
 ---
 
 ## 다음 단계
 
-| 결과에 따라  | 커맨드        |
-| :----------- | :------------ |
-| 이슈 수정 후 | `/work-fix`   |
-| 코드 정리    | `/work-clean` |
-| 모두 통과    | `/git-commit` |
+| 결과에 따라         | 커맨드           |
+| :------------------ | :--------------- |
+| lint warning 있으면 | `⭐ /work-clean` |
+| 이슈 수정 후        | `/work-fix`      |
+| 모두 통과           | `/git-commit`    |
