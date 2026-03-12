@@ -1,7 +1,7 @@
 ---
 name: work-brainstorming
 model: opus
-allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*), Bash(git status:*), Bash(ls:*), Agent, Write, Edit
+allowed-tools: Read, Grep, Glob, Bash(git log:*), Bash(git diff:*), Bash(git status:*), Bash(ls:*), Agent, Write, Edit, AskUserQuestion
 description: 코드 구현 전 요구사항 탐색 + spec 문서 작성 + architect 리뷰. Use when 구현할 기능의 요구사항이 불명확하거나, 접근법을 결정해야 할 때.
 argument-hint: <구현할 기능/변경에 대한 아이디어>
 ---
@@ -27,8 +27,9 @@ argument-hint: <구현할 기능/변경에 대한 아이디어>
 
 핵심 원칙:
 
+- **AskUserQuestion 사용** — 사용자에게 질문할 때 반드시 AskUserQuestion tool 사용
 - **질문은 한 번에 하나씩** — 여러 질문을 한꺼번에 하지 않음
-- **다지선다 우선** — 가능하면 2-4개 선택지 제시
+- **다지선다 우선** — 가능하면 2-4개 선택지 제시. 선택지에 Claude 추천을 `(추천)` 태그로 표시
 - **코드베이스 사실은 직접 조사** — 사용자에게 "어디에 있나요?" 묻지 않고 Grep/Read로 확인
 - **사용자에게는 선호도/우선순위만 질문**
 
@@ -47,8 +48,8 @@ argument-hint: <구현할 기능/변경에 대한 아이디어>
 
 1. **2-3개 접근법** 제시
 2. 각 접근법에 **트레이드오프** 명시
-3. **추천안**과 추천 이유 제시
-4. 사용자 선택 대기
+3. **Claude 추천안**을 `⭐ 추천` 태그로 명시하고 추천 이유 제시
+4. AskUserQuestion으로 사용자 선택 대기
 
 ## Step 4: Spec 문서 작성
 
