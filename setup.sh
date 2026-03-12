@@ -22,14 +22,14 @@ title "Dotfiles symlink (stow)"
 cd "$DOTFILES"
 
 # 공통 모듈
-COMMON_MODULES=(claude git lazygit nvim tmux zsh obsidian)
+COMMON_MODULES=(claude git lazygit nvim tmux obsidian)
 for m in $COMMON_MODULES; do
   [[ -d "$DOTFILES/$m" ]] && { stow --restow "$m" && info "stow: $m" }
 done
 
 # macOS 전용 모듈
 if [[ "$OS" == "Darwin" ]]; then
-  MACOS_MODULES=(alacritty ghostty karabiner wezterm)
+  MACOS_MODULES=(alacritty karabiner)
   for m in $MACOS_MODULES; do
     [[ -d "$DOTFILES/$m" ]] && { stow --restow "$m" && info "stow: $m" }
   done
@@ -37,7 +37,7 @@ fi
 
 # Linux 전용 모듈
 if [[ "$OS" == "Linux" ]]; then
-  LINUX_MODULES=(hypr kime linux)
+  LINUX_MODULES=(hypr kime linux zsh)
   for m in $LINUX_MODULES; do
     [[ -d "$DOTFILES/$m" ]] && { stow --restow "$m" && info "stow: $m" }
   done
