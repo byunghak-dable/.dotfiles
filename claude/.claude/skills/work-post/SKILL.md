@@ -44,7 +44,7 @@ CLAUDE.md 규칙: [CLAUDE.md 내용]
 
 ### Agent B: verify-agent (빌드/테스트)
 
-Agent tool (subagent_type: general-purpose, model: opus):
+Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 verify-agent입니다.
@@ -68,7 +68,7 @@ Agent tool (subagent_type: general-purpose, model: opus):
 
 ### Agent C: security-reviewer (보안)
 
-Agent tool (subagent_type: general-purpose, model: opus):
+Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 security-reviewer 에이전트입니다.

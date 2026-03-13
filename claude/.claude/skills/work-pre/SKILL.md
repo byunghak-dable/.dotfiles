@@ -77,7 +77,7 @@ architect 에이전트의 분석 결과를 사용자에게 전달한다.
 
 ## Step 4: planner 에이전트 — 실행 계획 수립
 
-분석 결과를 기반으로 Agent tool (subagent_type: general-purpose, model: opus)로 호출:
+분석 결과를 기반으로 Agent tool (subagent_type: general-purpose, model: sonnet)로 호출:
 
 ```
 당신은 planner 에이전트입니다.
