@@ -24,11 +24,10 @@ argument-hint: [의도 설명 - 생략 시 git diff 기반 추론]
 
 ### Agent A: code-reviewer (코드 품질)
 
-Agent tool (subagent_type: general-purpose, model: opus):
+Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 code-reviewer 에이전트입니다.
-~/.claude/agents/code-reviewer.md의 지침을 따르세요.
 
 변경 파일: [git diff --name-only 결과]
 CLAUDE.md 규칙: [CLAUDE.md 내용]
@@ -48,7 +47,6 @@ Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 verify-agent입니다.
-~/.claude/agents/verify-agent.md의 지침을 따르세요.
 
 프로젝트 타입: [감지된 타입]
 변경 파일: [git diff --name-only 결과]
@@ -72,7 +70,6 @@ Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 security-reviewer 에이전트입니다.
-~/.claude/agents/security-reviewer.md의 지침을 따르세요.
 
 변경 파일: [git diff --name-only 결과]
 
@@ -89,11 +86,10 @@ CRITICAL/HIGH 이슈만 보고 (MEDIUM 이하 생략)
 
 DB 관련 파일이 변경된 경우에만 실행:
 
-Agent tool (subagent_type: general-purpose, model: opus):
+Agent tool (subagent_type: general-purpose, model: sonnet):
 
 ```
 당신은 database-reviewer 에이전트입니다.
-~/.claude/agents/database-reviewer.md의 지침을 따르세요.
 
 변경 파일: [DB 관련 변경 파일만]
 
@@ -139,6 +135,14 @@ CRITICAL/HIGH 이슈만 보고
 
 verify-agent 결과에 lint warning(unused import, unused variable 등)이 있으면
 `/work-clean`에 `⭐ 추천` 태그를 붙여 안내한다.
+
+### Agent 실패 처리
+
+개별 agent가 실패(타임아웃, 에러)한 경우:
+
+1. 실패한 agent를 결과에 `⚠️ 실패 (사유)` 로 표시
+2. 나머지 agent 결과만으로 종합 판정 진행
+3. 판정 시 실패한 agent 영역은 **미검증**으로 명시
 
 ---
 
