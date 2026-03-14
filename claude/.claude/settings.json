@@ -1,4 +1,8 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "95"
+  },
   "permissions": {
     "allow": [
       "Bash(*)",
@@ -83,21 +87,17 @@
       "Bash(xargs *)*",
       "Bash(open http*)*",
       "Bash(source /dev/*)*",
-
       "Bash(*printenv*)*",
       "Bash(*export -p*)*",
-
       "Bash(*/etc/passwd*)*",
       "Bash(*/etc/shadow*)*",
       "Bash(*/etc/sudoers*)*",
-
       "Bash(*kill -9*)*",
       "Bash(*kill -KILL*)*",
       "Bash(*killall *)*",
       "Bash(*pkill *)*",
       "Bash(*shutdown*)*",
       "Bash(*reboot*)*",
-
       "Bash(*chown *)*",
       "Bash(*mount *)*",
       "Bash(*umount *)*",
@@ -105,7 +105,6 @@
     ],
     "defaultMode": "default"
   },
-  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -174,7 +173,7 @@
     "command": "bash -c 'node_bin=$(volta which node 2>/dev/null || which node) && \"$node_bin\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)dist/index.js\"'"
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
     "claude-md-management@claude-plugins-official": true,
     "Notion@claude-plugins-official": true,
     "claude-hud@claude-hud": true,
@@ -189,9 +188,5 @@
     "frontend-design@claude-plugins-official": true,
     "playwright@claude-plugins-official": true
   },
-  "alwaysThinkingEnabled": true,
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "95"
-  }
+  "alwaysThinkingEnabled": true
 }
