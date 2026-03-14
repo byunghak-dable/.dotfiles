@@ -97,7 +97,6 @@ Agent tool (subagent_type: general-purpose, model: opus)로 호출:
 
 ```
 당신은 architect 에이전트입니다.
-~/.claude/agents/architect.md의 지침을 따르세요.
 
 다음 spec 문서를 리뷰하세요:
 [spec 문서 전문]

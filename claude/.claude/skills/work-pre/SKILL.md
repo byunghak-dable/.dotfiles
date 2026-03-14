@@ -34,7 +34,6 @@ Agent tool (subagent_type: general-purpose, model: opus)로 호출:
 
 ```
 당신은 architect 에이전트입니다.
-~/.claude/agents/architect.md의 지침을 따르세요.
 
 프로젝트 타입: [감지된 타입]
 분석 요청: $ARGUMENTS
@@ -81,7 +80,6 @@ architect 에이전트의 분석 결과를 사용자에게 전달한다.
 
 ```
 당신은 planner 에이전트입니다.
-~/.claude/agents/planner.md의 지침을 따르세요.
 
 프로젝트 타입: [감지된 타입]
 작업 요청: $ARGUMENTS

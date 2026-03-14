@@ -47,7 +47,6 @@ Agent tool (subagent_type: general-purpose, model: sonnet)로 호출:
 
 ```
 당신은 verify-agent입니다.
-~/.claude/agents/verify-agent.md의 지침을 따르세요.
 
 프로젝트 타입: [감지된 타입]
 패키지 매니저: [감지된 PM]

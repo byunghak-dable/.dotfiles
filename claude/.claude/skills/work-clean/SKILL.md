@@ -21,7 +21,6 @@ Agent tool (subagent_type: general-purpose, model: sonnet)로 호출:
 
 ```
 당신은 refactor-cleaner 에이전트입니다.
-~/.claude/agents/refactor-cleaner.md의 지침을 따르세요.
 
 프로젝트 타입: [감지된 타입]
 변경 파일: [git diff --name-only 결과]
